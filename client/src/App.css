@@ -1,21 +1,21 @@
 @font-face {
     font-family: 'e-Ukraine';
-    src: url(../public/fonts/e-Ukraine-Regular.otf);
+    src: url(../fonts/e-Ukraine-Regular.otf);
 }
 
 @font-face {
     font-family: 'e-UkraineHead';
-    src: url(../public/fonts/e-UkraineHead-Regular.otf);
+    src: url(../fonts/e-UkraineHead-Regular.otf);
 }
 
 @font-face {
     font-family: 'e-Ukraine';
-    src: url(../public/fonts/e-Ukraine-Thin.otf);
+    src: url(../fonts/e-Ukraine-Thin.otf);
     font-weight: 300;
 }
 
 @font-face {
     font-family: 'e-UkraineHead';
-    src: url(../public/fonts/e-UkraineHead-Light.otf);
+    src: url(../fonts/e-UkraineHead-Light.otf);
     font-weight: 300;
 }
