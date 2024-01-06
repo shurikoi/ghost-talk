@@ -1,22 +1,24 @@
-import './AuthForm.css'
+import "./AuthForm.css"
 import { useState } from "react"
 import DefaultForm from "./DefaultForm"
 // import { CSSTransition, SwitchTransition } from "react-transition-group"
 import SignIn from "./SignIn"
+import SignUp from "./SignUp"
 
 export default function AuthForm() {
   const [email, setEmail] = useState("")
-  const [currentState, setCurrectState] = useState("default")
+  const [currentState, setCurrentState] = useState("default")
 
   const states = {
     default: (
       <DefaultForm
         setEmail={setEmail}
         email={email}
-        setCurrentState={setCurrectState}
+        setCurrentState={setCurrentState}
       ></DefaultForm>
     ),
-    signIn: <SignIn email={email} setCurrentState={setCurrectState}></SignIn>,
+    signIn: <SignIn email={email} setCurrentState={setCurrentState}></SignIn>,
+    signUp: <SignUp email={email} setCurrentState={setCurrentState}></SignUp>,
   }
 
   return (

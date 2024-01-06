@@ -19,7 +19,7 @@
   justify-content: center;
   align-items: center;
   width: 20rem;
-  gap: 2.2rem;
+  gap: 1.3rem;
 }
 
 .title {
@@ -40,17 +40,22 @@
   padding: 0.5rem 1rem;
   border: 1px solid black;
   border-radius: 10px;
+  height: 2rem;
 }
 
 input {
   border: none;
   width: 100%;
   outline: none;
-  font-family: 'e-Ukraine';
+  font-family: "e-Ukraine";
   font-weight: 300;
 }
 
 .submitBtn {
-  height: 30px;
   cursor: pointer;
+  /* object-fit: cover; */
+}
+
+.w-18 {
+  width: 18rem;
 }

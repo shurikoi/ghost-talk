@@ -1,4 +1,3 @@
-import "./DefaultForm.css"
 import SubmitIcon from "../ui/icon/SubmitIcon.jsx"
 
 export default function DefaultForm({ setEmail, email, setCurrentState }) {
@@ -16,6 +15,7 @@ export default function DefaultForm({ setEmail, email, setCurrentState }) {
     const data = await response.json()
 
     if (data.isExist) setCurrentState("signIn")
+    else setCurrentState("signUp")
   }
 
   const handleKeyDown = (e) => {
