@@ -14,10 +14,10 @@ app.use(express.json())
 
 app.post("/check-user", async (req, res) => {
   const user = await User.findOne({ email: req.body.email })
+  const isExist = !!user
 
-  if (!user) return res.status(404).json({ error: "User not found" })
-
-  res.json(user)
+//   if (!user) return res.status(404).json({ error: "User not found" })
+  res.json({ isExist })
   console.log(user)
 })
 

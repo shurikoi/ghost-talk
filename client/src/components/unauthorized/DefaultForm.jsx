@@ -1,19 +1,26 @@
-import "./AuthForm.css"
-import SubmitIcon from "../../ui/icon/SubmitIcon"
-import { useState } from "react"
+import "./DefaultForm.css"
+import SubmitIcon from "../ui/icon/SubmitIcon.jsx"
 
-export default function AuthForm() {
-  const [email, setEmail] = useState("")
+export default function DefaultForm({ setEmail, email, setCurrentState }) {
+  let isFilled = !!email //getting boolean if input is filled
 
-  const handleSubmit = (e) => {
-    fetch("http://localhost:4000/check-user", {
+  const handleSubmit = async (e) => {
+    const response = await fetch("http://localhost:4000/check-user", {
       method: "POST",
       body: JSON.stringify({ email }),
       headers: {
         "Content-Type": "application/json",
       },
     })
-    .then(response => response.json())
+
+    const data = response.json()
+
+    if (data.isExist) setCurrentState("default")
+    else setCurrentState("signUp")
+  }
+
+  const handleKeyDown = (e) => {
+    if (e.key == "Enter"  && isFilled) handleSubmit()
   }
 
   return (
@@ -33,8 +40,9 @@ export default function AuthForm() {
             onChange={(e) => {
               setEmail(e.target.value.trim())
             }}
+            onKeyDown={handleKeyDown}
           />
-          <SubmitIcon className="submitBtn" onClick={handleSubmit} isFilled={!!email} />
+          <SubmitIcon className="submitBtn" onClick={handleSubmit} isFilled={isFilled} />
         </div>
       </div>
     </div>
