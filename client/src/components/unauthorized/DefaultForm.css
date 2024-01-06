@@ -1,57 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap");
 
-.main {
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #10151d;
-}
-
-.auth-form {
-  box-shadow: 0px 0px 100px -20px rgb(219, 2, 239);
-  position: absolute;
-  background-color: white;
-  padding: 2rem 3rem;
-  border-radius: 1rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 20rem;
-  gap: 2.2rem;
-}
-
-.title {
-  font-family: "e-UkraineHead";
-  font-size: 20px;
-}
-
-.description {
-  font-family: "e-Ukraine";
-  font-weight: 300;
-  font-size: small;
-  text-align: center;
-}
-
-.input-wrapper {
-  display: flex;
-  justify-content: space-between;
-  padding: 0.5rem 1rem;
+.w-18 {
   width: 18rem;
-  border: 1px solid black;
-  border-radius: 10px;
-}
-
-.email {
-  border: none;
-  width: 100%;
-  outline: none;
-  font-family: 'e-Ukraine';
-  font-weight: 300;
-}
-
-.submitBtn {
-  height: 30px;
-  cursor: pointer;
 }

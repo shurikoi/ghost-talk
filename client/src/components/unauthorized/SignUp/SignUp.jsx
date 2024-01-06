@@ -1,9 +1,10 @@
 import "./SignUp.css"
 
-export default function SignUp({ setCurrentState }) {
-    return(
+export default function SignUp({ email, setCurrentState }) {
+    return (
         <>
-        <h1>SignUp</h1>
+        <div className="title">Sign up</div>
+        <div className="description">via {email}</div>
         <button onClick={() => setCurrentState("default")}>Back to 'default'</button>
         </>
     )
