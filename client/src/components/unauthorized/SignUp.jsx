@@ -7,6 +7,18 @@ export default function SignUp({ email, setCurrentState }) {
   const [surname, setSurname] = useState("")
   const [password, setPassword] = useState("")
 
+  const handleSubmit = async () => {
+    const response = await fetch("http://localhost:4000/create-user", {
+      method: "POST",
+      body: JSON.stringify({ email, name, surname, password }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+
+    const data = await response.json()
+  }
+
   const handleKeyDown = (e) => {
     if (e.key == "Enter" && isFilled) handleSubmit()
   }
@@ -51,7 +63,7 @@ export default function SignUp({ email, setCurrentState }) {
         />
         <SubmitIcon
           className="submitBtn"
-          //   onClick={handleSubmit}
+          onClick={handleSubmit}
           //   isFilled={isFilled} // TODO!!
         />
       </div>

@@ -31,6 +31,21 @@ app.post("/check-password", async (req, res) => {
   console.log(user)
 })
 
+app.post("/create-user", async (req, res) => {
+  const user = await User.insertMany([
+    {
+      email: req.body.email,
+      name: req.body.name,
+      surname: req.body.surname,
+      password: req.body.password,
+    },
+  ])
+  const isCreated = !!user
+
+  res.json(isCreated)
+  console.log(user)
+})
+
 connection().then(() => {
   app.listen(PORT)
 })
