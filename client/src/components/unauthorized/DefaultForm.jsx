@@ -4,7 +4,7 @@ import SubmitIcon from "../ui/icon/SubmitIcon.jsx"
 export default function DefaultForm({ setEmail, email, setCurrentState }) {
   let isFilled = !!email //getting boolean if input is filled
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async () => {
     const response = await fetch("http://localhost:4000/check-user", {
       method: "POST",
       body: JSON.stringify({ email }),
@@ -15,8 +15,7 @@ export default function DefaultForm({ setEmail, email, setCurrentState }) {
 
     const data = await response.json()
 
-    if (data.isExist) setCurrentState("default")
-    else setCurrentState("signUp")
+    if (data.isExist) setCurrentState("signIn")
   }
 
   const handleKeyDown = (e) => {

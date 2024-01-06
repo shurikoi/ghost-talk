@@ -2,7 +2,7 @@ import './AuthForm.css'
 import { useState } from "react"
 import DefaultForm from "./DefaultForm"
 // import { CSSTransition, SwitchTransition } from "react-transition-group"
-import SignUp from "./SignUp/SignUp"
+import SignIn from "./SignIn"
 
 export default function AuthForm() {
   const [email, setEmail] = useState("")
@@ -16,7 +16,7 @@ export default function AuthForm() {
         setCurrentState={setCurrectState}
       ></DefaultForm>
     ),
-    signUp: <SignUp email={email} setCurrentState={setCurrectState}></SignUp>,
+    signIn: <SignIn email={email} setCurrentState={setCurrectState}></SignIn>,
   }
 
   return (
