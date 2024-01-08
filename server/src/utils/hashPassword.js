@@ -1,5 +1,5 @@
-import { hash } from 'bcrypt'
+import { hashSync } from 'bcrypt'
 
 export default async function hashPassword(password) {
-    return hash(password, process.env.PASSWORD_SALT)
+    return hashSync(password, process.env.PASSWORD_SALT)
 }

@@ -4,6 +4,7 @@ import connection from "./utils/connection.js"
 import cors from "cors"
 import dotenv from "dotenv"
 import hashPassword from "./utils/hashPassword.js"
+import comparePassword from "./utils/comparePassword.js"
 dotenv.config({ path: ".env.local" })
 
 const app = express()
@@ -16,26 +17,24 @@ app.post("/check-user", async (req, res) => {
   const user = await User.findOne({ email: req.body.email })
   const isExist = !!user
 
-  //   if (!user) return res.status(404).json({ error: "User not found" })
   res.json({ isExist })
   console.log(user)
 })
 
 app.post("/check-password", async (req, res) => {
-  let {email, password} = req.body
-  password = await hashPassword(password)
+  let { email, password } = req.body
   const user = await User.findOne({
     email,
-    password,
   })
-  const isValid = !!user
+  if (!user) return res.status(404).json({ error: "Invalid email" })
+  const isValid = await comparePassword(password, user?.password)
 
   res.json(isValid)
   console.log(user)
 })
 
 app.post("/create-user", async (req, res) => {
-  let {email, name, surname, password} = req.body
+  let { email, name, surname, password } = req.body
   password = await hashPassword(password)
   const user = await User.insertMany([
     {
