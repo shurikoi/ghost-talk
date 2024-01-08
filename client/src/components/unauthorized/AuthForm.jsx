@@ -22,7 +22,6 @@ export default function AuthForm() {
   }
 
   return (
-    // states[currentState]
     <div className="main">
       <div className="auth-form" action="">
         {states[currentState]}

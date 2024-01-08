@@ -1,8 +1,9 @@
 import express from "express"
 import User from "./model/User.js"
-import connection from "./connection.js"
+import connection from "./utils/connection.js"
 import cors from "cors"
 import dotenv from "dotenv"
+import hashPassword from "./utils/hashPassword.js"
 dotenv.config({ path: ".env.local" })
 
 const app = express()
@@ -21,9 +22,11 @@ app.post("/check-user", async (req, res) => {
 })
 
 app.post("/check-password", async (req, res) => {
+  let {email, password} = req.body
+  password = await hashPassword(password)
   const user = await User.findOne({
-    email: req.body.email,
-    password: req.body.password,
+    email,
+    password,
   })
   const isValid = !!user
 
@@ -32,12 +35,14 @@ app.post("/check-password", async (req, res) => {
 })
 
 app.post("/create-user", async (req, res) => {
+  let {email, name, surname, password} = req.body
+  password = await hashPassword(password)
   const user = await User.insertMany([
     {
-      email: req.body.email,
-      name: req.body.name,
-      surname: req.body.surname,
-      password: req.body.password,
+      email,
+      name,
+      surname,
+      password,
     },
   ])
   const isCreated = !!user

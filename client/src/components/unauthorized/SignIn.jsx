@@ -8,7 +8,7 @@ export default function SignIn({ email, setCurrentState }) {
   const handleSubmit = async () => {
     const response = await fetch("http://localhost:4000/check-password", {
       method: "POST",
-      body: JSON.stringify({ email, password }),
+      body: JSON.stringify({ email, password }), // maybe it is better to pass the password hashed?
       headers: {
         "Content-Type": "application/json",
       },

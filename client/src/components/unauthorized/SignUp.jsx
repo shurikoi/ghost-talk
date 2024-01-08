@@ -20,7 +20,7 @@ export default function SignUp({ email, setCurrentState }) {
   }
 
   const handleKeyDown = (e) => {
-    if (e.key == "Enter" && isFilled) handleSubmit()
+    if (e.key == "Enter") handleSubmit() // TODO: add a check if all inputs are filled
   }
 
   return (
