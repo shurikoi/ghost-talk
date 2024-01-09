@@ -8,7 +8,7 @@ export default function SignUp({ email, setCurrentState }) {
   const [password, setPassword] = useState("")
 
   const handleSubmit = async () => {
-    const response = await fetch("http://localhost:4000/create-user", {
+    const response = await fetch("http://localhost:4000/api/create-user", {
       method: "POST",
       body: JSON.stringify({ email, name, surname, password }),
       headers: {

@@ -4,7 +4,7 @@ export default function DefaultForm({ setEmail, email, setCurrentState }) {
   let isFilled = !!email //getting boolean if input is filled
 
   const handleSubmit = async () => {
-    const response = await fetch("http://localhost:4000/check-user", {
+    const response = await fetch("http://localhost:4000/api/check-user", {
       method: "POST",
       body: JSON.stringify({ email }),
       headers: {
