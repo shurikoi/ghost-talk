@@ -1,13 +1,19 @@
 import "./App.css"
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import AuthForm from "./components/unauthorized/AuthForm"
 import DefaultForm from "./components/unauthorized/DefaultForm"
+import Main from "./components/authorized/Main"
 
 function App() {
   return (
-    <>
-      <AuthForm/>
-      {/* <DefaultForm/> */}
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Main />}></Route>
+        <Route path="auth" element={<AuthForm />}></Route>
+
+        <Route path="*" element={<DefaultForm />}></Route> 
+      </Routes>
+    </BrowserRouter>
   )
 }
 

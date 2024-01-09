@@ -5,11 +5,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #10151d;
+  background-color: #1e1f20;
 }
 
 .auth-form {
-  box-shadow: 0px 0px 100px -20px rgb(219, 2, 239);
+  /* box-shadow: 0px 0px 100px -20px rgb(219, 2, 239); */
   position: absolute;
   background-color: white;
   padding: 2rem 3rem;
@@ -53,7 +53,6 @@ input {
 
 .submitBtn {
   cursor: pointer;
-  /* object-fit: cover; */
 }
 
 .w-18 {

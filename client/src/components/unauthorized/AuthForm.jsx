@@ -25,7 +25,6 @@ export default function AuthForm() {
     <div className="main">
       <div className="auth-form" action="">
         {states[currentState]}
-        {/* {states["signUp"]} */}
       </div>
     </div>
   )
