@@ -1,12 +1,30 @@
+import ApiError from "../exceptions/apiError.js"
 import User from "../models/User.js"
+import comparePassword from "../utils/comparePassword.js"
 import hashPassword from "../utils/hashPassword.js"
 import { generateTokens, saveToken } from "./tokenService.js"
 
-export const registration = async (email, name, surname, password) => {
+export const serviceCheckUser = async (email) => {
+  const user = await User.findOne({ email })
+  return !!user
+}
+
+export const serviceCheckPassword = async (email, password) => {
+  const user = await User.findOne({
+    email,
+  })
+
+  if (!user) throw ApiError.BadRequest("Non-existent email address")
+
+  return await comparePassword(password, user.password)
+  // if (!isValid) throw ApiError.BadRequest("Incorrect password")
+}
+
+export const serviceCreateUser = async (email, name, surname, password) => {
   password = await hashPassword(password)
 
-//   const candidate = await User.findOne({ email })
-//   if (candidate) return { error: `User -- ${email} -- already exist` }
+  const isUserExist = await User.findOne({ email })
+  if (isUserExist) throw ApiError.BadRequest(`${email} already exists`)
 
   const user = await User.insertMany([
     {
