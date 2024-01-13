@@ -9,15 +9,21 @@ export const serviceCheckUser = async (email) => {
   return !!user
 }
 
-export const serviceCheckPassword = async (email, password) => {
+export const serviceSignIn = async (email, password) => {
   const user = await User.findOne({
     email,
   })
 
   if (!user) throw ApiError.BadRequest("Non-existent email address")
 
-  return await comparePassword(password, user.password)
-  // if (!isValid) throw ApiError.BadRequest("Incorrect password")
+  const isPasswordValid = await comparePassword(password, user.password)
+  if (!isPasswordValid) throw ApiError.BadRequest("Incorrect password")
+
+  const { id } = user
+  const { accessToken, refreshToken } = generateTokens({ email, id })
+  await saveToken(id, refreshToken)
+  
+  return { accessToken, refreshToken, user }
 }
 
 export const serviceCreateUser = async (email, name, surname, password) => {
@@ -34,6 +40,7 @@ export const serviceCreateUser = async (email, name, surname, password) => {
       password,
     },
   ])
+
   const { id } = user[0]
   const { accessToken, refreshToken } = generateTokens({ email, id })
   await saveToken(id, refreshToken)

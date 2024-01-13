@@ -1,5 +1,5 @@
 import {
-  serviceCheckPassword,
+  serviceSignIn,
   serviceCheckUser,
   serviceCreateUser,
 } from "../service/userService.js"
@@ -13,11 +13,16 @@ export const checkUser = async (req, res, next) => {
   }
 }
 
-export const checkPassword = async (req, res, next) => {
+export const signIn = async (req, res, next) => {
   try {
     const { email, password } = req.body
-    const isValid = await serviceCheckPassword(email, password)
-    res.json({ isValid })
+    const userData = await serviceSignIn(email, password)
+    res.cookie("refreshToken", userData.refreshToken, {
+      maxAge: 30 * 24 * 60 * 60 * 1000,
+      httpOnly: true,
+    })
+
+    res.json(userData)
   } catch (e) {
     next(e)
   }
