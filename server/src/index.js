@@ -12,8 +12,8 @@ const PORT = 4000
 
 app.use(cors())
 app.use(express.json())
-app.use('/api', router)
 app.use(cookieParser())
+app.use('/api', router)
 app.use(errorMiddleware)
 
 connection().then(() => {

@@ -2,6 +2,7 @@ import {
   serviceSignIn,
   serviceCheckUser,
   serviceCreateUser,
+  serviceSignOut
 } from "../service/userService.js"
 
 export const checkUser = async (req, res, next) => {
@@ -38,6 +39,18 @@ export const createUser = async (req, res, next) => {
     })
 
     res.json(userData)
+  } catch (e) {
+    next(e)
+  }
+}
+
+export const signOut = async (req, res, next) => {
+  try {
+    const { refreshToken } = req.cookies
+    const token = await serviceSignOut(refreshToken)
+    res.clearCookie('refreshToken')
+    res.json(token)
+
   } catch (e) {
     next(e)
   }

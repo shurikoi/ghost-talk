@@ -1,8 +1,8 @@
-import ApiError from "../exceptions/apiError.js"
+import ApiError from "../exceptions/ApiError.js"
 import User from "../models/User.js"
 import comparePassword from "../utils/comparePassword.js"
 import hashPassword from "../utils/hashPassword.js"
-import { generateTokens, saveToken } from "./tokenService.js"
+import { serviceGenerateTokens, serviceRemoveToken, serviceSaveToken } from "./tokenService.js"
 
 export const serviceCheckUser = async (email) => {
   const user = await User.findOne({ email })
@@ -20,8 +20,8 @@ export const serviceSignIn = async (email, password) => {
   if (!isPasswordValid) throw ApiError.BadRequest("Incorrect password")
 
   const { id } = user
-  const { accessToken, refreshToken } = generateTokens({ email, id })
-  await saveToken(id, refreshToken)
+  const { accessToken, refreshToken } = serviceGenerateTokens({ email, id })
+  await serviceSaveToken(id, refreshToken)
   
   return { accessToken, refreshToken, user }
 }
@@ -42,8 +42,13 @@ export const serviceCreateUser = async (email, name, surname, password) => {
   ])
 
   const { id } = user[0]
-  const { accessToken, refreshToken } = generateTokens({ email, id })
-  await saveToken(id, refreshToken)
+  const { accessToken, refreshToken } = serviceGenerateTokens({ email, id })
+  await serviceSaveToken(id, refreshToken)
   
   return { accessToken, refreshToken, user }
+}
+
+export const serviceSignOut = async (refreshToken) => {
+  const token = serviceRemoveToken(refreshToken)
+  return token
 }
