@@ -1,20 +1,14 @@
-import { useState } from "react"
+import { useContext, useState } from "react"
 import SubmitIcon from "../ui/icon/SubmitIcon"
+import { Context } from "../../main"
 
 export default function SignIn({ email, setCurrentState }) {
   const [password, setPassword] = useState("")
+  const { store } = useContext(Context)
   let isFilled = !!password
 
   const handleSubmit = async () => {
-    const response = await fetch("http://localhost:4000/api/sign-in", {
-      method: "POST",
-      body: JSON.stringify({ email, password }), // maybe it is better to pass the password hashed?
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-
-    const data = await response.json()
+    await store.signIn(email, password)
   }
 
   const handleKeyDown = (e) => {

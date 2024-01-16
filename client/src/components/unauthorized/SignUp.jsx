@@ -1,22 +1,16 @@
-import { useState } from "react"
+import { useContext, useState } from "react"
 import SubmitIcon from "../ui/icon/SubmitIcon"
 import "./SignUp.css"
+import { Context } from "../../main"
 
 export default function SignUp({ email, setCurrentState }) {
   const [name, setName] = useState("")
   const [surname, setSurname] = useState("")
   const [password, setPassword] = useState("")
+  const { store } = useContext(Context)
 
   const handleSubmit = async () => {
-    const response = await fetch("http://localhost:4000/api/create-user", {
-      method: "POST",
-      body: JSON.stringify({ email, name, surname, password }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-
-    const data = await response.json()
+    await store.signUp(email, name, surname, password)
   }
 
   const handleKeyDown = (e) => {
@@ -67,7 +61,7 @@ export default function SignUp({ email, setCurrentState }) {
           //   isFilled={isFilled} // TODO!!
         />
       </div>
-      <button onClick={() => setCurrentState("default")}>
+      <button onClick={handleSubmit}>
         Back to 'default'
       </button>
     </>

@@ -1,10 +1,10 @@
 import {
   serviceSignIn,
   serviceCheckUser,
-  serviceCreateUser,
+  serviceSignUp,
   serviceSignOut,
   serviceRefresh,
-} from "../service/userService.js"
+} from "../services/userService.js"
 
 export const checkUser = async (req, res, next) => {
   try {
@@ -30,10 +30,10 @@ export const signIn = async (req, res, next) => {
   }
 }
 
-export const createUser = async (req, res, next) => {
+export const signUp = async (req, res, next) => {
   try {
     const { email, name, surname, password } = req.body
-    const userData = await serviceCreateUser(email, name, surname, password)
+    const userData = await serviceSignUp(email, name, surname, password)
 
     res.cookie("refreshToken", userData.refreshToken, {
       maxAge: 30 * 24 * 60 * 60 * 1000,

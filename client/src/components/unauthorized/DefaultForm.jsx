@@ -1,18 +1,13 @@
+import { useContext } from "react"
 import SubmitIcon from "../ui/icon/SubmitIcon.jsx"
+import { Context } from "../../main.jsx"
 
 export default function DefaultForm({ setEmail, email, setCurrentState }) {
+  const { store } = useContext(Context)
   let isFilled = !!email //getting boolean if input is filled
 
   const handleSubmit = async () => {
-    const response = await fetch("http://localhost:4000/api/check-user", {
-      method: "POST",
-      body: JSON.stringify({ email }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-
-    const data = await response.json()
+    const data = await store.checkUser(email)
 
     if (data.isExist) setCurrentState("signIn")
     else setCurrentState("signUp")

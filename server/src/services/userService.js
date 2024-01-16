@@ -36,7 +36,7 @@ export const serviceSignIn = async (email, password) => {
   return await generateAndSaveTokens(user)
 }
 
-export const serviceCreateUser = async (email, name, surname, password) => {
+export const serviceSignUp = async (email, name, surname, password) => {
   password = await hashPassword(password)
 
   const isUserExist = await User.findOne({ email })
