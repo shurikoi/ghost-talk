@@ -3,14 +3,15 @@ import SubmitIcon from "../ui/icon/SubmitIcon"
 import "./SignUp.css"
 import { Context } from "../../main"
 
-export default function SignUp({ email, setCurrentState }) {
+export default function SignUp({ setCurrentState }) {
   const [name, setName] = useState("")
   const [surname, setSurname] = useState("")
   const [password, setPassword] = useState("")
-  const { store } = useContext(Context)
+  const { authStore, userStore } = useContext(Context)
+  const email = userStore.email
 
   const handleSubmit = async () => {
-    await store.signUp(email, name, surname, password)
+    await authStore.signUp(email, name, surname, password)
   }
 
   const handleKeyDown = (e) => {
@@ -61,7 +62,7 @@ export default function SignUp({ email, setCurrentState }) {
           //   isFilled={isFilled} // TODO!!
         />
       </div>
-      <button onClick={handleSubmit}>
+      <button onClick={() => setCurrentState("default")}>
         Back to 'default'
       </button>
     </>

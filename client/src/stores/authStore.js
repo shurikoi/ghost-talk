@@ -1,7 +1,7 @@
 import { makeAutoObservable } from "mobx"
 import { serviceCheckUser, serviceSignIn, serviceSignOut, serviceSignUp } from "../services/authService"
 
-export default class Store {
+export default class AuthStore {
     user = {}
     isAuth = false
 

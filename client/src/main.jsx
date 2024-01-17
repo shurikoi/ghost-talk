@@ -2,17 +2,21 @@ import React from "react"
 import ReactDOM from "react-dom/client"
 import App from "./App.jsx"
 import "./index.css"
-import Store from "./store/store.js"
+import AuthStore from "./stores/authStore.js"
 import { createContext } from "react"
+import UserStore from "./stores/userStore.js"
 
-const store = new Store()
+const authStore = new AuthStore()
+const userStore = new UserStore()
+
 export const Context = createContext({
-  store,
+  authStore,
+  userStore,
 })
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <Context.Provider value={{ store }}>
+    <Context.Provider value={{ authStore, userStore }}>
       <App />
     </Context.Provider>
   </React.StrictMode>

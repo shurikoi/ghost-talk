@@ -1,13 +1,15 @@
-import { useContext } from "react"
+import { useContext, useEffect } from "react"
 import SubmitIcon from "../ui/icon/SubmitIcon.jsx"
 import { Context } from "../../main.jsx"
+import { observer } from 'mobx-react-lite';
 
-export default function DefaultForm({ setEmail, email, setCurrentState }) {
-  const { store } = useContext(Context)
+function DefaultForm({ setCurrentState }) {
+  const { authStore, userStore } = useContext(Context)
+  const email = userStore.email
   let isFilled = !!email //getting boolean if input is filled
 
   const handleSubmit = async () => {
-    const data = await store.checkUser(email)
+    const data = await authStore.checkUser(email)
 
     if (data.isExist) setCurrentState("signIn")
     else setCurrentState("signUp")
@@ -30,7 +32,7 @@ export default function DefaultForm({ setEmail, email, setCurrentState }) {
           placeholder="example@gmail.com"
           value={email}
           onChange={(e) => {
-            setEmail(e.target.value.trim())
+            userStore.setEmail(e.target.value.trim())
           }}
           onKeyDown={handleKeyDown}
         />
@@ -43,3 +45,5 @@ export default function DefaultForm({ setEmail, email, setCurrentState }) {
     </>
   )
 }
+
+export default observer(DefaultForm)

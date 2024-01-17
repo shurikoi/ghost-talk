@@ -2,13 +2,15 @@ import { useContext, useState } from "react"
 import SubmitIcon from "../ui/icon/SubmitIcon"
 import { Context } from "../../main"
 
-export default function SignIn({ email, setCurrentState }) {
+export default function SignIn({ setCurrentState }) {
   const [password, setPassword] = useState("")
-  const { store } = useContext(Context)
+  const { authStore, userStore } = useContext(Context)
+  const email = userStore.email
+  const setEmail = userStore.setEmail
   let isFilled = !!password
 
   const handleSubmit = async () => {
-    await store.signIn(email, password)
+    await authStore.signIn(email, password)
   }
 
   const handleKeyDown = (e) => {
