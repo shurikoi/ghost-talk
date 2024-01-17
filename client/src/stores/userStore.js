@@ -1,10 +1,13 @@
-import { makeAutoObservable, observable } from "mobx"
+import { action, makeAutoObservable, observable } from "mobx"
 
 export default class UserStore {
     email = ""
 
     constructor() {
-        makeAutoObservable(this)
+        makeAutoObservable(this, {
+            email: observable,
+            setEmail: action,
+        })
     }
 
     setEmail(email) {
