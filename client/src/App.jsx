@@ -1,5 +1,6 @@
 import "./App.css"
 import { BrowserRouter, Route, Routes } from "react-router-dom"
+import StartPage from "./components/unauthorized/StartPage"
 import AuthForm from "./components/unauthorized/AuthForm"
 import DefaultForm from "./components/unauthorized/DefaultForm"
 import Main from "./components/authorized/Main"
@@ -24,7 +25,8 @@ function App() {
             {authStore.isAuth ? (
               <Route path="/" element={<Main />}></Route>
             ) : null}
-            <Route path="/" element={<AuthForm />}></Route>
+            {/* <Route path="/" element={<AuthForm />}></Route> */}
+            <Route path="/" element={<StartPage />}></Route>
 
             <Route path="*" element={<DefaultForm />}></Route>
           </Routes>

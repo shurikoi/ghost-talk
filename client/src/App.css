@@ -19,3 +19,9 @@
     src: url(../fonts/e-UkraineHead-Light.otf);
     font-weight: 300;
 }
+
+@font-face {
+    font-family: 'Cosen';
+    src: url(../fonts/Cosen-Medium.otf);
+    font-weight: 500;
+}

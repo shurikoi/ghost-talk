@@ -7,7 +7,27 @@ export const $api = axios.create(({
     baseURL: API_URL
 }))
 
-$api.interceptors.request.use(config => {
+$api.interceptors.request.use((config) => {
     config.headers.Authorization = `Bearer ${localStorage.getItem('token')}`
     return config
+})
+
+$api.interceptors.response.use((config) => {
+    return config
+}, async (error) => {
+    const originalRequest = error.config
+    try {
+        if (error.response.status == 401 && error.config && !error.config._isRetry) {
+            originalRequest._isRetry = true
+            const response = await axios(`${API_URL}/refresh`, {
+                withCredentials: true,
+            })
+            localStorage.setItem('token', response.data.accessToken)
+            $api.request(originalRequest)
+        }
+    } catch (e) {
+        console.log("User is not authorized")
+    }
+
+    throw error
 })
