@@ -1,4 +1,4 @@
-import "./AuthForm.css"
+import styles from "./AuthForm.module.css"
 import { useContext, useState } from "react"
 import DefaultForm from "./DefaultForm"
 // import { CSSTransition, SwitchTransition } from "react-transition-group"
@@ -19,8 +19,8 @@ export default function AuthForm() {
   }
 
   return (
-    <div className="main">
-      <div className="auth-form" action="">
+    <div className={styles.main}>
+      <div className={styles.authForm} action="">
         {states[currentState]}
       </div>
     </div>

@@ -1,14 +1,14 @@
 import { useContext } from "react"
-import "./Main.css"
+import styles from "./Main.module.css"
 import { Context } from "../../main"
 
 export default function Main() {
     const { authStore } = useContext(Context)
 
     return (
-        <div className="main">
-            <p className="">Hello</p>
+        <main>
+            <p className={styles.main}>Hello</p>
             <button onClick={() => authStore.signOut()}>Sign Out</button>
-        </div>
+        </main>
     )
 };

@@ -1,12 +1,11 @@
 import "./App.css"
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 import StartPage from "./components/unauthorized/StartPage"
-import AuthForm from "./components/unauthorized/AuthForm"
-import DefaultForm from "./components/unauthorized/DefaultForm"
 import Main from "./components/authorized/Main"
 import { useContext, useEffect } from "react"
 import { Context } from "./main"
 import { observer } from "mobx-react-lite"
+import AuthForm from "./components/unauthorized/AuthForm"
 
 function App() {
   const { authStore } = useContext(Context)
@@ -24,11 +23,9 @@ function App() {
           <Routes>
             {authStore.isAuth ? (
               <Route path="/" element={<Main />}></Route>
-            ) : null}
+            ) : <Route path="/" element={<StartPage />}></Route>}
             {/* <Route path="/" element={<AuthForm />}></Route> */}
-            <Route path="/" element={<StartPage />}></Route>
-
-            <Route path="*" element={<DefaultForm />}></Route>
+            {/* <Route path="*" element={}></Route> */}
           </Routes>
         </BrowserRouter>
       )}

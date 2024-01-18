@@ -1,6 +1,7 @@
 import { useContext, useState } from "react"
 import SubmitIcon from "../ui/icon/SubmitIcon"
 import { Context } from "../../main"
+import styles from "./AuthForm.module.css"
 
 export default function SignIn({ setCurrentState }) {
   const [password, setPassword] = useState("")
@@ -19,9 +20,9 @@ export default function SignIn({ setCurrentState }) {
 
   return (
     <>
-      <div className="title">Sign up</div>
-      <div className="description">via {email}</div>
-      <div className="input-wrapper w-18">
+      <div className={styles.title}>Sign up</div>
+      <div className={styles.description}>via {email}</div>
+      <div className={`${styles.inputWrapper} ${styles.w18}`}>
         <input
           type="password"
           placeholder="Enter your password"
@@ -32,7 +33,7 @@ export default function SignIn({ setCurrentState }) {
           onKeyDown={handleKeyDown}
         />
         <SubmitIcon
-          className="submitBtn"
+          className={styles.submitBtn}
           onClick={handleSubmit}
           isFilled={isFilled}
         />

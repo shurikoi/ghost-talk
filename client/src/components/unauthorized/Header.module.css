@@ -1,0 +1,72 @@
+.header {
+  height: 100svh; /* Assuming you intended 100vh */
+  background-color: #0a092d;
+  color: white;
+}
+
+.topContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 4rem;
+  border-bottom: 1px rgb(17, 30, 128) solid;
+}
+
+.name {
+  font-family: "Cosen";
+  font-size: xx-large;
+}
+
+.bottomContainer {
+  padding: 7rem 11rem 0rem 9rem;
+}
+
+.content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.about {
+  font-family: "e-Ukraine";
+  font-size: xx-large;
+  font-weight: 300;
+}
+
+.headImage {
+  height: 400px;
+}
+
+@media only screen and (max-width: 600px) {
+  .topContainer {
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+
+  .content {
+    flex-direction: column-reverse;
+    gap: 2.5rem;
+    text-align: center;
+  }
+
+  .bottomContainer {
+    padding: 3rem 2rem 0rem 2rem;
+  }
+}
+
+.getStarted {
+  background-color: #2053db;
+  border-radius: 20px;
+  padding: 0.5rem 2rem;
+  border: none;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-weight: 400;
+  font-size: medium;
+  color: white;
+  cursor: pointer;
+}
+
+.getStarted:hover {
+  background-color: #2a64e5;
+}

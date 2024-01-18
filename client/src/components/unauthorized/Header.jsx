@@ -1,19 +1,19 @@
 import HeadImage from "../../../public/images/HeadImage"
-import "./Header.css"
+import styles from "./Header.module.css"
 
 export default function Header() {
-    return (
-        <header>
-            <div className="top-container">
-                <div className="name">Lexify</div>
-                <button className="get-started">Get Started</button>
-            </div>
-            <div className="bottom-container">
-                <div className="content">
-                    <div className="about">Learning by flashcards</div>
-                    <HeadImage className="head-image"/>
-                </div>
-            </div>
-        </header>
-    )
+  return (
+    <div className={styles.header}>
+      <div className={styles.topContainer}>
+        <div className={styles.name}>Lexify</div>
+        <button className={styles.getStarted}>Get Started</button>
+      </div>
+      <div className={styles.bottomContainer}>
+        <div className={styles.content}>
+          <div className={styles.about}>Learning by flashcards</div>
+          <HeadImage className={styles.headImage} />
+        </div>
+      </div>
+    </div>
+  )
 }

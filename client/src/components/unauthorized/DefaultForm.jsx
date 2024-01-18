@@ -1,7 +1,8 @@
+import styles from "./AuthForm.module.css"
 import { useContext, useEffect } from "react"
 import SubmitIcon from "../ui/icon/SubmitIcon.jsx"
 import { Context } from "../../main.jsx"
-import { observer } from 'mobx-react-lite';
+import { observer } from "mobx-react-lite"
 
 function DefaultForm({ setCurrentState }) {
   const { authStore, userStore } = useContext(Context)
@@ -21,12 +22,12 @@ function DefaultForm({ setCurrentState }) {
 
   return (
     <>
-      <div className="title">Sign in or sign up in seconds</div>
-      <div className="description">
+      <div className={styles.title}>Sign in or sign up in seconds</div>
+      <div className={styles.description}>
         Use your email address. If you do not have an account, we will help you
         create one.
       </div>
-      <div className="input-wrapper w-18">
+      <div className={`${styles.inputWrapper} ${styles.w18}`}>
         <input
           type="text"
           placeholder="example@gmail.com"
@@ -37,7 +38,7 @@ function DefaultForm({ setCurrentState }) {
           onKeyDown={handleKeyDown}
         />
         <SubmitIcon
-          className="submitBtn"
+          className={styles.submitBtn}
           onClick={handleSubmit}
           isFilled={isFilled}
         />

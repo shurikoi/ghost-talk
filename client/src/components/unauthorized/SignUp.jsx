@@ -1,7 +1,7 @@
 import { useContext, useState } from "react"
 import SubmitIcon from "../ui/icon/SubmitIcon"
-import "./SignUp.css"
 import { Context } from "../../main"
+import styles from "./AuthForm.module.css"
 
 export default function SignUp({ setCurrentState }) {
   const [name, setName] = useState("")
@@ -20,11 +20,13 @@ export default function SignUp({ setCurrentState }) {
 
   return (
     <>
-      <div className="title">Sign up</div>
-      <div className="description">creating an account using {email}</div>
+      <div className={styles.title}>Sign up</div>
+      <div className={styles.description}>
+        creating an account using {email}
+      </div>
 
-      <div className="inputs-wrapper">
-        <div className="input-wrapper">
+      <div className={styles.inputsWrapper}>
+        <div className={styles.inputWrapper}>
           <input
             type="text"
             placeholder="Name"
@@ -34,7 +36,7 @@ export default function SignUp({ setCurrentState }) {
             }}
           />
         </div>
-        <div className="input-wrapper">
+        <div className={styles.inputWrapper}>
           <input
             type="text"
             placeholder="Surname"
@@ -46,7 +48,7 @@ export default function SignUp({ setCurrentState }) {
         </div>
       </div>
 
-      <div className="input-wrapper w-18">
+      <div className={`${styles.inputWrapper} ${styles.w18}`}>
         <input
           type="password"
           placeholder="Enter your password"
@@ -57,7 +59,7 @@ export default function SignUp({ setCurrentState }) {
           onKeyDown={handleKeyDown}
         />
         <SubmitIcon
-          className="submitBtn"
+          className={styles.submitBtn}
           onClick={handleSubmit}
           //   isFilled={isFilled} // TODO!!
         />
