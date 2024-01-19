@@ -1,7 +1,7 @@
 import styles from "./AuthForm.module.css"
 import { useContext, useEffect } from "react"
 import SubmitIcon from "../ui/icon/SubmitIcon.jsx"
-import { Context } from "../../main.jsx"
+import { Context } from "../../contexts/Context"
 import { observer } from "mobx-react-lite"
 
 function DefaultForm({ setCurrentState }) {

@@ -3,8 +3,8 @@ import { BrowserRouter, Route, Routes } from "react-router-dom"
 import StartPage from "./components/unauthorized/StartPage"
 import Main from "./components/authorized/Main"
 import { useContext, useEffect, useMemo } from "react"
-import { Context } from "./main"
 import { observer } from "mobx-react-lite"
+import { Context } from "./contexts/Context"
 
 function App() {
   const { authStore } = useContext(Context)

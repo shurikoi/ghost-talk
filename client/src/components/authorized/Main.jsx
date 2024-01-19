@@ -1,9 +1,9 @@
 import { useContext, useState } from "react"
 import styles from "./Main.module.css"
-import { Context } from "../../main"
 import Header from "./Header"
 import Navigation from "./Navigation"
 import { BrowserRouter, Routes, Route } from "react-router-dom"
+import { Context } from "../../contexts/Context"
 
 export default function Main() {
   const { authStore } = useContext(Context)

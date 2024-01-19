@@ -1,6 +1,6 @@
 import { useContext, useState } from "react"
 import SubmitIcon from "../ui/icon/SubmitIcon"
-import { Context } from "../../main"
+import { Context } from "../../contexts/Context"
 import styles from "./AuthForm.module.css"
 
 export default function SignUp({ setCurrentState }) {

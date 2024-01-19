@@ -1,6 +1,6 @@
 import { useContext } from "react"
 import styles from "./Header.module.css"
-import { Context } from "../../main"
+import { Context } from "../../contexts/Context"
 
 export default function Header() {
     const { authStore } = useContext(Context)
