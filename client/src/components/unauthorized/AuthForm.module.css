@@ -6,11 +6,17 @@
   width: 100svw;
   justify-content: center;
   align-items: center;
-
 }
 
 .active {
   display: flex;
+}
+
+.behind {
+  position: absolute;
+  height: 100svh;
+  width: 100svw;
+  background-color: rgba(0, 0, 0, 0.2);
 }
 
 .authForm {
@@ -18,6 +24,7 @@
   padding: 2rem 3rem;
   border-radius: 1rem;
   display: flex;
+  position: relative;
   flex-direction: column;
   justify-content: center;
   align-items: center;

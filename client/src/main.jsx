@@ -6,9 +6,6 @@ import authStore from "./stores/authStore.js"
 import { createContext } from "react"
 import userStore from "./stores/userStore.js"
 
-// const authStore = new AuthStore()
-// const userStore = new UserStore()
-
 export const Context = createContext({
   authStore,
   userStore,

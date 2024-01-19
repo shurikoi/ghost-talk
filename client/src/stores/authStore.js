@@ -72,21 +72,22 @@ class AuthStore {
         }
     }
     // can cause infinity loop !!!!!!!!
-    // async checkAuth() {
-    //     this.setLoading(true)
-    //     try {
-    //         const response = await axios(`${API_URL}/refresh`, {
-    //             withCredentials: true,
-    //         })
-    //         localStorage.setItem('token', response.data.accessToken)
-    //         this.setAuth(true)
-    //         this.setUser(response.data.user)
-    //     } catch (e) {
-    //         console.log(e.response?.data?.message)
-    //     } finally {
-    //         this.setLoading(false)
-    //     }
-    // }
+    async checkAuth() {
+        this.setLoading(true)
+        console.log("checkAuth")
+        try {
+            const response = await axios(`${API_URL}/refresh`, {
+                withCredentials: true,
+            })
+            localStorage.setItem('token', response.data.accessToken)
+            this.setAuth(true)
+            this.setUser(response.data.user)
+        } catch (e) {
+            console.log(e.response?.data?.message)
+        } finally {
+            this.setLoading(false)
+        }
+    }
 }
 
 const authStore = new AuthStore()

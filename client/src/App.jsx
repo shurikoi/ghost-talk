@@ -5,7 +5,6 @@ import Main from "./components/authorized/Main"
 import { useContext, useEffect } from "react"
 import { Context } from "./main"
 import { observer } from "mobx-react-lite"
-import AuthForm from "./components/unauthorized/AuthForm"
 
 function App() {
   const { authStore } = useContext(Context)
@@ -24,7 +23,7 @@ function App() {
             {authStore.isAuth ? (
               <Route path="/" element={<Main />}></Route>
             ) : <Route path="/" element={<StartPage />}></Route>}
-            {/* <Route path="/" element={<AuthForm />}></Route> */}
+            
             {/* <Route path="*" element={}></Route> */}
           </Routes>
         </BrowserRouter>

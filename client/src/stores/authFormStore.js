@@ -13,6 +13,14 @@ class AuthFormStore {
     setFormActive(bool) {
         this.isFormActive = bool
     }
+
+    addClass() {
+        this.isFormActive = true
+    }
+
+    removeClass() {
+        this.isFormActive = false
+    }
 }
 
 const authFormStore = new AuthFormStore()

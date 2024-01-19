@@ -7,23 +7,27 @@ import SignUp from "./SignUp"
 import { observer } from "mobx-react-lite"
 import { FormModalContext } from "../../contexts/FormModalContext"
 
-function AuthForm({className}) {
+function AuthForm({ className }) {
   const [currentState, setCurrentState] = useState("default")
   let { authFormStore } = useContext(FormModalContext)
 
   const states = {
-    default: (
-      <DefaultForm
-        setCurrentState={setCurrentState}
-      ></DefaultForm>
-    ),
+    default: <DefaultForm setCurrentState={setCurrentState}></DefaultForm>,
     signIn: <SignIn setCurrentState={setCurrentState}></SignIn>,
     signUp: <SignUp setCurrentState={setCurrentState}></SignUp>,
   }
 
   return (
-    <div className={`${styles.main} ${className} ${authFormStore.isFormActive ? styles.active : ""}`}>
-      <div className={styles.authForm} action="">
+    <div
+      className={`${styles.main} ${className} ${
+        authFormStore.isFormActive ? styles.active : ""
+      }`}
+    >
+      <div
+        className={styles.behind}
+        onClick={() => authFormStore.removeClass()}
+      ></div>
+      <div className={styles.authForm} action="" >
         {states[currentState]}
       </div>
     </div>
