@@ -2,7 +2,7 @@ import "./App.css"
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 import StartPage from "./components/unauthorized/StartPage"
 import Main from "./components/authorized/Main"
-import { useContext, useEffect } from "react"
+import { useContext, useEffect, useMemo } from "react"
 import { Context } from "./main"
 import { observer } from "mobx-react-lite"
 
@@ -10,7 +10,9 @@ function App() {
   const { authStore } = useContext(Context)
 
   useEffect(() => {
-    if (localStorage.getItem("token")) authStore.checkAuth()
+    const checkAuth = async () => await authStore.checkAuth()
+    const tokenExist = localStorage.getItem("token")
+    if (tokenExist) checkAuth()
   }, [])
 
   return (

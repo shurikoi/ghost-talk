@@ -1,0 +1,14 @@
+.header {
+  background-color: #0a092d;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem 4rem;
+  border-bottom: 1px rgb(17, 30, 128) solid;
+}
+
+.name {
+  font-family: "Cosen";
+  font-size: xx-large;
+}

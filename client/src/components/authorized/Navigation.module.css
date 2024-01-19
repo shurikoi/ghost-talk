@@ -1,0 +1,33 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+
+.options {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: 1;
+  gap: 2rem;
+}
+
+.option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 15rem;
+  width: 15rem;
+  background-color: #09074d;
+  border-radius: 15px;
+  font-family: e-Ukraine;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.option:hover {
+  background-color: #0b0852;
+}

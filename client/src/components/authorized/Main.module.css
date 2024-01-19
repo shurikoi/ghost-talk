@@ -1,8 +1,6 @@
-main {
-  height: 100vh;
+.wrapper {
+  min-height: 100svh;
+  background-color: #0a092d;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #1e1f20;
-  color: white;
+  flex-direction: column;
 }
