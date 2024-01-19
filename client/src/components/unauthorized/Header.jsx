@@ -7,10 +7,11 @@ export default function Header() {
     <div className={styles.header}>
       <div className={styles.topContainer}>
         <div className={styles.name}>Lexify</div>
-        <GetStartedBtn />
+        <GetStartedBtn className={styles.authTopBtn} />
       </div>
       <div className={styles.bottomContainer}>
         <div className={styles.content}>
+          <GetStartedBtn className={styles.authBottomBtn} />
           <div className={styles.about}>Learning by flashcards</div>
           <HeadImage className={styles.headImage} />
         </div>

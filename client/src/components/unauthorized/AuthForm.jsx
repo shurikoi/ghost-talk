@@ -9,7 +9,7 @@ import { FormModalContext } from "../../contexts/FormModalContext"
 
 function AuthForm({ className }) {
   const [currentState, setCurrentState] = useState("default")
-  let { authFormStore } = useContext(FormModalContext)
+  const { authFormStore } = useContext(FormModalContext)
 
   const states = {
     default: <DefaultForm setCurrentState={setCurrentState}></DefaultForm>,

@@ -2,9 +2,9 @@ import { useContext } from "react"
 import styles from "./GetStartedBtn.module.css"
 import { FormModalContext } from "../../../contexts/FormModalContext"
 
-export default function GetStartedBtn() {
+export default function GetStartedBtn({className = ""}) {
     const { authFormStore } = useContext(FormModalContext)
     return (
-        <button className={styles.getStarted} onClick={() => authFormStore.addClass()}>Get Started</button>
+        <button className={`${styles.getStarted} ${className}`} onClick={() => authFormStore.addClass()}>Get Started</button>
     )
 }
