@@ -1,5 +1,3 @@
-import { useEffect } from "react"
-
 export default function SubmitIcon({className, onClick, isFilled = false}) {
   const colors = {
     default: "#95ed8e",

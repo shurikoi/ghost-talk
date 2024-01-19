@@ -4,6 +4,7 @@ import Header from "./Header"
 import Navigation from "./Navigation"
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import { Context } from "../../contexts/Context"
+import CreateSet from "./CreateSet"
 
 export default function Main() {
   const { authStore } = useContext(Context)
@@ -11,7 +12,7 @@ export default function Main() {
 
   const states = {
     navigation: <Navigation setNavigationItem={setNavigationItem}></Navigation>,
-    "create-set": <h1>Hi</h1>
+    "create-set": <CreateSet></CreateSet>
   }
 
   return (

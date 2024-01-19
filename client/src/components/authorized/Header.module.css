@@ -12,3 +12,17 @@
   font-family: "Cosen";
   font-size: xx-large;
 }
+
+.signOutBtn {
+  padding: 0.7rem 0.8rem;
+  background-color: #2e3856;
+  color: rgb(179, 179, 210);
+  border: none;
+  border-radius: 7px;
+  font-family: e-Ukraine;
+  cursor: pointer;
+}
+
+.signOutBtn:hover {
+  background-color: #3d445b;
+}
