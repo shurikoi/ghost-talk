@@ -2,8 +2,7 @@ import { action, makeAutoObservable, observable } from "mobx"
 import { serviceCheckUser, serviceSignIn, serviceSignOut, serviceSignUp } from "../services/authService"
 import axios from "axios"
 import { API_URL } from "../http"
-
-export default class AuthStore {
+class AuthStore {
     user = {}
     isAuth = false
     isLoading = false
@@ -72,20 +71,23 @@ export default class AuthStore {
             console.log(e.response?.data?.message)
         }
     }
-
-    async checkAuth() {
-        this.setLoading(true)
-        try {
-            const response = await axios(`${API_URL}/refresh`, {
-                withCredentials: true,
-            })
-            localStorage.setItem('token', response.data.accessToken)
-            this.setAuth(true)
-            this.setUser(response.data.user)
-        } catch (e) {
-            console.log(e.response?.data?.message)
-        } finally {
-            this.setLoading(false)
-        }
-    }
+    // can cause infinity loop !!!!!!!!
+    // async checkAuth() {
+    //     this.setLoading(true)
+    //     try {
+    //         const response = await axios(`${API_URL}/refresh`, {
+    //             withCredentials: true,
+    //         })
+    //         localStorage.setItem('token', response.data.accessToken)
+    //         this.setAuth(true)
+    //         this.setUser(response.data.user)
+    //     } catch (e) {
+    //         console.log(e.response?.data?.message)
+    //     } finally {
+    //         this.setLoading(false)
+    //     }
+    // }
 }
+
+const authStore = new AuthStore()
+export default authStore

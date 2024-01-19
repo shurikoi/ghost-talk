@@ -1,16 +1,19 @@
 @import url("https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap");
 
 .main {
-  height: 100vh;
-  display: flex;
+  display: none;
+  height: 100svh;
+  width: 100svw;
   justify-content: center;
   align-items: center;
-  background-color: #1e1f20;
+
+}
+
+.active {
+  display: flex;
 }
 
 .authForm {
-  /* box-shadow: 0px 0px 100px -20px rgb(219, 2, 239); */
-  position: absolute;
   background-color: white;
   padding: 2rem 3rem;
   border-radius: 1rem;

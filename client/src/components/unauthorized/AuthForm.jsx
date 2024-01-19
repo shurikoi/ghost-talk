@@ -4,9 +4,12 @@ import DefaultForm from "./DefaultForm"
 // import { CSSTransition, SwitchTransition } from "react-transition-group"
 import SignIn from "./SignIn"
 import SignUp from "./SignUp"
+import { observer } from "mobx-react-lite"
+import { FormModalContext } from "../../contexts/FormModalContext"
 
-export default function AuthForm() {
+function AuthForm({className}) {
   const [currentState, setCurrentState] = useState("default")
+  let { authFormStore } = useContext(FormModalContext)
 
   const states = {
     default: (
@@ -19,10 +22,12 @@ export default function AuthForm() {
   }
 
   return (
-    <div className={styles.main}>
+    <div className={`${styles.main} ${className} ${authFormStore.isFormActive ? styles.active : ""}`}>
       <div className={styles.authForm} action="">
         {states[currentState]}
       </div>
     </div>
   )
 }
+
+export default observer(AuthForm)

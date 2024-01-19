@@ -2,12 +2,12 @@ import React from "react"
 import ReactDOM from "react-dom/client"
 import App from "./App.jsx"
 import "./index.css"
-import AuthStore from "./stores/authStore.js"
+import authStore from "./stores/authStore.js"
 import { createContext } from "react"
-import UserStore from "./stores/userStore.js"
+import userStore from "./stores/userStore.js"
 
-const authStore = new AuthStore()
-const userStore = new UserStore()
+// const authStore = new AuthStore()
+// const userStore = new UserStore()
 
 export const Context = createContext({
   authStore,

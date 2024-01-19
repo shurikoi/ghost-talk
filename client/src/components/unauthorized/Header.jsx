@@ -1,4 +1,5 @@
 import HeadImage from "../../../public/images/HeadImage"
+import GetStartedBtn from "../ui/buttons/GetStartedBtn"
 import styles from "./Header.module.css"
 
 export default function Header() {
@@ -6,7 +7,7 @@ export default function Header() {
     <div className={styles.header}>
       <div className={styles.topContainer}>
         <div className={styles.name}>Lexify</div>
-        <button className={styles.getStarted}>Get Started</button>
+        <GetStartedBtn />
       </div>
       <div className={styles.bottomContainer}>
         <div className={styles.content}>

@@ -1,6 +1,6 @@
 import { action, makeAutoObservable, observable } from "mobx"
 
-export default class UserStore {
+class UserStore {
     email = ""
 
     constructor() {
@@ -14,3 +14,6 @@ export default class UserStore {
         this.email = email
     }
 }
+
+const userStore = new UserStore()
+export default userStore
