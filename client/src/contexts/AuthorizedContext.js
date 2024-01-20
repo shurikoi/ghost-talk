@@ -1,6 +1,6 @@
-import navigatorStore from "../stores/navigatorStore"
+import setStore from "../stores/setStore"
 import { createContext } from "react"
 
 export const AuthorizedContext = createContext({
-    navigatorStore,
+    setStore,
 })

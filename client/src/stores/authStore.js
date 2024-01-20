@@ -1,7 +1,5 @@
 import { action, makeAutoObservable, observable } from "mobx"
-import { serviceCheckUser, serviceSignIn, serviceSignOut, serviceSignUp } from "../services/authService"
-import axios from "axios"
-import { API_URL } from "../http"
+import { serviceCheckUser, serviceRefresh, serviceSignIn, serviceSignOut, serviceSignUp } from "../services/authService"
 import authFormStore from "./authFormStore"
 class AuthStore {
     user = {}
@@ -79,9 +77,7 @@ class AuthStore {
         this.setLoading(true)
         try {
             console.log(0)
-            const response = await axios(`${API_URL}/refresh`, {
-                withCredentials: true,
-            })
+            const response = await serviceRefresh()
             console.log(1)
             localStorage.setItem('token', response.data.accessToken)
             this.setAuth(true)

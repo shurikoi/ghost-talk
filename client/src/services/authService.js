@@ -15,3 +15,7 @@ export const serviceSignUp = async (email, name, surname, password) => {
 export const serviceSignOut = async () => {
     return $api.post("/sign-out")
 }
+
+export const serviceRefresh = async () => {
+    return $api.get("/refresh")
+}

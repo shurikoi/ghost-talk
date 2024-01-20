@@ -1,10 +1,10 @@
 import ApiError from "../exceptions/ApiError.js"
 import Set from "../models/Set.js"
 
-export const serviceCreateSet = async (email, title, words) => {
+export const serviceCreateSet = async (userId, title, words) => {
   const set = await Set.insertMany([
     {
-      user: email,
+      user: userId,
       title,
       words: words,
     },

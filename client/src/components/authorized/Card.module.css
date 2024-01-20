@@ -1,54 +1,4 @@
-.main {
-    display: flex;
-    flex-direction: column;
-    margin: 4rem 10rem;
-    color: white;
-    gap: 3rem;
-}
-
-.topWrapper {
-    display: flex;
-    flex-direction: column;
-    gap: 1.2rem;
-}
-
-.aboutWrapper {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.about {
-    font-family: e-Ukraine;
-    font-weight: 500;
-    font-size: x-large;
-}
-
-.free {
-    font-family: e-Ukraine;
-    font-weight: 300;
-    font-size: small;
-    color: #ffcd1f;
-}
-
-.title {
-    background-color: #2e3856;
-    padding: 1rem;
-    border-radius: 10px;
-    width: auto;
-}
-
-.title::placeholder {
-    color: #bcbcbc;
-}
-
-.cards {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-}
-
-/* .card {
+.card {
     display: flex;
     flex-direction: column;
     gap: 1.5px;
@@ -102,9 +52,4 @@
     font-family: e-UkraineHead;
     font-size: small;
     padding-top: 5px;
-} */
-/* 
-.link {
-    text-decoration: none;
-    color: unset
-} */
+}
