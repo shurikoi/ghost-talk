@@ -1,53 +1,73 @@
 .main {
-    display: flex;
-    flex-direction: column;
-    margin: 4rem 10rem;
-    color: white;
-    gap: 3rem;
+  display: flex;
+  flex-direction: column;
+  margin: 4rem 10rem;
+  color: white;
+  gap: 3rem;
 }
 
 .topWrapper {
-    display: flex;
-    flex-direction: column;
-    gap: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
 }
 
 .aboutWrapper {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .about {
-    font-family: e-Ukraine;
-    font-weight: 500;
-    font-size: x-large;
+  font-family: e-Ukraine;
+  font-weight: 500;
+  font-size: x-large;
 }
 
 .free {
-    font-family: e-Ukraine;
-    font-weight: 300;
-    font-size: small;
-    color: #ffcd1f;
+  font-family: e-Ukraine;
+  font-weight: 300;
+  font-size: small;
+  color: #ffcd1f;
 }
 
 .title {
-    background-color: #2e3856;
-    padding: 1rem;
-    border-radius: 10px;
-    width: auto;
+  background-color: #2e3856;
+  padding: 1rem;
+  border-radius: 10px;
+  width: auto;
 }
 
 .title::placeholder {
-    color: #bcbcbc;
+  color: #bcbcbc;
 }
 
 .cards {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
+.text {
+  font-family: e-Ukraine;
+  font-weight: 500;
+  font-size: medium;
+  color: white;
+}
+
+.newCard {
+  background-color: #2e3856;
+  color: rgb(179, 179, 210);
+  border: none;
+  border-radius: 7px;
+  font-family: e-Ukraine;
+  cursor: pointer;
+  padding: 1rem 0rem;
+}
+
+.newCard:hover {
+    color: #daaf17;
+  }
 /* .card {
     display: flex;
     flex-direction: column;
