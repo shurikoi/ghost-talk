@@ -2,6 +2,7 @@ import { action, makeAutoObservable, observable } from "mobx"
 import { serviceCheckUser, serviceSignIn, serviceSignOut, serviceSignUp } from "../services/authService"
 import axios from "axios"
 import { API_URL } from "../http"
+import authFormStore from "./authFormStore"
 class AuthStore {
     user = {}
     isAuth = false
@@ -45,6 +46,7 @@ class AuthStore {
             localStorage.setItem('token', response.data.accessToken)
             this.setAuth(true)
             this.setUser(response.data.user)
+            authFormStore.removeClass()
         } catch (e) {
             console.log(e.response?.data?.message)
         }
@@ -56,6 +58,7 @@ class AuthStore {
             localStorage.setItem('token', response.data.accessToken)
             this.setAuth(true)
             this.setUser(response.data.user)
+            authFormStore.removeClass()
         } catch (e) {
             console.log(e.response?.data?.message)
         }

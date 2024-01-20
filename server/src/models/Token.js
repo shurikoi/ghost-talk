@@ -5,6 +5,6 @@ const tokenSchema = new Schema({
   refreshToken: { type: String, required: true },
 })
 
-const userModule = model("Token", tokenSchema)
+const tokenModule = model("Token", tokenSchema)
 
-export default userModule
+export default tokenModule

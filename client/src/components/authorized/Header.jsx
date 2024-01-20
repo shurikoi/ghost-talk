@@ -1,4 +1,5 @@
 import { useContext } from "react"
+import { Link } from "react-router-dom"
 import styles from "./Header.module.css"
 import { Context } from "../../contexts/Context"
 
@@ -7,7 +8,7 @@ export default function Header() {
   return (
     <div className={styles.header}>
       <div className={styles.name}>Lexify</div>
-      <button className={styles.signOutBtn} onClick={() => authStore.signOut()}>Sign Out</button>
+      <Link to="/" className="link"><button className={styles.signOutBtn} onClick={async () => await authStore.signOut()}>Sign Out</button></Link>
     </div>
   )
 }
