@@ -6,6 +6,12 @@
     gap: 3rem;
 }
 
+.topWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
 .aboutWrapper {
     display: flex;
     justify-content: space-between;
@@ -97,3 +103,8 @@
     font-size: small;
     padding-top: 5px;
 }
+/* 
+.link {
+    text-decoration: none;
+    color: unset
+} */

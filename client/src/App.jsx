@@ -5,6 +5,8 @@ import Main from "./components/authorized/Main"
 import { useContext, useEffect, useMemo } from "react"
 import { observer } from "mobx-react-lite"
 import { Context } from "./contexts/Context"
+import Navigation from "./components/authorized/Navigation"
+import CreateSet from "./components/authorized/CreateSet"
 
 function App() {
   const { authStore } = useContext(Context)
@@ -15,6 +17,11 @@ function App() {
     if (tokenExist) checkAuth()
   }, [])
 
+  const authorizedPages = [
+    ["/", <Navigation></Navigation>],
+    ["/create-set", <CreateSet></CreateSet>]
+  ]
+
   return (
     <>
       {authStore.isLoading ? (
@@ -23,7 +30,9 @@ function App() {
         <BrowserRouter>
           <Routes>
             {authStore.isAuth ? (
-              <Route path="/" element={<Main />}></Route>
+              authorizedPages.map((page, index) => (
+                <Route path={page[0]} element={<Main>{page[1]}</Main>} key={index}></Route>
+              ))
             ) : <Route path="/" element={<StartPage />}></Route>}
             
             {/* <Route path="*" element={}></Route> */}

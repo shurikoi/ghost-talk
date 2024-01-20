@@ -25,3 +25,8 @@
     src: url(../fonts/Cosen-Medium.otf);
     font-weight: 500;
 }
+
+.link {
+    text-decoration: none;
+    color: unset;
+}
