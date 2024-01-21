@@ -24,11 +24,9 @@ $apiBearer.interceptors.response.use((config) => {
     try {
         if (error.response.status == 401 && error.config && !error.config._isRetry) {
             originalRequest._isRetry = true
-            const response = await axios(`${API_URL}/refresh`, {
-                withCredentials: true,
-            })
+            const response = await $api("/refresh")
             localStorage.setItem('token', response.data.accessToken)
-            $api.request(originalRequest)
+            $apiBearer.request(originalRequest)
         }
     } catch (e) {
         console.log("User is not authorized")

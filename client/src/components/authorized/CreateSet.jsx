@@ -4,6 +4,7 @@ import styles from "./CreateSet.module.css"
 import { useContext, useState } from "react"
 import { AuthorizedContext } from "../../contexts/AuthorizedContext"
 import Card from "./Card"
+import CreateBtn from "../ui/buttons/CreateBtn"
 
 export default function CreateSet() {
   const { setStore } = useContext(AuthorizedContext)
@@ -46,7 +47,9 @@ export default function CreateSet() {
       >
         Add a new card
       </button>
-      <button onClick={handleSubmit}>Submit</button>
+      <div className={styles.submitWrapper}>
+       <CreateBtn onClick={handleSubmit} />
+      </div>
     </div>
   )
 }

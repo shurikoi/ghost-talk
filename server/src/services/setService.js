@@ -10,7 +10,20 @@ export const serviceCreateSet = async (userId, title, words) => {
     },
   ])
 
-  console.log(words)
+  if (!set) throw ApiError.BadRequest("Something went wrong")
 
-  return 1
+  return set
+}
+
+export const serviceGetSet = async (setId, userId) => {
+  const set = await Set.findOne({
+    $and: [
+      { _id: setId },
+      { user: userId }
+    ]
+  })
+
+  if (!set) throw ApiError.UnauthorizedError()
+
+  return set
 }

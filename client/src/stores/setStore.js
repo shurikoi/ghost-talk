@@ -2,7 +2,7 @@ import { action, makeAutoObservable, observable } from "mobx"
 import { serviceCreateSet } from "../services/setService"
 
 class SetStore {
-  title
+  title = ""
   words = []
 
   constructor() {
@@ -18,9 +18,15 @@ class SetStore {
     console.log(this.words)
   }
 
+  reset() {
+    this.words = []
+    this.title = ""
+  }
+
   async createSet() {
     try {
       const response = await serviceCreateSet(this.title, this.words)
+      this.reset()
     } catch (e) {
       console.log(e.response?.data?.message)
     }

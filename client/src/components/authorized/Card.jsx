@@ -9,7 +9,8 @@ function Card({ number = 1 }) {
   const [explanation, setExplanation] = useState("")
   const { setStore } = useContext(AuthorizedContext)
 
-  setStore.setWords({ word, explanation }, number - 1)
+  let dto = { word, explanation }
+  setStore.setWords(dto, number - 1)
 
   return (
     <div className={styles.card}>

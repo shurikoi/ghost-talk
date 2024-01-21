@@ -1,0 +1,15 @@
+.submitBtn {
+    padding: 1.5rem 2rem;
+    background-color: #253bff;
+    color: rgb(252, 252, 252);
+    border: none;
+    border-radius: 7px;
+    font-family: e-Ukraine;
+    cursor: pointer;
+    transition: 0.3s;
+    font-size: medium;
+  }
+  
+  .submitBtn:hover {
+    background-color: #3a4dfc;
+  }

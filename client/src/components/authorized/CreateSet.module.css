@@ -7,7 +7,7 @@
   flex-direction: column;
   margin: 4rem 10%;
   color: white;
-  gap: 3rem;
+  gap: 2rem;
 }
 
 .topWrapper {
@@ -71,6 +71,7 @@
   font-family: e-Ukraine;
   cursor: pointer;
   padding: 1rem 0rem;
+  transition: 0.3s;
 }
 
 .newCard:hover {
@@ -84,4 +85,9 @@
     .topWrapper {
         align-items: center;
     }
+}
+
+.submitWrapper {
+  display: flex;
+  justify-content: flex-end;
 }
