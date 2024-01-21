@@ -10,5 +10,7 @@ export const serviceCreateSet = async (userId, title, words) => {
     },
   ])
 
-  return set
+  console.log(words)
+
+  return 1
 }

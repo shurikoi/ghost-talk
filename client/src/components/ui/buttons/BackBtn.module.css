@@ -8,6 +8,7 @@
     align-items: center;
     color: var(--local-color);
     cursor: pointer;
+    width: fit-content;
 }
 
 .wrapper:hover {

@@ -1,7 +1,11 @@
+:root {
+  --input-color: #2e3856;
+}
+
 .main {
   display: flex;
   flex-direction: column;
-  margin: 4rem 10rem;
+  margin: 4rem 10%;
   color: white;
   gap: 3rem;
 }
@@ -32,7 +36,7 @@
 }
 
 .title {
-  background-color: #2e3856;
+  background-color: var(--input-color);
   padding: 1rem;
   border-radius: 10px;
   width: auto;
@@ -40,6 +44,10 @@
 
 .title::placeholder {
   color: #bcbcbc;
+}
+
+.title:hover {
+  --input-color: #323d5b;
 }
 
 .cards {
@@ -67,64 +75,13 @@
 
 .newCard:hover {
     color: #daaf17;
-  }
-/* .card {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5px;
 }
 
-.topContainer {
-    display: flex;
-    justify-content: space-between;
-    background-color: #2e3856;
-    border-radius: 10px 10px 0px 0px;
-    width: auto;
-    padding: 1rem 1.5rem;
+@media only screen and (max-width: 700px) {
+    .aboutWrapper {
+        flex-direction: column;
+    }
+    .topWrapper {
+        align-items: center;
+    }
 }
-
-.text {
-    font-family: e-Ukraine;
-    font-weight: 500;
-    font-size: medium;
-    color: white;
-}
-
-.bin {
-    fill: rgb(255, 255, 255);
-}
-
-.bottomContainer {
-    display: flex;
-    border-radius: 0px 0px 10px 10px;
-    width: auto;
-    padding: 2rem 1.5rem;
-    background-color: #2e3856;
-    gap: 3rem;
-}
-
-.textEditor {
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
-}
-
-.editorInput {
-    background: none;
-    width: auto;
-    padding-bottom: 5px;
-    border-bottom: 3px #e0e0e0 solid;
-    font-weight: 300;
-}
-
-.editorLabel {
-    color: #d0d0d0;
-    font-family: e-UkraineHead;
-    font-size: small;
-    padding-top: 5px;
-} */
-/* 
-.link {
-    text-decoration: none;
-    color: unset
-} */

@@ -29,4 +29,5 @@
 .link {
     text-decoration: none;
     color: unset;
+    width: fit-content;
 }

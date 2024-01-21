@@ -16,6 +16,8 @@
 .name {
   font-family: "Cosen";
   font-size: xx-large;
+  cursor: pointer;
+  user-select: none;
 }
 
 .bottomContainer {

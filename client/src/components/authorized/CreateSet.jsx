@@ -7,16 +7,26 @@ import Card from "./Card"
 
 export default function CreateSet() {
   const { setStore } = useContext(AuthorizedContext)
-  let [ cards, setCard ] = useState([<Card key="0" number={1}></Card>])
+  let [cards, setCard] = useState([<Card key="0"></Card>])
+  const [title, setTitle] = useState("")
 
-  // await setStore.createSet("FROM CLIENT", [{"word": "test", "explanation": "test"}])
-  const handleCreateCard = () => setCard([...cards, <Card key={cards.length} number={cards.length + 1}></Card>])
-  const handleClick = async () => await setStore.createSet("FROM CLIENT", [{"word": "test", "explanation": "test"}])
+  const handleCreateCard = () =>
+    setCard((prevCards) => [
+      ...prevCards,
+      <Card key={cards.length} number={cards.length + 1}></Card>,
+    ])
+
+  const handleSubmit = async () => {
+    setStore.setTitle(title)
+    await setStore.createSet()
+  }
 
   return (
     <div className={styles.main}>
       <div className={styles.topWrapper}>
-        <Link to="/" className="link"><BackBtn /></Link>
+        <Link to="/" className="link">
+          <BackBtn />
+        </Link>
         <div className={styles.aboutWrapper}>
           <div className={styles.about}>Create a new learning set</div>
           <div className={styles.free}>free</div>
@@ -26,12 +36,17 @@ export default function CreateSet() {
         type="text"
         className={`${styles.title} ${styles.text}`}
         placeholder={`Enter the title, for example "German - City"`}
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
       />
-      <div className={styles.cards}>
-        {cards.map((card) => card)}
-      </div>
-      <button className={styles.newCard} onClick={handleCreateCard}>Add a new card</button>
-      <button onClick={handleClick}>Hi</button>
+      <div className={styles.cards}>{cards.map((card, index) => card)}</div>
+      <button
+        className={`${styles.newCard} ${styles.text}`}
+        onClick={handleCreateCard}
+      >
+        Add a new card
+      </button>
+      <button onClick={handleSubmit}>Submit</button>
     </div>
   )
 }
