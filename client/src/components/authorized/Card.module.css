@@ -1,77 +1,42 @@
-:root {
-    --card-color: #2e3856;
-}
-
 .card {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5px;
+    position: relative;
+    height: 15rem;
+    width: auto;
+    background-color: #2e3856;
+    cursor: pointer;
+    border-radius: 10px;
+    transform: perspective(1000px) rotateX(var(--rotate-x, 0)) translateY(var(--translate-y, 0));
+    transform-style: preserve-3d;
+    transition: 0.5s;
+    font-family: e-Ukraine;
+    font-size: large;
+    font-weight: 300;
+    text-transform: uppercase;
 }
 
 .card:hover {
-    --card-color: #323d5b;
+    --translate-y: -2px;
 }
 
-.topContainer {
-    display: flex;
-    justify-content: space-between;
-    background-color: var(--card-color);
-    border-radius: 10px 10px 0px 0px;
-    width: auto;
-    padding: 1rem 1.5rem;
+.card.flip {
+    --rotate-x: 180deg;
 }
 
-.text {
-    font-family: e-Ukraine;
-    font-weight: 500;
-    font-size: medium;
-    color: white;
-}
-
-.bin {
-    fill: rgb(255, 255, 255);
-    width: fit-content;
-    height: fit-content;
-    cursor: pointer;
-}
-
-.bin:hover {
-    fill: #daaf17;
-}
-
-.bottomContainer {
-    display: flex;
-    border-radius: 0px 0px 10px 10px;
-    width: auto;
-    padding: 2rem 1.5rem;
-    background-color: var(--card-color);
-    gap: 3rem;
-}
-
-.textEditor {
+.front, .back {
+    height: 100%;
+    width: 100%;
     display: flex;
     flex-direction: column;
-    flex-grow: 1;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    backface-visibility: hidden;
 }
 
-.editorInput {
-    background: none;
-    width: auto;
-    padding-bottom: 5px;
-    border-bottom: 3px #e0e0e0 solid;
-    font-weight: 300;
-    outline: none;
+.card.flip .front {
+    visibility: hidden;
 }
 
-.editorLabel {
-    color: #d0d0d0;
-    font-family: e-UkraineHead;
-    font-size: small;
-    padding-top: 5px;
-}
-
-@media only screen and (max-width: 700px) {
-    .bottomContainer {
-        flex-direction: column;
-    }
+.back {
+    transform: rotateX(180deg);
 }

@@ -5,8 +5,9 @@ import Main from "./components/authorized/Main"
 import { useContext, useEffect, useMemo } from "react"
 import { observer } from "mobx-react-lite"
 import { Context } from "./contexts/Context"
-import Navigation from "./components/authorized/Navigation"
+// import Navigation from "./components/authorized/Navigation"
 import CreateSet from "./components/authorized/CreateSet"
+import ViewSet from "./components/authorized/ViewSet"
 
 function App() {
   const { authStore } = useContext(Context)
@@ -18,8 +19,9 @@ function App() {
   }, [])
 
   const authorizedPages = [
-    ["/", <Navigation></Navigation>],
-    ["/create-set", <CreateSet></CreateSet>]
+    ["/"],
+    ["/create-set", <CreateSet></CreateSet>],
+    ["/set", <ViewSet></ViewSet>]
   ]
 
   return (

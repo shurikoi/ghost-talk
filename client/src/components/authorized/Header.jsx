@@ -7,7 +7,9 @@ export default function Header() {
   const { authStore } = useContext(Context)
   return (
     <div className={styles.header}>
-      <div className={styles.name}>Lexify</div>
+      <Link to="/" className="link">
+      <div className={styles.projectName}>Lexify</div>
+      </Link>
       <Link to="/" className="link"><button className={styles.signOutBtn} onClick={async () => await authStore.signOut()}>Sign Out</button></Link>
     </div>
   )

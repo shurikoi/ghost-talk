@@ -1,0 +1,77 @@
+:root {
+    --card-color: #2e3856;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5px;
+}
+
+.card:hover {
+    --card-color: #323d5b;
+}
+
+.topContainer {
+    display: flex;
+    justify-content: space-between;
+    background-color: var(--card-color);
+    border-radius: 10px 10px 0px 0px;
+    width: auto;
+    padding: 1rem 1.5rem;
+}
+
+.text {
+    font-family: e-Ukraine;
+    font-weight: 500;
+    font-size: medium;
+    color: white;
+}
+
+.bin {
+    fill: rgb(255, 255, 255);
+    width: fit-content;
+    height: fit-content;
+    cursor: pointer;
+}
+
+.bin:hover {
+    fill: #daaf17;
+}
+
+.bottomContainer {
+    display: flex;
+    border-radius: 0px 0px 10px 10px;
+    width: auto;
+    padding: 2rem 1.5rem;
+    background-color: var(--card-color);
+    gap: 3rem;
+}
+
+.textEditor {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.editorInput {
+    background: none;
+    width: auto;
+    padding-bottom: 5px;
+    border-bottom: 3px #e0e0e0 solid;
+    font-weight: 300;
+    outline: none;
+}
+
+.editorLabel {
+    color: #d0d0d0;
+    font-family: e-UkraineHead;
+    font-size: small;
+    padding-top: 5px;
+}
+
+@media only screen and (max-width: 700px) {
+    .bottomContainer {
+        flex-direction: column;
+    }
+}

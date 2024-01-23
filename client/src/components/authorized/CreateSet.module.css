@@ -5,7 +5,6 @@
 .main {
   display: flex;
   flex-direction: column;
-  margin: 4rem 10%;
   color: white;
   gap: 2rem;
 }
@@ -16,13 +15,13 @@
   gap: 1.2rem;
 }
 
-.aboutWrapper {
+.titleWrapper {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.about {
+.title {
   font-family: e-Ukraine;
   font-weight: 500;
   font-size: x-large;
@@ -35,18 +34,18 @@
   color: #ffcd1f;
 }
 
-.title {
+.setTitle {
   background-color: var(--input-color);
   padding: 1rem;
   border-radius: 10px;
   width: auto;
 }
 
-.title::placeholder {
+.setTitle::placeholder {
   color: #bcbcbc;
 }
 
-.title:hover {
+.setTitle:hover {
   --input-color: #323d5b;
 }
 
@@ -79,7 +78,7 @@
 }
 
 @media only screen and (max-width: 700px) {
-    .aboutWrapper {
+    .titleWrapper {
         flex-direction: column;
     }
     .topWrapper {

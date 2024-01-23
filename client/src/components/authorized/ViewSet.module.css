@@ -1,0 +1,40 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  color: white;
+  gap: 2rem;
+}
+
+.topWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.titleWrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title {
+  font-family: e-Ukraine;
+  font-weight: 500;
+  font-size: x-large;
+}
+
+/* .free {
+  font-family: e-Ukraine;
+  font-weight: 300;
+  font-size: small;
+  color: #ffcd1f;
+} */
+
+@media only screen and (max-width: 700px) {
+  .topWrapper {
+    align-items: center;
+  }
+  .titleWrapper {
+    flex-direction: column;
+  }
+}

@@ -3,7 +3,7 @@ import { serviceCreateSet } from "../services/setService"
 
 class SetStore {
   title = ""
-  words = []
+  cards = []
 
   constructor() {
     makeAutoObservable(this)
@@ -13,19 +13,18 @@ class SetStore {
     this.title = title
   }
 
-  setWords(object, number) {
-    this.words[number] = object
-    console.log(this.words)
+  setCards(object, index) {
+    this.cards[index] = object
   }
 
   reset() {
-    this.words = []
+    this.cards = []
     this.title = ""
   }
 
   async createSet() {
     try {
-      const response = await serviceCreateSet(this.title, this.words)
+      const response = await serviceCreateSet(this.title, this.cards)
       this.reset()
     } catch (e) {
       console.log(e.response?.data?.message)
