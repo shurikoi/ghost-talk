@@ -1,5 +1,5 @@
 import { action, makeAutoObservable, observable } from "mobx"
-import { serviceCreateSet, serviceGetSet } from "../services/setService"
+import { serviceGetAllSets, serviceCreateSet, serviceGetSet } from "../services/setService"
 
 class SetStore {
   title = ""
@@ -40,6 +40,18 @@ class SetStore {
     this.setLoading(true)
     try {
       const response = await serviceGetSet(setId)
+      return response.data
+    } catch (e) {
+      console.log(e.response)
+    } finally {
+      this.setLoading(false)
+    }
+  }
+
+  async getAllSets() {
+    this.setLoading(true)
+    try {
+      const response = await serviceGetAllSets()
       return response.data
     } catch (e) {
       console.log(e.response)

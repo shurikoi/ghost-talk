@@ -7,7 +7,6 @@ import { AuthorizedContext } from "../../contexts/AuthorizedContext"
 import Cards from "./Cards"
 
 export default function ViewSet() {
-  
   const { link } = useParams()
   const { setStore } = useContext(AuthorizedContext)
   const [ data, setData ] = useState(null)
@@ -21,7 +20,7 @@ export default function ViewSet() {
   }, [])
   
   if (!data) return <h1>FETCHING</h1>
-  const { user, title, words } = data
+  const { user, title, cards } = data
 
   return (
     <div className={styles.main}>
@@ -32,8 +31,8 @@ export default function ViewSet() {
           {/* <div className={styles.free}>free</div> */}
         </div>
       </div>
-      <Cards words={words} />
-      <Author userId={"65aac7ba48a44635250d3a8a"} />
+      <Cards cards={cards} />
+      <Author userId={user} />
     </div>
   )
 }

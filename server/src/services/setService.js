@@ -1,12 +1,12 @@
 import ApiError from "../exceptions/ApiError.js"
 import Set from "../models/Set.js"
 
-export const serviceCreateSet = async (userId, title, words) => {
+export const serviceCreateSet = async (userId, title, cards) => {
   const set = await Set.insertMany([
     {
       user: userId,
       title,
-      words: words,
+      cards,
     },
   ])
 
@@ -23,4 +23,8 @@ export const serviceGetSet = async (setId) => {
   if (!set) throw ApiError.UnauthorizedError()
 
   return set
+}
+
+export const serviceGetAllSets = async () => {
+  return await Set.find()
 }

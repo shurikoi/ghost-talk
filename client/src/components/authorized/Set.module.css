@@ -1,0 +1,49 @@
+.set {
+    display: flex;
+    flex-direction: column;
+    width: auto;
+    justify-content: space-between;
+    padding: 2rem 2rem;
+    background-color: #2e3856;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    gap: 1.5rem;
+}
+
+.set:hover {
+    background-color: #323d5b;
+}
+
+.topContainer {
+    display: flex;
+    justify-content: space-between;
+    flex: 1;
+}
+
+.title {
+    font-family: e-UkraineHead;
+    font-weight: 300;
+    font-size: medium;
+    color: white;
+}
+
+.date {
+    font-family: e-Ukraine;
+    font-weight: 300;
+    font-size: small;
+    color: white;
+}
+
+.bottomContainer {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.rectangular {
+    padding: 0.3rem 0.5rem;
+    background-color: #939dff;
+    border-radius: 20px;
+    font-family: e-Ukraine;
+    font-size: small;
+}

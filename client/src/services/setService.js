@@ -1,9 +1,13 @@
 import { $api, $apiBearer } from "../http"
 
-export const serviceCreateSet = async (title, words) => {
-    return $apiBearer.post("/create-set", { title, words })
+export const serviceCreateSet = async (title, cards) => {
+    return $apiBearer.post("/create-set", { title, cards })
 }
 
 export const serviceGetSet = async (setId) => {
     return $api.post("get-set", { setId })
+}
+
+export const serviceGetAllSets = async () => {
+    return $apiBearer.get("get-all-sets")
 }
