@@ -1,9 +1,10 @@
 import { action, makeAutoObservable, observable } from "mobx"
-import { serviceCreateSet } from "../services/setService"
+import { serviceCreateSet, serviceGetSet } from "../services/setService"
 
 class SetStore {
   title = ""
   cards = []
+  isLoading = false
 
   constructor() {
     makeAutoObservable(this)
@@ -17,6 +18,10 @@ class SetStore {
     this.cards[index] = object
   }
 
+  setLoading(bool) {
+    this.isLoading = bool
+  }
+
   reset() {
     this.cards = []
     this.title = ""
@@ -28,6 +33,18 @@ class SetStore {
       this.reset()
     } catch (e) {
       console.log(e.response?.data?.message)
+    }
+  }
+
+  async getSet(setId) {
+    this.setLoading(true)
+    try {
+      const response = await serviceGetSet(setId)
+      return response.data
+    } catch (e) {
+      console.log(e.response)
+    } finally {
+      this.setLoading(false)
     }
   }
 }

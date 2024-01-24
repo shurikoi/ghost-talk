@@ -1,8 +1,8 @@
 import "./App.css"
-import { BrowserRouter, Route, Routes } from "react-router-dom"
+import { BrowserRouter, Route, Routes, useParams } from "react-router-dom"
 import StartPage from "./components/unauthorized/StartPage"
 import Main from "./components/authorized/Main"
-import { useContext, useEffect, useMemo } from "react"
+import { useContext, useEffect } from "react"
 import { observer } from "mobx-react-lite"
 import { Context } from "./contexts/Context"
 // import Navigation from "./components/authorized/Navigation"
@@ -21,7 +21,7 @@ function App() {
   const authorizedPages = [
     ["/"],
     ["/create-set", <CreateSet></CreateSet>],
-    ["/set", <ViewSet></ViewSet>]
+    ["/set/:link", <ViewSet></ViewSet>]
   ]
 
   return (

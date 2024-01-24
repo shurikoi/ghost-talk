@@ -15,12 +15,9 @@ export const serviceCreateSet = async (userId, title, words) => {
   return set
 }
 
-export const serviceGetSet = async (setId, userId) => {
+export const serviceGetSet = async (setId) => {
   const set = await Set.findOne({
-    $and: [
-      { _id: setId },
-      { user: userId }
-    ]
+    _id: setId 
   })
 
   if (!set) throw ApiError.UnauthorizedError()

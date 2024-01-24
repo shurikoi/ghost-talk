@@ -11,6 +11,7 @@ router.post('/sign-up', signUp)
 router.post('/sign-out', signOut)
 router.get('/refresh', refresh)
 router.post('/create-set', authMiddleware, createSet)
-router.post('/get-set', authMiddleware, getSet)
+router.post('/get-set', getSet)
+// router.post('/set/:link', getSet)
 
 export default router
