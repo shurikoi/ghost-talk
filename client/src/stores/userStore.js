@@ -1,4 +1,5 @@
 import { action, makeAutoObservable, observable } from "mobx"
+import { serviceGetUserById } from "../services/userService"
 
 class UserStore {
     email = ""
@@ -12,6 +13,15 @@ class UserStore {
 
     setEmail(email) {
         this.email = email
+    }
+
+    async getUserById(userId) {
+        try {
+            const response = await serviceGetUserById(userId)
+            return response.data
+        } catch (e) {
+            console.log(e.response)
+        }
     }
 }
 

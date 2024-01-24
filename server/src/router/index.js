@@ -1,5 +1,5 @@
 import express from "express"
-import { signIn, checkUser, signUp, signOut, refresh } from "../controllers/UserController.js"
+import { signIn, checkUser, signUp, signOut, refresh, getUserById } from "../controllers/UserController.js"
 import { createSet, getSet } from "../controllers/SetController.js"
 import { authMiddleware } from "../middlewares/authMiddleware.js"
 
@@ -12,6 +12,6 @@ router.post('/sign-out', signOut)
 router.get('/refresh', refresh)
 router.post('/create-set', authMiddleware, createSet)
 router.post('/get-set', getSet)
-// router.post('/set/:link', getSet)
+router.post('/get-user-by-id', authMiddleware, getUserById)
 
 export default router

@@ -4,6 +4,7 @@ import {
   serviceSignUp,
   serviceSignOut,
   serviceRefresh,
+  serviceGetUserById,
 } from "../services/userService.js"
 
 export const checkUser = async (req, res, next) => {
@@ -71,5 +72,16 @@ export const refresh = async (req, res, next) => {
     return res.json(userData)
   } catch (e) {
     next(e)
+  }
+}
+
+export const getUserById = async (req, res, next) => {
+  try {
+    const { userId } = req.body
+    const userData = await serviceGetUserById(userId)
+    const { email, name, surname } = userData
+    return res.json({ email, name, surname })
+  } catch (e) {
+    next (e)
   }
 }

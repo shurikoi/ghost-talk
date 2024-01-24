@@ -1,15 +1,13 @@
 import { useContext, useEffect, useState } from "react"
 import BackBtn from "../ui/buttons/BackBtn"
 import Author from "./Author"
-import Card from "./Card"
-import { TransitionGroup, CSSTransition } from "react-transition-group"
 import styles from "./ViewSet.module.css"
 import { useParams } from "react-router-dom"
 import { AuthorizedContext } from "../../contexts/AuthorizedContext"
+import Cards from "./Cards"
 
 export default function ViewSet() {
-  const [index, setIndex] = useState(0)
-  const [direction, setDirection] = useState(true)
+  
   const { link } = useParams()
   const { setStore } = useContext(AuthorizedContext)
   const [ data, setData ] = useState(null)
@@ -23,18 +21,7 @@ export default function ViewSet() {
   }, [])
   
   if (!data) return <h1>FETCHING</h1>
-  const { title, words } = data
-
-  const moveLeft = () => {
-    if (index === 0) return
-    setDirection(false)
-    setIndex(index - 1)
-}
-  const moveRight = () => {
-    if (index === words.length - 1) return
-    setDirection(true)
-    setIndex(index + 1)
-  }
+  const { user, title, words } = data
 
   return (
     <div className={styles.main}>
@@ -45,40 +32,8 @@ export default function ViewSet() {
           {/* <div className={styles.free}>free</div> */}
         </div>
       </div>
-
-      <div className={styles.cards}>
-        <div className={styles.cardsWrapper}>
-          <TransitionGroup>
-            <CSSTransition
-              key={words[index]._id}
-              timeout={1000}
-              classNames={direction ? {
-                enter: styles.fadeEnter,
-                enterActive: styles.fadeEnterActive,
-                exit: styles.fadeExit,
-                exitActive: styles.fadeExitActive,
-              } : {
-                enter: styles.fadeLeftEnter,
-                enterActive: styles.fadeLeftEnterActive,
-                exit: styles.fadeLeftExit,
-                exitActive: styles.fadeLeftExitActive,
-              }}
-            >
-              <Card card={words[index]} key={index} />
-            </CSSTransition>
-          </TransitionGroup>
-        </div>
-        <div className={styles.navigation}>
-          <button className={styles.navButton} onClick={moveLeft}>
-            prev
-          </button>
-          <button className={styles.navButton} onClick={moveRight}>
-            next
-          </button>
-        </div>
-      </div>
-
-      <Author />
+      <Cards words={words} />
+      <Author userId={"65aac7ba48a44635250d3a8a"} />
     </div>
   )
 }

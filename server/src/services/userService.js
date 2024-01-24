@@ -71,3 +71,9 @@ export const serviceRefresh = async (refreshToken) => {
 
   return await generateAndSaveTokens(user)
 }
+
+export const serviceGetUserById = async (userId) => {
+  const user = await User.findOne({_id: userId})
+  if (!user) throw ApiError.BadRequest("Non-existent userId")
+  return user
+}

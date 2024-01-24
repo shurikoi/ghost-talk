@@ -1,10 +1,24 @@
+import { useContext, useEffect, useState } from "react"
 import styles from "./Author.module.css"
+import { AuthorizedContext } from "../../contexts/AuthorizedContext"
 
-export default function Author() {
+export default function Author({ userId }) {
+    const [ name, setName ] = useState("")
+    const { userStore } = useContext(AuthorizedContext)
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const responseData = await userStore.getUserById(userId)
+            const { name } = responseData
+            setName(name)
+          }
+          fetchData()
+    }, [])
+
     return (
         <div className={styles.wrapper}>
             <div className={styles.title}>Author</div>
-            <div className={styles.user}>NAME</div>
+            <div className={styles.user}>{name}</div>
         </div>
     )
 }
