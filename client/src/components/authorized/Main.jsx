@@ -13,7 +13,7 @@ export default function Main({ children }) {
         {children ? (
           <div className={styles.childrenWrapper}>{children}</div>
         ) : (
-          <Navigation />
+          <div className={styles.childrenWrapper}><Navigation /></div>
         )}
       </div>
     </AuthorizedContext.Provider>

@@ -28,7 +28,7 @@ export default function CreateSet() {
         <BackBtn />
         <div className={styles.titleWrapper}>
           <div className={styles.title}>Create a new learning set</div>
-          <div className={styles.free}>free</div>
+          <div className={styles.free}>public</div>
         </div>
       </div>
       <input
