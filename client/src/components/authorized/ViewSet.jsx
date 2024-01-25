@@ -5,6 +5,7 @@ import styles from "./ViewSet.module.css"
 import { useParams } from "react-router-dom"
 import { AuthorizedContext } from "../../contexts/AuthorizedContext"
 import Cards from "./Cards"
+import ViewSetSkeleton from "./ViewSetSkeleton"
 
 export default function ViewSet() {
   const { link } = useParams()
@@ -19,7 +20,7 @@ export default function ViewSet() {
     fetchData()
   }, [])
   
-  if (!data) return <h1>FETCHING</h1>
+  if (!data) return <ViewSetSkeleton />
   const { user, title, cards } = data
 
   return (

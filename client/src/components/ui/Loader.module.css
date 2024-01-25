@@ -1,0 +1,7 @@
+.loaderWrapper {
+    min-height: 100svh;
+    background-color: #0a092d;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

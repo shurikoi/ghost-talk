@@ -8,6 +8,7 @@ import { Context } from "./contexts/Context"
 // import Navigation from "./components/authorized/Navigation"
 import CreateSet from "./components/authorized/CreateSet"
 import ViewSet from "./components/authorized/ViewSet"
+import Loader from "./components/ui/Loader"
 
 function App() {
   const { authStore } = useContext(Context)
@@ -27,7 +28,7 @@ function App() {
   return (
     <>
       {authStore.isLoading ? (
-        <h1>isLoading</h1>
+        <Loader />
       ) : (
         <BrowserRouter>
           <Routes>
