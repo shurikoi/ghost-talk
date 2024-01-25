@@ -1,11 +1,14 @@
 import ApiError from "../exceptions/ApiError.js"
 import Set from "../models/Set.js"
+import { v4 as uuidv4 } from "uuid"
 
 export const serviceCreateSet = async (userId, title, cards) => {
+  const link = uuidv4()
   const set = await Set.insertMany([
     {
       user: userId,
       title,
+      link,
       cards,
     },
   ])
@@ -15,9 +18,9 @@ export const serviceCreateSet = async (userId, title, cards) => {
   return set
 }
 
-export const serviceGetSet = async (setId) => {
+export const serviceGetSet = async (link) => {
   const set = await Set.findOne({
-    _id: setId 
+    link,
   })
 
   if (!set) throw ApiError.UnauthorizedError()

@@ -4,7 +4,7 @@ import { serviceGetAllSets, serviceCreateSet, serviceGetSet } from "../services/
 class SetStore {
   title = ""
   cards = []
-  isLoading = false
+  isLoading = true
 
   constructor() {
     makeAutoObservable(this)

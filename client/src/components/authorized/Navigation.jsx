@@ -5,10 +5,11 @@ import Set from "./Set"
 import { useContext, useEffect, useState } from "react"
 import { AuthorizedContext } from "../../contexts/AuthorizedContext"
 import { observer } from "mobx-react-lite"
+import SetSkeleton from "./SetSkeleton"
 
 function Navigation() {
   const { setStore } = useContext(AuthorizedContext)
-  const [ setsData, setSetsData ] = useState(null)
+  const [setsData, setSetsData] = useState([])
 
   useEffect(() => {
     const fetchData = async () => {
@@ -26,9 +27,15 @@ function Navigation() {
       <div className={styles.setsContainer}>
         <div className={styles.heading}>Try out these learning sets</div>
         <div className={styles.container}>
-          {!setsData ? <h1>FETCHING SETS</h1> : (
+          {setStore.isLoading ? (
+            <SetSkeleton />
+          ) : (
             setsData.map((setData, index) => (
-              <Link key={index} to={`/set/${setData.link}`} className={`link ${styles.link}`}>
+              <Link
+                key={index}
+                to={`/set/${setData.link}`}
+                className={`link ${styles.link}`}
+              >
                 <Set key={index} setData={setsData[index]} />
               </Link>
             ))

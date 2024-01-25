@@ -1,0 +1,20 @@
+.set {
+    display: flex;
+    flex-direction: column;
+    width: auto;
+    justify-content: space-between;
+    padding: 2rem 2rem;
+    background-color: #2e3856;
+    /* color: #3c4767; */
+    border-radius: 10px;
+    cursor: pointer;
+    gap: 1.5rem;
+}
+
+.title {
+    width: 50%;
+}
+
+.rectangular {
+    width: 20%;
+}

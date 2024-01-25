@@ -10,6 +10,7 @@ const setSchema = new Schema({
     _id: Schema.Types.ObjectId,
     user: { type: Schema.Types.ObjectId, ref: 'User' },
     title: { type: String, required: true },
+    link: { type: String, required: true },
     cards: [cardSchema],
 })
 
