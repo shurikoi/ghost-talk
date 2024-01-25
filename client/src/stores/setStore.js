@@ -31,6 +31,7 @@ class SetStore {
     try {
       const response = await serviceCreateSet(this.title, this.cards)
       this.reset()
+      return response.data[0]
     } catch (e) {
       console.log(e.response?.data?.message)
     }

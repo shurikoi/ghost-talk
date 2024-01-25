@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import BackBtn from "../ui/buttons/BackBtn"
 import styles from "./CreateSet.module.css"
 import { useContext, useState } from "react"
@@ -10,6 +10,7 @@ export default function CreateSet() {
   const { setStore } = useContext(AuthorizedContext)
   let [cards, setCard] = useState([<CreateCard key="0"></CreateCard>])
   const [title, setTitle] = useState("")
+  const navigate = useNavigate()
 
   const handleCreateCard = () =>
     setCard((prevCards) => [
@@ -19,7 +20,8 @@ export default function CreateSet() {
 
   const handleSubmit = async () => {
     setStore.setTitle(title)
-    await setStore.createSet()
+    const response = await setStore.createSet()
+    navigate(`/set/${response.link}`)
   }
 
   return (

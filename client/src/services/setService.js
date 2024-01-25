@@ -4,8 +4,8 @@ export const serviceCreateSet = async (title, cards) => {
     return $apiBearer.post("/create-set", { title, cards })
 }
 
-export const serviceGetSet = async (setId) => {
-    return $api.post("get-set", { setId })
+export const serviceGetSet = async (link) => {
+    return $api.post("get-set", { link })
 }
 
 export const serviceGetAllSets = async () => {

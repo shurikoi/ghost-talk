@@ -28,7 +28,7 @@ function Navigation() {
         <div className={styles.container}>
           {!setsData ? <h1>FETCHING SETS</h1> : (
             setsData.map((setData, index) => (
-              <Link key={index} to={`/set/${setData._id}`} className={`link ${styles.link}`}>
+              <Link key={index} to={`/set/${setData.link}`} className={`link ${styles.link}`}>
                 <Set key={index} setData={setsData[index]} />
               </Link>
             ))
