@@ -1,5 +1,5 @@
 .header {
-  min-height: 100svh; 
+  min-height: 100svh;
   background-color: #0a092d;
   color: white;
   /* overflow: scroll; */
@@ -21,7 +21,7 @@
 }
 
 .bottomContainer {
-  padding: 7rem 11rem 0rem 9rem;
+  padding: 7rem 13% 0rem 15%;
 }
 
 .content {

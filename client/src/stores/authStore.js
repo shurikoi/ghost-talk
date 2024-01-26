@@ -1,8 +1,10 @@
 import { action, makeAutoObservable, observable } from "mobx"
 import { serviceCheckUser, serviceRefresh, serviceSignIn, serviceSignOut, serviceSignUp } from "../services/authService"
 import authFormStore from "./authFormStore"
+import userStore from "./userStore"
 class AuthStore {
     user = {}
+    email = ""
     isAuth = false
     isLoading = false
 
@@ -21,6 +23,10 @@ class AuthStore {
         this.user = user
     }
 
+    setEmail(email) {
+        this.email = email
+    }
+
     setAuth(bool) {
         this.isAuth = bool
     }
@@ -31,8 +37,9 @@ class AuthStore {
 
     async checkUser(email) {
         try {
+            this.setEmail(email)
             const response = await serviceCheckUser(email)
-            return response.data
+            return response.data // { isExist }
         } catch (e) {
             console.log(e.response?.data?.message)
         }
@@ -43,7 +50,7 @@ class AuthStore {
             const response = await serviceSignIn(email, password)
             localStorage.setItem('token', response.data.accessToken)
             this.setAuth(true)
-            this.setUser(response.data.user)
+            userStore.setUser(response.data.user) // ?
             authFormStore.removeClass()
         } catch (e) {
             console.log(e.response?.data?.message)
@@ -55,7 +62,7 @@ class AuthStore {
             const response = await serviceSignUp(email, name, surname, password)
             localStorage.setItem('token', response.data.accessToken)
             this.setAuth(true)
-            this.setUser(response.data.user)
+            userStore.setUser(response.data.user)
             authFormStore.removeClass()
         } catch (e) {
             console.log(e.response?.data?.message)
@@ -67,7 +74,7 @@ class AuthStore {
             await serviceSignOut()
             localStorage.removeItem('token')
             this.setAuth(false)
-            this.setUser({})
+            userStore.setUser({})
         } catch (e) {
             console.log(e.response?.data?.message)
         }
@@ -81,7 +88,7 @@ class AuthStore {
             console.log(1)
             localStorage.setItem('token', response.data.accessToken)
             this.setAuth(true)
-            this.setUser(response.data.user)
+            userStore.setUser(response.data.user)
             console.log(2)
         } catch (e) {
             console.log(e.response?.data?.message)

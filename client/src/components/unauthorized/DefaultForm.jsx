@@ -1,13 +1,16 @@
 import styles from "./AuthForm.module.css"
-import { useContext, useEffect } from "react"
-import SubmitIcon from "../ui/icon/SubmitIcon.jsx"
+import { useContext, useState } from "react"
 import { Context } from "../../contexts/Context"
-import { observer } from "mobx-react-lite"
+import { FormModalContext } from "../../contexts/FormModalContext.js"
+import AuthBackArrowIcon from "../ui/icon/AuthBackArrowIcon.jsx"
+import AuthSubmitButton from "../ui/buttons/AuthSubmitButton.jsx"
+import AuthInput from "../ui/AuthInput.jsx"
 
-function DefaultForm({ setCurrentState }) {
-  const { authStore, userStore } = useContext(Context)
-  const email = userStore.email
-  let isFilled = !!email //getting boolean if input is filled
+export default function DefaultForm({ setCurrentState }) {
+  const { authStore } = useContext(Context)
+  const { authFormStore } = useContext(FormModalContext)
+  const [ email, setEmail ] = useState("")
+  let isFilled = !!email
 
   const handleSubmit = async () => {
     const data = await authStore.checkUser(email)
@@ -16,35 +19,26 @@ function DefaultForm({ setCurrentState }) {
     else setCurrentState("signUp")
   }
 
-  const handleKeyDown = (e) => {
-    if (e.key == "Enter" && isFilled) handleSubmit()
-  }
-
   return (
     <>
-      <div className={styles.title}>Sign in or sign up in seconds</div>
+      <AuthBackArrowIcon
+        className={styles.arrow}
+        onClick={() => {
+          authFormStore.removeClass()
+        }}
+      />
+      <div className={styles.title}>Sign in in seconds</div>
       <div className={styles.description}>
-        Use your email address. If you do not have an account, we will help you
-        create one.
+        If you do not have an account, we will help you create one
       </div>
-      <div className={`${styles.inputWrapper} ${styles.w18}`}>
-        <input
-          type="text"
-          placeholder="example@gmail.com"
-          value={email}
-          onChange={(e) => {
-            userStore.setEmail(e.target.value.trim())
-          }}
-          onKeyDown={handleKeyDown}
-        />
-        <SubmitIcon
-          className={styles.submitBtn}
-          onClick={handleSubmit}
-          isFilled={isFilled}
-        />
-      </div>
+      <AuthInput
+        placeholder={"Your email"}
+        value={email}
+        setValue={setEmail}
+        isFilled={isFilled}
+        handleSubmit={handleSubmit}
+      />
+      <AuthSubmitButton isFilled={isFilled} onClick={handleSubmit} />
     </>
   )
 }
-
-export default observer(DefaultForm)

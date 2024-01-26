@@ -2,71 +2,52 @@ import { useContext, useState } from "react"
 import SubmitIcon from "../ui/icon/SubmitIcon"
 import { Context } from "../../contexts/Context"
 import styles from "./AuthForm.module.css"
+import AuthBackArrowIcon from "../ui/icon/AuthBackArrowIcon"
+import AuthInput from "../ui/AuthInput"
+import AuthSubmitButton from "../ui/buttons/AuthSubmitButton"
 
 export default function SignUp({ setCurrentState }) {
   const [name, setName] = useState("")
   const [surname, setSurname] = useState("")
   const [password, setPassword] = useState("")
-  const { authStore, userStore } = useContext(Context)
-  const email = userStore.email
+  const { authStore } = useContext(Context)
+  const email = authStore.email
 
   const handleSubmit = async () => {
     await authStore.signUp(email, name, surname, password)
   }
 
-  const handleKeyDown = (e) => {
-    if (e.key == "Enter") handleSubmit() // TODO: add a check if all inputs are filled
-  }
-
   return (
     <>
-      <div className={styles.title}>Sign up</div>
+      <AuthBackArrowIcon
+        className={styles.arrow}
+        onClick={() => setCurrentState("default")}
+      />
+      <div className={styles.title}>Sign up to continue</div>
       <div className={styles.description}>
         creating an account using {email}
       </div>
-
       <div className={styles.inputsWrapper}>
-        <div className={styles.inputWrapper}>
-          <input
-            type="text"
-            placeholder="Name"
-            value={name}
-            onChange={(e) => {
-              setName(e.target.value.trim())
-            }}
-          />
-        </div>
-        <div className={styles.inputWrapper}>
-          <input
-            type="text"
-            placeholder="Surname"
-            value={surname}
-            onChange={(e) => {
-              setSurname(e.target.value.trim())
-            }}
-          />
-        </div>
-      </div>
-
-      <div className={`${styles.inputWrapper} ${styles.w18}`}>
-        <input
-          type="password"
-          placeholder="Enter your password"
-          value={password}
-          onChange={(e) => {
-            setPassword(e.target.value.trim())
-          }}
-          onKeyDown={handleKeyDown}
+        <AuthInput
+          placeholder={"First name"}
+          value={name}
+          setValue={setName}
+          handleSubmit={handleSubmit}
         />
-        <SubmitIcon
-          className={styles.submitBtn}
-          onClick={handleSubmit}
-          //   isFilled={isFilled} // TODO!!
+        <AuthInput
+          placeholder={"Second name"}
+          value={surname}
+          setValue={setSurname}
+          handleSubmit={handleSubmit}
         />
       </div>
-      <button onClick={() => setCurrentState("default")}>
-        Back to 'default'
-      </button>
+      <AuthInput
+        placeholder={"Password"}
+        value={password}
+        setValue={setPassword}
+        handleSubmit={handleSubmit}
+      />
+      <AuthSubmitButton onClick={handleSubmit} />
     </>
   )
 }

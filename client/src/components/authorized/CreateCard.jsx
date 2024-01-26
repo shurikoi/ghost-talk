@@ -16,7 +16,7 @@ function CreateCard({ number = 1 }) {
     <div className={styles.card}>
       <div className={styles.topContainer}>
         <div className={styles.text}>{number}</div>
-        <TrashIcon className={styles.bin} />
+        {/* <TrashIcon className={styles.bin} /> */}
       </div>
       <div className={styles.bottomContainer}>
         <div className={styles.textEditor}>

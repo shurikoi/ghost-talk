@@ -1,0 +1,16 @@
+.emailInput {
+    width: 100%;
+    outline: none;
+    font-family: "e-Ukraine";
+    font-size: medium;
+    font-weight: 500;
+    padding: 1rem 1rem;
+    box-sizing: border-box;
+    border: 2px solid rgb(200, 200, 200);
+    border-radius: 18px;
+}
+
+.emailInput:focus {
+    border: 2px solid rgb(31, 31, 31);
+    transition: border 0.5s;
+}

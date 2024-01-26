@@ -11,7 +11,7 @@ const app = express()
 const PORT = 4000
 
 app.use(cors({
-  origin: 'https://nwxrfz36-5173.uks1.devtunnels.ms',
+  origin: 'http://localhost:5173',
   credentials: true
 }))
 app.use(express.json())

@@ -5,13 +5,13 @@ export default function ViewSetSkeleton() {
   return (
     <div className={styles.main}>
       <div className={styles.topWrapper}>
-        <Skeleton width={100} />
+        <Skeleton width="6rem" />
         <div className={styles.title}>
-          <Skeleton width={400} />
+          <Skeleton width="60%" />
         </div>
       </div>
       <Skeleton height={250} />
-      <Skeleton width={90} />
+      <Skeleton width="4rem" />
     </div>
   )
 }

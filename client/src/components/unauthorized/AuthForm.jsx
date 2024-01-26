@@ -27,7 +27,7 @@ function AuthForm({ className }) {
         className={styles.behind}
         onClick={() => authFormStore.removeClass()}
       ></div>
-      <div className={styles.authForm} action="" >
+      <div className={styles.authForm} action="">
         {states[currentState]}
       </div>
     </div>
