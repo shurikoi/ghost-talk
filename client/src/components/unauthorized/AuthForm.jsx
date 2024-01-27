@@ -7,7 +7,7 @@ import SignUp from "./SignUp"
 import { observer } from "mobx-react-lite"
 import { FormModalContext } from "../../contexts/FormModalContext"
 
-function AuthForm({ className }) {
+function AuthForm({ className = "" }) {
   const [currentState, setCurrentState] = useState("default")
   const { authFormStore } = useContext(FormModalContext)
 

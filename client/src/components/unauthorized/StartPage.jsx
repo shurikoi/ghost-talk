@@ -9,7 +9,7 @@ export default function StartPage() {
       <FormModalContext.Provider value={{ authFormStore }}>
         <div className={styles.wrapper}>
         <Header />
-        <AuthForm className={styles.authForm} />
+        <AuthForm />
         </div>
       </FormModalContext.Provider>
   )

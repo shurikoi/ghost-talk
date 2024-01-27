@@ -4,7 +4,7 @@ import styles from "./CreateSet.module.css"
 import { useContext, useState } from "react"
 import { AuthorizedContext } from "../../contexts/AuthorizedContext"
 import CreateBtn from "../ui/buttons/CreateBtn"
-import CreateCard from "./createCard"
+import CreateCard from "./CreateCard"
 
 export default function CreateSet() {
   const { setStore } = useContext(AuthorizedContext)

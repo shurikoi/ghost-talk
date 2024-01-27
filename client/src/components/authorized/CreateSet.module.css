@@ -39,6 +39,8 @@
   padding: 1rem;
   border-radius: 10px;
   width: auto;
+  border: none;
+  outline: none;
 }
 
 .setTitle::placeholder {

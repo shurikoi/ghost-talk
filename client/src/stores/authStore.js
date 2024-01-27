@@ -2,6 +2,7 @@ import { action, makeAutoObservable, observable } from "mobx"
 import { serviceCheckUser, serviceRefresh, serviceSignIn, serviceSignOut, serviceSignUp } from "../services/authService"
 import authFormStore from "./authFormStore"
 import userStore from "./userStore"
+import toast from "react-hot-toast"
 class AuthStore {
     user = {}
     email = ""
@@ -53,7 +54,7 @@ class AuthStore {
             userStore.setUser(response.data.user) // ?
             authFormStore.removeClass()
         } catch (e) {
-            console.log(e.response?.data?.message)
+            toast.error(e.response?.data?.message)
         }
     }
 
@@ -65,7 +66,7 @@ class AuthStore {
             userStore.setUser(response.data.user)
             authFormStore.removeClass()
         } catch (e) {
-            console.log(e.response?.data?.message)
+            toast.error(e.response?.data?.message)
         }
     }
 

@@ -9,6 +9,7 @@ import { Context } from "./contexts/Context"
 import CreateSet from "./components/authorized/CreateSet"
 import ViewSet from "./components/authorized/ViewSet"
 import Loader from "./components/ui/Loader"
+import toast, { Toaster } from "react-hot-toast"
 
 function App() {
   const { authStore } = useContext(Context)
@@ -22,11 +23,19 @@ function App() {
   const authorizedPages = [
     ["/"],
     ["/create-set", <CreateSet></CreateSet>],
-    ["/set/:link", <ViewSet></ViewSet>]
+    ["/set/:link", <ViewSet></ViewSet>],
   ]
 
   return (
     <>
+      <Toaster
+        toastOptions={{
+          className: "",
+          style: {
+            fontFamily: "e-Ukraine",
+          },
+        }}
+      />
       {authStore.isLoading ? (
         <Loader />
       ) : (
@@ -34,10 +43,16 @@ function App() {
           <Routes>
             {authStore.isAuth ? (
               authorizedPages.map((page, index) => (
-                <Route path={page[0]} element={<Main>{page[1]}</Main>} key={index}></Route>
+                <Route
+                  path={page[0]}
+                  element={<Main>{page[1]}</Main>}
+                  key={index}
+                ></Route>
               ))
-            ) : <Route path="/" element={<StartPage />}></Route>}
-            
+            ) : (
+              <Route path="/" element={<StartPage />}></Route>
+            )}
+
             {/* <Route path="*" element={}></Route> */}
           </Routes>
         </BrowserRouter>
