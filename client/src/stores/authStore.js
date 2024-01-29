@@ -71,6 +71,7 @@ class AuthStore {
     }
 
     async signOut() {
+        // this.setLoading(true)
         try {
             await serviceSignOut()
             localStorage.removeItem('token')
@@ -78,9 +79,12 @@ class AuthStore {
             userStore.setUser({})
         } catch (e) {
             console.log(e.response?.data?.message)
-        }
+        } 
+        // finally {
+        //     this.setLoading(false)
+        // }
     }
-    // can cause infinity loop !!!!!!!!
+
     async checkAuth() {
         this.setLoading(true)
         try {
