@@ -4,7 +4,10 @@ import { serviceGetAllSets, serviceCreateSet, serviceGetSet } from "../services/
 class SetStore {
   title = ""
   cards = []
-  isLoading = true
+  isLoading = false
+  errors = {
+    setNotFound: false
+  }
 
   constructor() {
     makeAutoObservable(this)
@@ -43,6 +46,7 @@ class SetStore {
       const response = await serviceGetSet(setId)
       return response.data
     } catch (e) {
+      this.errors.setNotFound = true
       console.log(e.response)
     } finally {
       this.setLoading(false)
@@ -50,14 +54,11 @@ class SetStore {
   }
 
   async getAllSets() {
-    this.setLoading(true)
     try {
       const response = await serviceGetAllSets()
       return response.data
     } catch (e) {
       console.log(e.response)
-    } finally {
-      this.setLoading(false)
     }
   }
 }

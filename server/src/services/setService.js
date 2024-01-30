@@ -23,7 +23,7 @@ export const serviceGetSet = async (link) => {
     link,
   })
 
-  if (!set) throw ApiError.UnauthorizedError()
+  if (!set) throw ApiError.BadRequest("Set does not exist")
 
   return set
 }

@@ -1,0 +1,29 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    color: rgb(249, 249, 255);
+}
+
+.NotFound {
+    height: 70svh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.description {
+    text-align: center;
+    font-family: e-UkraineHead;
+    font-weight: 300;
+    font-size: larger;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.link {
+    width: auto;
+}

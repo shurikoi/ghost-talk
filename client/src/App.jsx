@@ -9,7 +9,7 @@ import { Context } from "./contexts/Context"
 import CreateSet from "./components/authorized/CreateSet"
 import ViewSet from "./components/authorized/ViewSet"
 import Loader from "./components/ui/Loader"
-import toast, { Toaster } from "react-hot-toast"
+import { Toaster } from "react-hot-toast"
 
 function App() {
   const { authStore } = useContext(Context)

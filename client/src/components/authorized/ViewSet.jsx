@@ -6,11 +6,14 @@ import { useParams } from "react-router-dom"
 import { AuthorizedContext } from "../../contexts/AuthorizedContext"
 import Cards from "./Cards"
 import ViewSetSkeleton from "./ViewSetSkeleton"
+import { observer } from "mobx-react-lite"
+import NotFound from "./NotFound"
 
-export default function ViewSet() {
+function ViewSet() {
   const { link } = useParams()
   const { setStore } = useContext(AuthorizedContext)
   const [ data, setData ] = useState(null)
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -20,7 +23,8 @@ export default function ViewSet() {
     fetchData()
   }, [])
   
-  if (!data) return <ViewSetSkeleton />
+  if (setStore.isLoading && !data) return <ViewSetSkeleton />
+  if (!data) return <NotFound /> // TODO: Only when 404!!
   const { user, title, cards } = data
 
   return (
@@ -37,3 +41,5 @@ export default function ViewSet() {
     </div>
   )
 }
+
+export default observer(ViewSet)
