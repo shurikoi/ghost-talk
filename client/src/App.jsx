@@ -19,7 +19,7 @@ function App() {
     const tokenExist = localStorage.getItem("token")
     if (tokenExist) checkAuth()
   }, [])
-
+  
   const authorizedPages = [
     ["/"],
     ["/create-set", <CreateSet></CreateSet>],

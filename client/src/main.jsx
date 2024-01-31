@@ -6,12 +6,14 @@ import authStore from "./stores/authStore.js"
 import userStore from "./stores/userStore.js"
 import { Context } from "./contexts/Context"
 import { QueryClient, QueryClientProvider } from "react-query"
-const queryClient = new QueryClient()
-
-// export const Context = createContext({
-//   authStore,
-//   userStore,
-// })
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+      retry: false,
+    },
+  },
+})
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   // <React.StrictMode>

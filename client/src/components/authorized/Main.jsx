@@ -3,8 +3,8 @@ import Header from "./Header"
 import { AuthorizedContext } from "../../contexts/AuthorizedContext"
 import setStore from "../../stores/setStore"
 import userStore from "../../stores/userStore"
-import Navigation from "./Navigation"
 import { SkeletonTheme } from "react-loading-skeleton"
+import StartPage from "./StartPage"
 
 export default function Main({ children }) {
   return (
@@ -15,7 +15,7 @@ export default function Main({ children }) {
         {children ? (
           <div className={styles.childrenWrapper}>{children}</div>
         ) : (
-          <div className={styles.childrenWrapper}><Navigation /></div>
+          <div className={styles.childrenWrapper}><StartPage /></div>
         )}
       </div>
     </AuthorizedContext.Provider>

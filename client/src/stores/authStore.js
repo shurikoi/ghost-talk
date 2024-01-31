@@ -71,7 +71,6 @@ class AuthStore {
     }
 
     async signOut() {
-        // this.setLoading(true)
         try {
             await serviceSignOut()
             localStorage.removeItem('token')
@@ -79,22 +78,19 @@ class AuthStore {
             userStore.setUser({})
         } catch (e) {
             console.log(e.response?.data?.message)
-        } 
-        // finally {
-        //     this.setLoading(false)
-        // }
+        }
     }
 
     async checkAuth() {
         this.setLoading(true)
         try {
-            console.log(0)
+            console.log("Refreshing tokens in db...")
             const response = await serviceRefresh()
-            console.log(1)
+            console.log("Setting new tokens on client...")
             localStorage.setItem('token', response.data.accessToken)
             this.setAuth(true)
             userStore.setUser(response.data.user)
-            console.log(2)
+            console.log("Authorized")
         } catch (e) {
             console.log(e.response?.data?.message)
         } finally {
