@@ -5,16 +5,13 @@ import { useState } from "react"
 
 export default function Cards({ cards }) {
   const [index, setIndex] = useState(0)
-  const [direction, setDirection] = useState(true)
 
   const moveLeft = () => {
     if (index === 0) return
-    setDirection(false)
     setIndex(index - 1)
   }
   const moveRight = () => {
     if (index === cards.length - 1) return
-    setDirection(true)
     setIndex(index + 1)
   }
 
@@ -24,22 +21,13 @@ export default function Cards({ cards }) {
         <TransitionGroup>
           <CSSTransition
             key={cards[index]._id}
-            timeout={1000}
-            classNames={
-              direction
-                ? {
-                    enter: styles.fadeEnter,
-                    enterActive: styles.fadeEnterActive,
-                    exit: styles.fadeExit,
-                    exitActive: styles.fadeExitActive,
-                  }
-                : {
-                    enter: styles.fadeLeftEnter,
-                    enterActive: styles.fadeLeftEnterActive,
-                    exit: styles.fadeLeftExit,
-                    exitActive: styles.fadeLeftExitActive,
-                  }
-            }
+            timeout={5000}
+            classNames={{
+              enter: styles.fadeEnter,
+              enterActive: styles.fadeEnterActive,
+              exit: styles.fadeExit,
+              exitActive: styles.fadeExitActive,
+            }}
           >
             <Card card={cards[index]} key={index} />
           </CSSTransition>

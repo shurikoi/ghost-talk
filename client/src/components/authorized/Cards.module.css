@@ -45,39 +45,19 @@
 }
 
 .fadeEnter {
-    transform: translateX(100%);
+    opacity: 0;
 }
 
 .fadeEnterActive {
-    transform: translateX(0%);
-    transition: transform 1000ms ease;
+    opacity: 1;
+    transition: opasity 200ms;
 }
 
 .fadeExit {
-    transform: translateX(0%);
+    opacity: 1;
 }
 
 .fadeExitActive {
-    transform: translateX(-100%);
-    transition: transform 1000ms ease;
-}
-
-/* */
-
-.fadeLeftEnter {
-    transform: translateX(-100%);
-}
-
-.fadeLeftEnterActive {
-    transform: translateX(0%);
-    transition: transform 1000ms ease;
-}
-
-.fadeLeftExit {
-    transform: translateX(0%);
-}
-
-.fadeLeftExitActive {
-    transform: translateX(100%);
-    transition: transform 1000ms ease;
+    opacity: 0;
+    transition: opasity 200ms;
 }
