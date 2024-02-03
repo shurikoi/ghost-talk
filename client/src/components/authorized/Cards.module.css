@@ -6,10 +6,6 @@
     gap: 1rem;
 }
 
-/* .cardsWrapper {
-    overflow: auto;
-  } */
-
 .navigation {
     display: flex;
     gap: 0.5rem;
@@ -44,20 +40,23 @@
     }
 }
 
-.fadeEnter {
+.fadeEnter{
     opacity: 0;
-}
-
-.fadeEnterActive {
+ }
+ 
+ .fadeExit{
     opacity: 1;
-    transition: opasity 200ms;
-}
-
-.fadeExit {
+ }
+ 
+ .fadeEnterActive{
     opacity: 1;
-}
-
-.fadeExitActive {
+ }
+ 
+ .fadeExitActive{
     opacity: 0;
-    transition: opasity 200ms;
-}
+ }
+ 
+ .fadeEnterActive,
+ .fadeExitActive{
+    transition: opacity 200ms;
+ }

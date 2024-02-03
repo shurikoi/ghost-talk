@@ -1,6 +1,6 @@
 import styles from "./Cards.module.css"
 import Card from "./Card"
-import { TransitionGroup, CSSTransition } from "react-transition-group"
+import { TransitionGroup, CSSTransition, SwitchTransition } from "react-transition-group"
 import { useState } from "react"
 
 export default function Cards({ cards }) {
@@ -14,14 +14,15 @@ export default function Cards({ cards }) {
     if (index === cards.length - 1) return
     setIndex(index + 1)
   }
+  // console.log(cards[index])
 
   return (
     <div className={styles.cards}>
       <div className={styles.cardsWrapper}>
-        <TransitionGroup>
+        <SwitchTransition mode={"out-in"}>
           <CSSTransition
-            key={cards[index]._id}
-            timeout={5000}
+            key={index}
+            timeout={200}
             classNames={{
               enter: styles.fadeEnter,
               enterActive: styles.fadeEnterActive,
@@ -31,7 +32,7 @@ export default function Cards({ cards }) {
           >
             <Card card={cards[index]} key={index} />
           </CSSTransition>
-        </TransitionGroup>
+        </SwitchTransition>
       </div>
       <div className={styles.navigation}>
         <button className={styles.navButton} onClick={moveLeft}>
