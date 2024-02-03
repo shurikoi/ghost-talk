@@ -21,16 +21,21 @@
 }
 
 .authForm {
-  box-sizing: border-box;
   background-color: white;
-  padding: 2rem 3rem;
   border-radius: 32px;
+  position: relative;
+  width: 27rem;
+  overflow: hidden;
+}
+
+.wrapper {
+  box-sizing: border-box;
+  padding: 2rem 3rem;
   display: flex;
   position: relative;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 27rem;
   gap: 1.3rem;
 }
 
@@ -66,15 +71,17 @@
     left: 0px;
   }
   .authForm {
-    padding: 2rem 2rem;
     position: absolute;
     bottom: 0;
     left: 0;
     width: 100%;
     border-radius: 32px 32px 0px 0px;
   }
+  .wrapper {
+    padding: 2rem 2rem;
+  }
 
-  /* hide scrollbar for chrome: */
+  /* Hide scrollbar for chrome: */
   ::-webkit-scrollbar {
     display: none;
   }
@@ -88,3 +95,20 @@
     overflow: hidden;
   }
 }
+
+.fadeEnter {
+  transform: translateX(100%);
+}
+
+.fadeEnterActive {
+  transform: translateX(0%);
+}
+
+.fadeExit {
+  transform: translateX(0%);
+}
+
+.fadeEnterActive,
+.fadeExitActive {
+  transition: transform 100ms;
+} 

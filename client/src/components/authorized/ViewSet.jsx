@@ -15,7 +15,7 @@ export default function ViewSet() {
   const { data, error, isLoading } = useQuery(["getSet", link], () => setStore.getSet(link))
 
   if (isLoading) return <ViewSetSkeleton />
-  if (error) return <NotFound />
+  if (error) return <NotFound /> // TODO: Find better way to handle 404 just from App component !
 
   return (
     <div className={styles.main}>

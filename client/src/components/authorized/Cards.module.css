@@ -40,23 +40,23 @@
     }
 }
 
-.fadeEnter{
+.fadeEnter {
     opacity: 0;
- }
- 
- .fadeExit{
+}
+
+.fadeExit {
     opacity: 1;
- }
- 
- .fadeEnterActive{
+}
+
+.fadeEnterActive {
     opacity: 1;
- }
- 
- .fadeExitActive{
+}
+
+.fadeExitActive {
     opacity: 0;
- }
- 
- .fadeEnterActive,
- .fadeExitActive{
+}
+
+.fadeEnterActive,
+.fadeExitActive {
     transition: opacity 200ms;
- }
+}
