@@ -1,15 +1,15 @@
 import "./App.css"
-import { BrowserRouter, Route, Routes, useParams } from "react-router-dom"
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom"
 import StartPage from "./components/unauthorized/StartPage"
 import Main from "./components/authorized/Main"
 import { useContext, useEffect } from "react"
 import { observer } from "mobx-react-lite"
 import { Context } from "./contexts/Context"
-// import Navigation from "./components/authorized/Navigation"
 import CreateSet from "./components/authorized/CreateSet"
 import ViewSet from "./components/authorized/ViewSet"
 import Loader from "./components/ui/Loader"
 import { Toaster } from "react-hot-toast"
+import NotFound from "./components/authorized/NotFound"
 
 function App() {
   const { authStore } = useContext(Context)
@@ -19,12 +19,8 @@ function App() {
     const tokenExist = localStorage.getItem("token")
     if (tokenExist) checkAuth()
   }, [])
-  
-  const authorizedPages = [
-    ["/"],
-    ["/create-set", <CreateSet></CreateSet>],
-    ["/set/:link", <ViewSet></ViewSet>],
-  ]
+
+  if (authStore.isLoading) return <Loader></Loader>
 
   return (
     <>
@@ -36,27 +32,23 @@ function App() {
           },
         }}
       />
-      {authStore.isLoading ? (
-        <Loader />
-      ) : (
-        <BrowserRouter>
-          <Routes>
-            {authStore.isAuth ? (
-              authorizedPages.map((page, index) => (
-                <Route
-                  path={page[0]}
-                  element={<Main>{page[1]}</Main>}
-                  key={index}
-                ></Route>
-              ))
-            ) : (
+      <BrowserRouter>
+        <Routes>          
+          {authStore.isAuth ? (
+           <>
+            <Route path="/" element={<Main />}></Route>
+            <Route path="/create-set" element={<Main><CreateSet /></Main>}></Route>
+            <Route path="/set/:link" element={<Main><ViewSet /></Main>}></Route>
+            <Route path="*" element={<Main><NotFound /></Main>}></Route>
+           </>
+          ) : (
+            <>
               <Route path="/" element={<StartPage />}></Route>
-            )}
-
-            {/* <Route path="*" element={}></Route> */}
-          </Routes>
-        </BrowserRouter>
-      )}
+              <Route path="*" element={<Navigate to="/" />} />
+            </>
+          )}
+        </Routes>
+      </BrowserRouter>
     </>
   )
 }
