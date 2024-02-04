@@ -8,10 +8,9 @@
     transform: perspective(1000px) rotateX(var(--rotate-x, 0));
     transform-style: preserve-3d;
     transition: 0.5s;
-    font-family: e-Ukraine;
+    font-family: e-UkraineHead;
     font-size: large;
     font-weight: 300;
-    text-transform: uppercase;
 }
 
 .card.flip {

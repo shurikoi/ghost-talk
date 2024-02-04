@@ -4,6 +4,7 @@ import styles from "./Card.module.css"
 
 export default function Card({ card }) {
   const [isFlipped, setFlipped] = useState(false)
+  
   return (
       <div className={styles.container}>
         <div className={`${styles.card} ${isFlipped ? styles.flip : ""}`}>

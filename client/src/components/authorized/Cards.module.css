@@ -30,12 +30,7 @@
     .topWrapper {
         align-items: center;
     }
-
     .titleWrapper {
-        flex-direction: column;
-    }
-
-    .navigation {
         flex-direction: column;
     }
 }

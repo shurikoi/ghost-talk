@@ -32,7 +32,7 @@
     font-family: e-Ukraine;
     font-weight: 300;
     font-size: small;
-    color: white;
+    color: rgb(201, 199, 255);
 }
 
 .bottomContainer {
@@ -46,4 +46,12 @@
     border-radius: 20px;
     font-family: e-Ukraine;
     font-size: small;
+}
+
+@media only screen and (max-width: 700px) {
+    .topContainer {
+        display: flex;
+        flex-direction: column-reverse;
+        gap: 0.6rem;
+    }
 }

@@ -12,6 +12,8 @@ const setSchema = new Schema({
     title: { type: String, required: true },
     link: { type: String, required: true },
     cards: [cardSchema],
+}, {
+    timestamps: true
 })
 
 const setModule = model("Set", setSchema)
