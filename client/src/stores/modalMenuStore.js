@@ -1,6 +1,6 @@
 import { action, makeAutoObservable, observable } from "mobx"
 
-class AuthFormStore {
+class ModalMenuStore {
     isFormActive = false
 
     constructor() {
@@ -23,5 +23,5 @@ class AuthFormStore {
     }
 }
 
-const authFormStore = new AuthFormStore()
-export default authFormStore
+const modalMenuStore = new ModalMenuStore()
+export default modalMenuStore

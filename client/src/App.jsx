@@ -39,12 +39,12 @@ function App() {
             <Route path="/" element={<Main />}></Route>
             <Route path="/create-set" element={<Main><CreateSet /></Main>}></Route>
             <Route path="/set/:link" element={<Main><ViewSet /></Main>}></Route>
-            {/* <Route path="*" element={<Main><NotFound /></Main>}></Route> */}
+            <Route path="*" element={<Main><NotFound /></Main>}></Route>
            </>
           ) : (
             <>
               <Route path="/" element={<StartPage />}></Route>
-              <Route path="*" element={<Navigate to="/" />} />
+              {/* <Route path="*" element={<Navigate to="/" />} /> */}
             </>
           )}
         </Routes>

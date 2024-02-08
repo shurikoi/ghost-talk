@@ -1,6 +1,6 @@
 import { action, makeAutoObservable, observable } from "mobx"
 import { serviceCheckUser, serviceRefresh, serviceSignIn, serviceSignOut, serviceSignUp } from "../services/authService"
-import authFormStore from "./authFormStore"
+import authFormStore from "./modalMenuStore"
 import userStore from "./userStore"
 import toast from "react-hot-toast"
 class AuthStore {

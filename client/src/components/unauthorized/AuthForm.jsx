@@ -1,16 +1,16 @@
 import styles from "./AuthForm.module.css"
 import { useContext, useRef, useState } from "react"
 import DefaultForm from "./DefaultForm"
-// import { CSSTransition, SwitchTransition } from "react-transition-group"
 import SignIn from "./SignIn"
 import SignUp from "./SignUp"
 import { observer } from "mobx-react-lite"
 import { FormModalContext } from "../../contexts/FormModalContext"
 import { CSSTransition, SwitchTransition } from "react-transition-group"
+import ModalMenu from "../ui/ModalMenu"
 
-function AuthForm({ className = "" }) {
+function AuthForm() {
   const [currentState, setCurrentState] = useState("default")
-  const { authFormStore } = useContext(FormModalContext)
+  const { modalMenuStore } = useContext(FormModalContext)
 
   const states = {
     default: <DefaultForm setCurrentState={setCurrentState}></DefaultForm>,
@@ -19,17 +19,8 @@ function AuthForm({ className = "" }) {
   }
 
   return (
-    <div
-      className={`${styles.main} ${className} ${
-        authFormStore.isFormActive ? styles.active : ""
-      }`}
-    >
-      <div
-        className={styles.behind}
-        onClick={() => authFormStore.removeClass()}
-      ></div>
-      <div className={styles.authForm}>
-        <SwitchTransition mode={"out-in"}>
+    <ModalMenu>
+      <SwitchTransition mode={"out-in"}>
           <CSSTransition
             key={currentState}
             timeout={100}
@@ -45,8 +36,7 @@ function AuthForm({ className = "" }) {
             </div>
           </CSSTransition>
         </SwitchTransition>
-      </div>
-    </div>
+    </ModalMenu>
   )
 }
 

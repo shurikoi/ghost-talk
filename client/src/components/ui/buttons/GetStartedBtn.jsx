@@ -3,8 +3,8 @@ import styles from "./GetStartedBtn.module.css"
 import { FormModalContext } from "../../../contexts/FormModalContext"
 
 export default function GetStartedBtn({className = ""}) {
-    const { authFormStore } = useContext(FormModalContext)
+    const { modalMenuStore } = useContext(FormModalContext)
     return (
-        <button className={`${styles.getStarted} ${className}`} onClick={() => authFormStore.addClass()}>Get Started</button>
+        <button className={`${styles.getStarted} ${className}`} onClick={() => modalMenuStore.addClass()}>Get Started</button>
     )
 }

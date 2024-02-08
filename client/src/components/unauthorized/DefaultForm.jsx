@@ -8,7 +8,7 @@ import AuthInput from "../ui/AuthInput.jsx"
 
 export default function DefaultForm({ setCurrentState }) {
   const { authStore } = useContext(Context)
-  const { authFormStore } = useContext(FormModalContext)
+  const { modalMenuStore } = useContext(FormModalContext)
   const [ email, setEmail ] = useState("")
   let isFilled = !!email
 
@@ -24,7 +24,7 @@ export default function DefaultForm({ setCurrentState }) {
       <AuthBackArrowIcon
         className={styles.arrow}
         onClick={() => {
-          authFormStore.removeClass()
+          modalMenuStore.removeClass()
         }}
       />
       <div className={styles.title}>Sign in in seconds</div>
