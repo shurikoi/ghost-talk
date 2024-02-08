@@ -2,9 +2,9 @@ import { Link } from "react-router-dom"
 import Set from "./Set"
 import styles from "./AllSets.module.css"
 
-export default function AllSets({ data, title }) {
+export default function AllSets({ data = [], title }) {
   // TODO: Compatibility with NotFound page
-  if (!data) return
+  if (data.length === 0 ) return 
 
   return (
     <div className={`${styles.flexColumn} ${styles.gap2}`}>

@@ -16,7 +16,7 @@ function ModalMenu({ children }) {
         className={styles.behind}
         onClick={() => modalMenuStore.removeClass()}
       ></div>
-      <div className={styles.authForm}>{children}</div>
+      <div className={styles.form}>{children}</div>
     </div>
   )
 }

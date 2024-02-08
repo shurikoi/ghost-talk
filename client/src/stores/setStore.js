@@ -3,6 +3,7 @@ import {
   serviceGetAllSets,
   serviceCreateSet,
   serviceGetSet,
+  serviceDeleteSet,
 } from "../services/setService"
 import userStore from "./userStore"
 
@@ -57,6 +58,14 @@ class SetStore {
     const userSets = data.filter((set) => set.user === userStore.user._id)
     const leftSets = data.filter((set) => set.user !== userStore.user._id)
     return [data, userSets, leftSets]
+  }
+
+  async deleteSet(setId) {
+    try {
+      await serviceDeleteSet(setId)
+    } catch (error) {
+      console.log(error)
+    }
   }
 }
 

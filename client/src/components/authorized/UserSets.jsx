@@ -2,8 +2,9 @@ import { Link } from "react-router-dom"
 import Set from "./Set"
 import styles from "./UserSets.module.css"
 
-export default function UserSets({ data, title }) {
-  if (!data) return
+export default function UserSets({ data = [], title }) {
+  if (data.length === 0 ) return 
+  
 
   return (
     <div className={`${styles.flexColumn} ${styles.gap2}`}>

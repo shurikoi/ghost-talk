@@ -1,0 +1,27 @@
+.deleteBtn {
+    border-radius: 10px;
+    padding: 1rem;
+    border-color: rgb(192, 54, 54);
+    background-color: unset;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    justify-content: space-around;
+    height: 2rem;
+    cursor: pointer;
+    border-style: double;
+}
+
+.deleteBtn:hover {
+    background-color: rgb(175, 175, 175, 0.1);
+}
+
+.title {
+    color: rgb(192, 54, 54);
+}
+
+.icon {
+    fill: rgb(192, 54, 54);
+    margin-bottom: 1px;
+    height: 1rem;
+}

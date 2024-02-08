@@ -30,3 +30,8 @@
   color: #ffcd1f;
 } */
 
+.setInfo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

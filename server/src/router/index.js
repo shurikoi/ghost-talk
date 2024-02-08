@@ -14,6 +14,6 @@ router.post('/create-set', authMiddleware, createSet)
 router.post('/get-set', getSet)
 router.post('/get-user-by-id', authMiddleware, getUserById)
 router.get('/get-all-sets', authMiddleware, getAllSets)
-// router.delete('/delete-set', authMiddleware, deleteSet)
+router.post('/delete-set', authMiddleware, deleteSet)
 
 export default router

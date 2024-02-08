@@ -1,4 +1,4 @@
-export default function TrashIcon({ className }) {
+export default function TrashIcon({ className = "" }) {
   return (
     <div className={className}>
       <svg
