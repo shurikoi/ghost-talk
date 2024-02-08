@@ -1,16 +1,14 @@
 import styles from "./AuthForm.module.css"
-import { useContext, useRef, useState } from "react"
+import { useState } from "react"
 import DefaultForm from "./DefaultForm"
 import SignIn from "./SignIn"
 import SignUp from "./SignUp"
 import { observer } from "mobx-react-lite"
-import { FormModalContext } from "../../contexts/FormModalContext"
 import { CSSTransition, SwitchTransition } from "react-transition-group"
 import ModalMenu from "../ui/ModalMenu"
 
 function AuthForm() {
   const [currentState, setCurrentState] = useState("default")
-  const { modalMenuStore } = useContext(FormModalContext)
 
   const states = {
     default: <DefaultForm setCurrentState={setCurrentState}></DefaultForm>,

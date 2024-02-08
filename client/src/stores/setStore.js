@@ -1,13 +1,15 @@
 import { action, makeAutoObservable, observable } from "mobx"
-import { serviceGetAllSets, serviceCreateSet, serviceGetSet } from "../services/setService"
+import {
+  serviceGetAllSets,
+  serviceCreateSet,
+  serviceGetSet,
+} from "../services/setService"
+import userStore from "./userStore"
 
 class SetStore {
   title = ""
   cards = []
   isLoading = false
-  errors = {
-    setNotFound: false
-  }
 
   constructor() {
     makeAutoObservable(this)
@@ -41,13 +43,20 @@ class SetStore {
   }
 
   async getSet(setId) {
-      const response = await serviceGetSet(setId)
-      return response.data
+    const { data } = await serviceGetSet(setId)
+    return data
   }
 
   async getAllSets() {
-      const response = await serviceGetAllSets()
-      return response.data
+    const { data } = await serviceGetAllSets()
+    return data
+  }
+
+  async getSortedSets() {
+    const { data } = await serviceGetAllSets()
+    const userSets = data.filter((set) => set.user === userStore.user._id)
+    const leftSets = data.filter((set) => set.user !== userStore.user._id)
+    return [data, userSets, leftSets]
   }
 }
 

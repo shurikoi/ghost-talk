@@ -2,6 +2,7 @@ import styles from "./NotFound.module.css"
 import AllSets from "./AllSets"
 
 export default function NotFound() {
+  // WARNING: AllSets does not work properly
   return (
     <div className={styles.wrapper}>
       <div className={styles.NotFound}>

@@ -26,6 +26,7 @@
     align-items: center;
     position: absolute;
     backface-visibility: hidden;
+    text-align: center;
 }
 
 .card.flip .front {

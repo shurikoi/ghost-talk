@@ -1,0 +1,24 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+.title {
+    font-family: e-Ukraine;
+    font-size: x-large;
+    color: white;
+    padding-left: 1rem;
+}
+
+.underline {
+    text-decoration-line: underline;
+}
+
+.cadetblue {
+    text-decoration-color: cadetblue;
+}
+
+.cornflowerblue {
+    text-decoration-color: cornflowerblue;
+}

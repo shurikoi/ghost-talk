@@ -2,6 +2,7 @@ import { Link } from "react-router-dom"
 import styles from "./StartPage.module.css"
 import CreateSetBtn from "../ui/buttons/CreateSetBtn"
 import AllSets from "./AllSets"
+import SetsSections from "./SetsSections"
 
 export default function StartPage() {
   return (
@@ -9,10 +10,7 @@ export default function StartPage() {
       <Link to="/create-set" className={`link ${styles.link}`}>
         <CreateSetBtn />
       </Link>
-      <div className={styles.setsContainer}>
-        <div className={styles.heading}>Try out these learning sets</div>
-        <AllSets />
-      </div>
+      <SetsSections />
     </div>
   )
 }

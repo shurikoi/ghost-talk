@@ -1,14 +1,15 @@
 import { Link } from "react-router-dom"
 import Set from "./Set"
-import styles from "./AllSets.module.css"
+import styles from "./UserSets.module.css"
 
-export default function AllSets({ data, title }) {
-  // TODO: Compatibility with NotFound page
+export default function UserSets({ data, title }) {
   if (!data) return
 
   return (
     <div className={`${styles.flexColumn} ${styles.gap2}`}>
-      <div className={title}>Try out these learning sets</div>
+      <div className={title}>
+        Manage your sets
+      </div>
       <div className={`${styles.flexColumn} ${styles.gap1}`}>
         {data.map((setData, index) => (
           <Link

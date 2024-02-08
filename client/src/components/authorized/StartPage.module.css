@@ -7,16 +7,3 @@
 .link {
   width: auto;
 }
-
-.setsContainer {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-}
-
-.heading {
-  font-family: e-Ukraine;
-  font-size: x-large;
-  color: white;
-  padding-left: 1rem;
-}
