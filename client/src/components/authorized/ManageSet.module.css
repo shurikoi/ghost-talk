@@ -1,0 +1,25 @@
+.wrapper {
+    box-sizing: border-box;
+    padding: 2rem 3rem;
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1.3rem;
+    color: black;
+}
+
+.title {
+    display: flex;
+    text-align: center;
+    font-family: "e-UkraineHead";
+    font-size: 20px;
+}
+
+.description {
+    font-family: "e-Ukraine";
+    font-weight: 300;
+    font-size: small;
+    text-align: center;
+}

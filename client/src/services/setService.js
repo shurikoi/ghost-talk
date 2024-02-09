@@ -12,6 +12,6 @@ export const serviceGetAllSets = async () => {
     return await $apiBearer.get("get-all-sets")
 }
 
-export const serviceDeleteSet = async (setId) => {
-    return await $apiBearer.post("delete-set", { setId })
+export const serviceDeleteSet = async (setId, setUser) => {
+    return await $apiBearer.post("delete-set", { setId, setUser })
 }

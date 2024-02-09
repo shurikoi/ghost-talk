@@ -11,12 +11,11 @@ import { useQuery } from "react-query"
 import DeleteBtn from "../ui/buttons/DeleteBtn"
 import ModalMenu from "../ui/ModalMenu"
 import AuthSubmitButton from "../ui/buttons/AuthSubmitButton"
-// import { FormModalContext } from "../../contexts/FormModalContext"
+import ManageSet from "./ManageSet"
 
 export default function ViewSet() {
   const { link } = useParams()
-  const { setStore } = useContext(AuthorizedContext)
-  // const { modalMenuStore } = useContext(FormModalContext)
+  const { setStore, userStore } = useContext(AuthorizedContext)
   const { data, error, isLoading } = useQuery(["getSet", link], () =>
     setStore.getSet(link)
   )
@@ -24,10 +23,6 @@ export default function ViewSet() {
   if (isLoading) return <ViewSetSkeleton />
   if (error) return <NotFound /> // TODO: Find better way to handle 404 just from App component !
 
-  const handleSubmit = async () => {
-    await setStore.deleteSet(data._id)
-  }
-  
   return (
     <div className={styles.main}>
       <div className={styles.topWrapper}>
@@ -40,10 +35,7 @@ export default function ViewSet() {
       <Cards cards={data.cards} />
       <div className={styles.setInfo}>
         <Author userId={data.user} />
-        <DeleteBtn />
-        <ModalMenu>
-          <AuthSubmitButton onClick={handleSubmit} />
-        </ModalMenu>
+        {data.user === userStore.user._id && <ManageSet setTitle={data.title} setId={data._id} setUser={data.user} />}
       </div>
     </div>
   )

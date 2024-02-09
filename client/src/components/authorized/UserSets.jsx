@@ -2,14 +2,14 @@ import { Link } from "react-router-dom"
 import Set from "./Set"
 import styles from "./UserSets.module.css"
 
-export default function UserSets({ data = [], title }) {
+export default function UserSets({ data = [], title, titleStyles }) {
   if (data.length === 0 ) return 
   
 
   return (
     <div className={`${styles.flexColumn} ${styles.gap2}`}>
-      <div className={title}>
-        Manage your sets
+      <div className={titleStyles}>
+        {title}
       </div>
       <div className={`${styles.flexColumn} ${styles.gap1}`}>
         {data.map((setData, index) => (

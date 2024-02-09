@@ -16,8 +16,8 @@ export default function SetsSections() {
 
   return (
     <div className={styles.container}>
-        <UserSets data={data[1]} title={`${styles.title} ${styles.underline} ${styles.cadetblue}`} />
-        <AllSets data={data[2]} title={`${styles.title} ${styles.underline} ${styles.cornflowerblue}`} />
+        <AllSets data={data[1]} title="Manage your sets" titleStyles={`${styles.title} ${styles.underline} ${styles.cadetblue}`} />
+        <AllSets data={data[2]} title="Try out these learning sets" titleStyles={`${styles.title} ${styles.underline} ${styles.cornflowerblue}`} />
     </div>
   )
 }

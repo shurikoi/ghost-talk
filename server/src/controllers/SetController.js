@@ -34,8 +34,8 @@ export const getAllSets = async (req, res, next) => {
 export const deleteSet = async (req, res, next) => {
   try {
     const { id } = req.user
-    const { setId } = req.body
-    const setsData = await serviceDeleteSet(id, setId)
+    const { setId, setUser } = req.body
+    const setsData = await serviceDeleteSet(id, setId, setUser)
     return res.json(setsData)
   } catch (e) {
     next(e)

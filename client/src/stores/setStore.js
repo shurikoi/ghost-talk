@@ -60,9 +60,9 @@ class SetStore {
     return [data, userSets, leftSets]
   }
 
-  async deleteSet(setId) {
+  async deleteSet(setId, setUser) {
     try {
-      await serviceDeleteSet(setId)
+      await serviceDeleteSet(setId, setUser)
     } catch (error) {
       console.log(error)
     }

@@ -32,15 +32,15 @@ export const serviceGetAllSets = async () => {
   return await Set.find()
 }
 
-export const serviceDeleteSet = async (userId, setId) => {
+export const serviceDeleteSet = async (userId, setId, setUser) => {
+  if (userId !== setUser) throw ApiError.UnauthorizedError()
+
   const set = await Set.deleteOne({
     $and: [
       {_id: setId},
       {user: userId}
     ]
   })
-
-  if (!set) throw ApiError.UnauthorizedError()
 
   return set
 }
