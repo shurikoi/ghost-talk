@@ -12,7 +12,6 @@ import {
 
 const generateAndSaveTokens = async (user) => {
   const { email, id } = user
-  console.log("generateAndSaveTokens",user, id)
   let { accessToken, refreshToken } = serviceGenerateTokens({ email, id }) // why let?
   await serviceSaveToken(id, refreshToken)
 
@@ -40,7 +39,7 @@ export const serviceSignIn = async (email, password) => {
 export const serviceSignUp = async (email, name, surname, password) => {
   password = await hashPassword(password)
 
-  const isUserExist = await User.findOne({ email })
+  const isUserExist = await User.findOne({ email }) // there is middleware to check it in insertMany (how to implement it correctly)
   if (isUserExist) throw ApiError.BadRequest(`${email} already exists`)
 
   const user = await User.insertMany([
