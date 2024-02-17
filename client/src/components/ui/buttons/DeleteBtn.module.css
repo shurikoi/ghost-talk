@@ -9,7 +9,7 @@
     justify-content: space-around;
     height: 2rem;
     cursor: pointer;
-    border-style: double;
+    border-style: solid;
 }
 
 .deleteBtn:hover {

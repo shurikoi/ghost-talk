@@ -1,15 +1,16 @@
 import { observer } from "mobx-react-lite"
-import styles from "./AuthInput.module.css"
+import styles from "./BasicInput.module.css"
 import { Context } from "../../contexts/Context"
 import { useContext } from "react"
 
-export default function AuthInput({
+export default function BasicInput({
   className = "",
   placeholder,
   value,
   setValue,
   isFilled = true,
   handleSubmit,
+  type = "text",
 }) {
   const handleKeyDown = (e) => {
     if (e.key == "Enter" && isFilled) handleSubmit()
@@ -18,7 +19,7 @@ export default function AuthInput({
   return (
     <input
       className={`${styles.emailInput} ${className}`}
-      type="text"
+      type={type}
       placeholder={placeholder}
       autoCapitalize="off"
       autoComplete="false"

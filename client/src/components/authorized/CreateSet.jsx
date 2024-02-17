@@ -5,6 +5,7 @@ import { useContext, useState } from "react"
 import { AuthorizedContext } from "../../contexts/AuthorizedContext"
 import CreateBtn from "../ui/buttons/CreateBtn"
 import CreateCard from "./CreateCard"
+import toast from "react-hot-toast"
 
 export default function CreateSet() {
   const { setStore } = useContext(AuthorizedContext)
@@ -21,7 +22,12 @@ export default function CreateSet() {
   const handleSubmit = async () => {
     setStore.setTitle(title)
     const response = await setStore.createSet()
+    if (!response) {
+      toast.error("Something went wrong :(")
+      return
+    }
     navigate(`/set/${response.link}`)
+    toast.success("Hooray!")
   }
 
   return (

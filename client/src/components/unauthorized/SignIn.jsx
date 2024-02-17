@@ -2,9 +2,9 @@ import { useContext, useState } from "react"
 import SubmitIcon from "../ui/icon/SubmitIcon"
 import { Context } from "../../contexts/Context"
 import styles from "./AuthForm.module.css"
-import AuthInput from "../ui/AuthInput"
-import AuthSubmitButton from "../ui/buttons/AuthSubmitButton"
-import AuthBackArrowIcon from "../ui/icon/AuthBackArrowIcon"
+import BasicInput from "../ui/BasicInput"
+import BasicSubmitButton from "../ui/buttons/BasicSubmitButton"
+import BackArrowIcon from "../ui/icon/BackArrowIcon"
 
 export default function SignIn({ setCurrentState }) {
   const [password, setPassword] = useState("")
@@ -18,20 +18,21 @@ export default function SignIn({ setCurrentState }) {
 
   return (
     <>
-      <AuthBackArrowIcon
+      <BackArrowIcon
         className={styles.arrow}
         onClick={() => setCurrentState("default")}
       />
       <div className={styles.title}>Sign in to continue</div>
       <div className={styles.description}>via {email}</div>
-      <AuthInput
+      <BasicInput
         placeholder={"Your password"}
+        type="password"
         value={password}
         setValue={setPassword}
         isFilled={isFilled}
         handleSubmit={handleSubmit}
       />
-      <AuthSubmitButton isFilled={isFilled} onClick={handleSubmit} />
+      <BasicSubmitButton isFilled={isFilled} onClick={handleSubmit} />
     </>
   )
 }

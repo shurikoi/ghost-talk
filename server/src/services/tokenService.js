@@ -21,6 +21,7 @@ export const serviceSaveToken = async (userId, refreshToken) => {
   }
 
   const token = await Token.insertMany([{ user: userId, refreshToken }])
+  console.log("USERID",userId)
   return token
 }
 

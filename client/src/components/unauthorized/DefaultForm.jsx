@@ -2,9 +2,9 @@ import styles from "./AuthForm.module.css"
 import { useContext, useState } from "react"
 import { Context } from "../../contexts/Context"
 import { FormModalContext } from "../../contexts/FormModalContext.js"
-import AuthBackArrowIcon from "../ui/icon/AuthBackArrowIcon.jsx"
-import AuthSubmitButton from "../ui/buttons/AuthSubmitButton.jsx"
-import AuthInput from "../ui/AuthInput.jsx"
+import BackArrowIcon from "../ui/icon/BackArrowIcon.jsx"
+import BasicSubmitButton from "../ui/buttons/BasicSubmitButton.jsx"
+import BasicInput from "../ui/BasicInput.jsx"
 
 export default function DefaultForm({ setCurrentState }) {
   const { authStore } = useContext(Context)
@@ -21,7 +21,7 @@ export default function DefaultForm({ setCurrentState }) {
 
   return (
     <>
-      <AuthBackArrowIcon
+      <BackArrowIcon
         onClick={() => {
           authFormStore.removeClass()
         }}
@@ -30,14 +30,14 @@ export default function DefaultForm({ setCurrentState }) {
       <div className={styles.description}>
         If you do not have an account, we will help you create one
       </div>
-      <AuthInput
+      <BasicInput
         placeholder={"Your email"}
         value={email}
         setValue={setEmail}
         isFilled={isFilled}
         handleSubmit={handleSubmit}
       />
-      <AuthSubmitButton isFilled={isFilled} onClick={handleSubmit} />
+      <BasicSubmitButton isFilled={isFilled} onClick={handleSubmit} />
     </>
   )
 }

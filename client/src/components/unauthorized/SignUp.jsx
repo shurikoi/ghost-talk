@@ -2,9 +2,9 @@ import { useContext, useState } from "react"
 import SubmitIcon from "../ui/icon/SubmitIcon"
 import { Context } from "../../contexts/Context"
 import styles from "./AuthForm.module.css"
-import AuthBackArrowIcon from "../ui/icon/AuthBackArrowIcon"
-import AuthInput from "../ui/AuthInput"
-import AuthSubmitButton from "../ui/buttons/AuthSubmitButton"
+import BackArrowIcon from "../ui/icon/BackArrowIcon"
+import BasicInput from "../ui/BasicInput"
+import BasicSubmitButton from "../ui/buttons/BasicSubmitButton"
 
 export default function SignUp({ setCurrentState }) {
   const [name, setName] = useState("")
@@ -19,7 +19,7 @@ export default function SignUp({ setCurrentState }) {
 
   return (
     <>
-      <AuthBackArrowIcon
+      <BackArrowIcon
         className={styles.arrow}
         onClick={() => setCurrentState("default")}
       />
@@ -28,26 +28,27 @@ export default function SignUp({ setCurrentState }) {
         creating an account using {email}
       </div>
       <div className={styles.inputsWrapper}>
-        <AuthInput
+        <BasicInput
           placeholder={"First name"}
           value={name}
           setValue={setName}
           handleSubmit={handleSubmit}
         />
-        <AuthInput
+        <BasicInput
           placeholder={"Second name"}
           value={surname}
           setValue={setSurname}
           handleSubmit={handleSubmit}
         />
       </div>
-      <AuthInput
+      <BasicInput
         placeholder={"Password"}
+        type="password"
         value={password}
         setValue={setPassword}
         handleSubmit={handleSubmit}
       />
-      <AuthSubmitButton onClick={handleSubmit} />
+      <BasicSubmitButton onClick={handleSubmit} />
     </>
   )
 }

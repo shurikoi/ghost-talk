@@ -12,7 +12,8 @@ import {
 
 const generateAndSaveTokens = async (user) => {
   const { email, id } = user
-  let { accessToken, refreshToken } = serviceGenerateTokens({ email, id })
+  console.log("generateAndSaveTokens",user, id)
+  let { accessToken, refreshToken } = serviceGenerateTokens({ email, id }) // why let?
   await serviceSaveToken(id, refreshToken)
 
   return { accessToken, refreshToken, user }

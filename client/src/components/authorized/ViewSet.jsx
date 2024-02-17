@@ -8,9 +8,6 @@ import Cards from "./Cards"
 import ViewSetSkeleton from "./ViewSetSkeleton"
 import NotFound from "./NotFound"
 import { useQuery } from "react-query"
-import DeleteBtn from "../ui/buttons/DeleteBtn"
-import ModalMenu from "../ui/ModalMenu"
-import AuthSubmitButton from "../ui/buttons/AuthSubmitButton"
 import ManageSet from "./ManageSet"
 
 export default function ViewSet() {
@@ -22,6 +19,7 @@ export default function ViewSet() {
 
   if (isLoading) return <ViewSetSkeleton />
   if (error) return <NotFound /> // TODO: Find better way to handle 404 just from App component !
+  console.log(data)
 
   return (
     <div className={styles.main}>

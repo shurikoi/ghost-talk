@@ -1,6 +1,6 @@
-import styles from "./AuthSubmitButton.module.css"
+import styles from "./BasicSubmitButton.module.css"
 
-export default function AuthSubmitButton({
+export default function BasicSubmitButton({
   className = "",
   onClick,
   isFilled = true,

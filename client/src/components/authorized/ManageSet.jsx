@@ -1,13 +1,14 @@
 import { useContext, useState } from "react"
 import { AuthorizedContext } from "../../contexts/AuthorizedContext"
 import ModalMenu from "../ui/ModalMenu"
-import AuthSubmitButton from "../ui/buttons/AuthSubmitButton"
+import BasicSubmitButton from "../ui/buttons/BasicSubmitButton"
 import DeleteBtn from "../ui/buttons/DeleteBtn"
 import { useNavigate } from "react-router-dom"
 import { FormModalContext } from "../../contexts/FormModalContext"
 import styles from "./ManageSet.module.css"
-import AuthBackArrowIcon from "../ui/icon/AuthBackArrowIcon"
-import AuthInput from "../ui/AuthInput"
+import BackArrowIcon from "../ui/icon/BackArrowIcon"
+import BasicInput from "../ui/BasicInput"
+import toast from "react-hot-toast"
 
 export default function ManageSet({ setTitle, setId, setUser }) {
   const { setStore } = useContext(AuthorizedContext)
@@ -18,9 +19,10 @@ export default function ManageSet({ setTitle, setId, setUser }) {
 
   const handleSubmit = async () => {
     if (isFilled) {
-      await setStore.deleteSet(setId, setUser) // There is a way to delete set by spoofing the owner
+      const response = await setStore.deleteSet(setId, setUser) // There is a way to delete set by spoofing the owner
       navigate("/")
       modalMenuStore.removeClass()
+      toast.success("You have just deleted set")
     }
   }
 
@@ -29,7 +31,7 @@ export default function ManageSet({ setTitle, setId, setUser }) {
       <DeleteBtn />
       <ModalMenu>
         <div className={styles.wrapper}>
-          <AuthBackArrowIcon
+          <BackArrowIcon
             onClick={() => {
               modalMenuStore.removeClass()
             }}
@@ -38,14 +40,14 @@ export default function ManageSet({ setTitle, setId, setUser }) {
           <div
             className={styles.description}
           >{`To confirm, type "${setTitle}" in the box below`}</div>
-          <AuthInput
+          <BasicInput
             placeholder={"Type here"}
             value={confirm}
             setValue={setConfirm}
             isFilled={isFilled}
             handleSubmit={handleSubmit}
           />
-          <AuthSubmitButton onClick={handleSubmit} isFilled={isFilled} />
+          <BasicSubmitButton onClick={handleSubmit} isFilled={isFilled} />
         </div>
       </ModalMenu>
     </>

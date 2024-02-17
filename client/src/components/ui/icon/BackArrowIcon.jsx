@@ -1,6 +1,6 @@
-import styles from "./AuthBackArrowIcon.module.css"
+import styles from "./BackArrowIcon.module.css"
 
-export default function AuthBackArrowIcon({ className = "", onClick }) {
+export default function BackArrowIcon({ className = "", onClick }) {
   return (
     <div className={`${styles.arrow} ${className}`} onClick={onClick}>
       <svg
