@@ -1,4 +1,4 @@
-import { serviceCreateSet, serviceGetSet, serviceGetAllSets, serviceDeleteSet } from "../services/setService.js"
+import { serviceCreateSet, serviceGetSet, serviceGetAllSets, serviceDeleteSet, serviceCreateSetByLink } from "../services/setService.js"
 
 export const createSet = async (req, res, next) => {
   try {
@@ -37,6 +37,17 @@ export const deleteSet = async (req, res, next) => {
     const { setId, setUser } = req.body
     const setsData = await serviceDeleteSet(id, setId, setUser)
     return res.json(setsData)
+  } catch (e) {
+    next(e)
+  }
+}
+
+export const createSetByLink = async (req, res, next) => {
+  try {
+    const { title } = req.body
+    const { id } = req.user
+    const response = await serviceCreateSetByLink(id, title)
+    return res.json(response)
   } catch (e) {
     next(e)
   }
