@@ -48,29 +48,27 @@ class JSONRequestHandler(http.server.BaseHTTPRequestHandler):
         self.end_headers()
 
     def do_POST(self):
-        # start = time.perf_counter()
+        start = time.perf_counter()
         content_length = int(self.headers['Content-Length'])
         post_data = self.rfile.read(content_length)
-        print(post_data)
-        print(type(post_data))
-        # json_data = json.loads(post_data.decode('utf-8'))
-        #
-        # self._set_headers()
-        # print("Received JSON:")
-        # page_text = parse_web_page(json_data['resource'])
-        #
-        # words = page_text.split()
-        # unique_words = set(words)
-        # filtered_list = [word for word in unique_words if is_word(word)]
-        # print(filtered_list)
-        # print(len(filtered_list))
-        #
-        # word_definition_mapping = generate_word_definition_mapping(csv_file, filtered_list)
-        # json_output = json.dumps(word_definition_mapping, ensure_ascii=False, indent=4)
-        #
-        # print(json_output)
-        # end = time.perf_counter()
-        # print(end - start)
+        json_data = json.loads(post_data.decode('utf-8'))
+
+        self._set_headers()
+        print("Received JSON:")
+        page_text = parse_web_page(json_data['resource'])
+
+        words = page_text.split()
+        unique_words = set(words)
+        filtered_list = [word for word in unique_words if is_word(word)]
+        print(filtered_list)
+        print(len(filtered_list))
+
+        word_definition_mapping = generate_word_definition_mapping(csv_file, filtered_list)
+        json_output = json.dumps(word_definition_mapping, ensure_ascii=False, indent=4)
+
+        print(json_output)
+        end = time.perf_counter()
+        print(end - start)
 
 
 def run(server_class=http.server.HTTPServer, handler_class=JSONRequestHandler, port=8000):
