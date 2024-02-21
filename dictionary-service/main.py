@@ -46,8 +46,20 @@ def parse_web_page(url):
     except Exception as e:
         print(f"An error occurred: {e}")
         return None
+def response_check(data_to_check:str) -> bool:
+    list_to_check_keys = ['id', 'resource', 'partOfSpeech']
+    list_to_check_part_of_speach = []
+    try:
+        data_to_check = json.loads(data_to_check)
+    except:
+        return False
+    for key in list_to_check_keys:
+        if key not in data_to_check:
+            return False
+        if data_to_check[key] == "":
+            return False
 
-
+    return True
 class JSONRequestHandler(http.server.BaseHTTPRequestHandler):
     csv_data_ = csv_initialisation()
 
@@ -63,20 +75,31 @@ class JSONRequestHandler(http.server.BaseHTTPRequestHandler):
             self.send_response(100)
             self.end_headers()
             self.wfile.write("Status: Ok".encode('utf-8'))
+            print("Status check")
             return
 
         elif self.path != '/create_cards':
             self.send_response(404)
             self.end_headers()
             self.wfile.write("Error 404: Not Found".encode('utf-8'))
+            print("Error: 404")
             return
 
         content_length = int(self.headers['Content-Length'])
         post_data = self.rfile.read(content_length)
 
+        decoded_data = post_data.decode('utf-8')
+
+        if not response_check(decoded_data):
+            self.send_response(401)
+            self.end_headers()
+            self.wfile.write("Error 401: Bad Request".encode('utf-8'))
+            print("Error: 401")
+            return
+
         self._set_headers()
 
-        json_data = json.loads(post_data.decode('utf-8'))
+        json_data = json.loads(decoded_data)
         time_parse_s = perf_counter()
         page_text = parse_web_page(json_data['resource'])
 
@@ -100,7 +123,6 @@ class JSONRequestHandler(http.server.BaseHTTPRequestHandler):
         print(f"len: {test_len}")
 
         for item in response_data:
-            # Удаляем кавычки из строки в значении 'explanation'
             item['explanation'] = item['explanation'].strip('"')
 
         json_output = json.dumps(response_data, ensure_ascii=False, indent=4)
