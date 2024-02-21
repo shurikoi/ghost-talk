@@ -12,7 +12,7 @@ csv_file = fr'OPTED-Dictionary.csv'
 def csv_initialisation():
     print("initialisation csv data...")
     with open(csv_file, 'r', encoding='utf-8') as file:
-        csv_reader = csv.DictReader(file)
+        csv_reader = csv.DictReader(file, quotechar='~')
         data = list(csv_reader)
     print("Successful initialization of csv")
     return data
@@ -98,6 +98,10 @@ class JSONRequestHandler(http.server.BaseHTTPRequestHandler):
                 "explanation": definition
             })
         print(f"len: {test_len}")
+
+        for item in response_data:
+            # Удаляем кавычки из строки в значении 'explanation'
+            item['explanation'] = item['explanation'].strip('"')
 
         json_output = json.dumps(response_data, ensure_ascii=False, indent=4)
         self.wfile.write(json_output.encode('utf-8'))
