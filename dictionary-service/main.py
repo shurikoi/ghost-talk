@@ -11,20 +11,28 @@ csv_file = fr'OPTED-Dictionary.csv'
 
 def csv_initialisation():
     print("initialisation csv data...")
+
     with open(csv_file, 'r', encoding='utf-8') as file:
         csv_reader = csv.DictReader(file, quotechar='~')
         data = list(csv_reader)
+
     print("Successful initialization of csv")
     return data
 
 
-def generate_word_definition_mapping(csv_data: list, word_list: list) -> dict:
+def generate_word_definition_mapping(csv_data: list, word_list: list, amount: int) -> dict:
     word_definition_mapping = {}
+    encountered_words = set()
+
     for row in csv_data:
         word = row['Word']
-        if word in word_list:
+        if word in word_list and word not in encountered_words:
             definition = row['Definition']
             word_definition_mapping[word] = definition
+            encountered_words.add(word)
+            amount -= 1
+            if amount <= 0:
+                return word_definition_mapping
     return word_definition_mapping
 
 
@@ -46,8 +54,10 @@ def parse_web_page(url):
     except Exception as e:
         print(f"An error occurred: {e}")
         return None
-def response_check(data_to_check:str) -> bool:
-    list_to_check_keys = ['id', 'resource', 'partOfSpeech']
+
+
+def response_check(data_to_check: str) -> bool:
+    list_to_check_keys = ['id', 'resource', 'partOfSpeech', 'amountOfCards']
     list_to_check_part_of_speach = []
     try:
         data_to_check = json.loads(data_to_check)
@@ -60,6 +70,8 @@ def response_check(data_to_check:str) -> bool:
             return False
 
     return True
+
+
 class JSONRequestHandler(http.server.BaseHTTPRequestHandler):
     csv_data_ = csv_initialisation()
 
@@ -71,6 +83,7 @@ class JSONRequestHandler(http.server.BaseHTTPRequestHandler):
     def do_POST(self):
         s_t = perf_counter()
         print("Post resp start...")
+
         if self.path == 'status':
             self.send_response(100)
             self.end_headers()
@@ -100,18 +113,22 @@ class JSONRequestHandler(http.server.BaseHTTPRequestHandler):
         self._set_headers()
 
         json_data = json.loads(decoded_data)
+
+        amount_of_cards = json_data['amountOfCards']
+
         time_parse_s = perf_counter()
         page_text = parse_web_page(json_data['resource'])
-
         words = page_text.split()
         unique_words = set(words)
         filtered_list = [word.capitalize() for word in unique_words if is_word(word)]
         time_parse_e = perf_counter()
         print(f"parse time: {time_parse_e - time_parse_s} s")
+
         time_sapostication_s = perf_counter()
-        word_definition_mapping = generate_word_definition_mapping(self.csv_data_, filtered_list)
+        word_definition_mapping = generate_word_definition_mapping(self.csv_data_, filtered_list, amount_of_cards)
         time_sapostication_e = perf_counter()
         print(f"sapostication time: {time_sapostication_e - time_sapostication_s} s")
+
         response_data = []
         test_len = 0
         for word, definition in word_definition_mapping.items():
@@ -127,9 +144,10 @@ class JSONRequestHandler(http.server.BaseHTTPRequestHandler):
 
         json_output = json.dumps(response_data, ensure_ascii=False, indent=4)
         self.wfile.write(json_output.encode('utf-8'))
+
         print("Post resp end")
         e_t = perf_counter()
-        print(f"time: {e_t - s_t} s")
+        print(f"time of post: {e_t - s_t} s")
 
 
 def run(server_class=http.server.HTTPServer, handler_class=JSONRequestHandler, port=8000):

@@ -1,5 +1,6 @@
 {
   "id": 1,
   "resource": "https://en.wikipedia.org/wiki/API",
-  "partOfSpeech": "verb"
+  "partOfSpeech": "verb",
+  "amountOfCards": 10
 }
