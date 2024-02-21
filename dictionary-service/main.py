@@ -4,13 +4,12 @@ import json
 import re
 import time
 from urllib.request import urlopen
-
 from bs4 import BeautifulSoup
 
 csv_file = fr'OPTED-Dictionary.csv'
 
 
-def generate_word_definition_mapping(csv_file, word_list):
+def generate_word_definition_mapping(csv_file: str, word_list: list) -> dict:
     word_definition_mapping = {}
     with open(csv_file, 'r', encoding='utf-8') as file:
         csv_reader = csv.DictReader(file)
@@ -48,6 +47,12 @@ class JSONRequestHandler(http.server.BaseHTTPRequestHandler):
         self.end_headers()
 
     def do_POST(self):
+        if self.path != '/create_cards':
+            self.send_response(404)
+            self.end_headers()
+            self.wfile.write("Error 404: Not Found".encode('utf-8'))
+            return
+
         start = time.perf_counter()
         content_length = int(self.headers['Content-Length'])
         post_data = self.rfile.read(content_length)
@@ -64,9 +69,19 @@ class JSONRequestHandler(http.server.BaseHTTPRequestHandler):
         print(len(filtered_list))
 
         word_definition_mapping = generate_word_definition_mapping(csv_file, filtered_list)
-        json_output = json.dumps(word_definition_mapping, ensure_ascii=False, indent=4)
 
-        print(json_output)
+        # Создаем список словарей слово-определение
+        response_data = []
+        for word, definition in word_definition_mapping.items():
+            response_data.append({
+                "word": word,
+                "explanation": definition
+            })
+
+        # Преобразуем список в JSON и отправляем его
+        json_output = json.dumps(response_data, ensure_ascii=False, indent=4)
+        self.wfile.write(json_output.encode('utf-8'))
+
         end = time.perf_counter()
         print(end - start)
 
