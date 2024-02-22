@@ -20,13 +20,26 @@ def csv_initialisation():
     return data
 
 
-def generate_word_definition_mapping(csv_data: list, word_list: list, amount: int) -> dict:
+def partofspeech_convert(partofspeech: str) -> str:
+    if partofspeech == 'nouns':
+        return 'n.'
+    elif partofspeech == 'adjectives':
+        return 'a.'
+    elif partofspeech == 'verbs':
+        return 'v.'
+    elif partofspeech == 'adverbs':
+        return 'adv.'
+    else:
+        return 'error'
+
+
+def generate_word_definition_mapping(csv_data: list, word_list: list, amount: int, pospeech: str) -> dict:
     word_definition_mapping = {}
     encountered_words = set()
 
     for row in csv_data:
         word = row['Word']
-        if word in word_list and word not in encountered_words:
+        if word in word_list and word not in encountered_words and pospeech in row['POS']:
             definition = row['Definition']
             word_definition_mapping[word] = definition
             encountered_words.add(word)
@@ -53,12 +66,12 @@ def parse_web_page(url):
         return page_text
     except Exception as e:
         print(f"An error occurred: {e}")
-        return None
+        return False, e
 
 
 def response_check(data_to_check: str) -> bool:
     list_to_check_keys = ['id', 'resource', 'partOfSpeech', 'amountOfCards']
-    list_to_check_part_of_speach = []
+    list_to_check_part_of_speach = ["nouns", "adjectives", "verbs", "adverbs"]
     try:
         data_to_check = json.loads(data_to_check)
     except:
@@ -68,6 +81,8 @@ def response_check(data_to_check: str) -> bool:
             return False
         if data_to_check[key] == "":
             return False
+    if data_to_check['partOfSpeech'] not in list_to_check_part_of_speach:
+        return False
 
     return True
 
@@ -115,9 +130,16 @@ class JSONRequestHandler(http.server.BaseHTTPRequestHandler):
         json_data = json.loads(decoded_data)
 
         amount_of_cards = json_data['amountOfCards']
+        pospeech_ = partofspeech_convert(json_data['partOfSpeech'])
 
         time_parse_s = perf_counter()
         page_text = parse_web_page(json_data['resource'])
+        if isinstance(page_text, tuple):
+            self.send_response(500)
+            self.end_headers()
+            self.wfile.write(f"{page_text[1]}".encode('utf-8'))
+            print("Error: 500")
+            return
         words = page_text.split()
         unique_words = set(words)
         filtered_list = [word.capitalize() for word in unique_words if is_word(word)]
@@ -125,7 +147,8 @@ class JSONRequestHandler(http.server.BaseHTTPRequestHandler):
         print(f"parse time: {time_parse_e - time_parse_s} s")
 
         time_sapostication_s = perf_counter()
-        word_definition_mapping = generate_word_definition_mapping(self.csv_data_, filtered_list, amount_of_cards)
+        word_definition_mapping = generate_word_definition_mapping(self.csv_data_, filtered_list, amount_of_cards,
+                                                                   pospeech_)
         time_sapostication_e = perf_counter()
         print(f"sapostication time: {time_sapostication_e - time_sapostication_s} s")
 
