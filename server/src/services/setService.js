@@ -1,7 +1,7 @@
 import ApiError from "../exceptions/ApiError.js"
 import Set from "../models/Set.js"
 import { v4 as uuidv4 } from "uuid"
-import fetch from "node-fetch"
+import axios from "axios"
 
 export const serviceCreateSet = async (userId, title, cards) => {
   const link = uuidv4()
@@ -47,26 +47,25 @@ export const serviceDeleteSet = async (userId, setId, setUser) => {
 }
 
 // Maybe I will rewrite it all
-export const serviceCreateSetByLink = async (userId, title) => {
+export const serviceCreateSetByLink = async (id, title = "", resource, partOfSpeech) => {
   // To send ID request to Python endpoint 
   // TODO: In order not to generate twice, it makes sense to transfer this string to serviceCreateSet ?
-  const reqId = uuidv4()
+  // const reqId = uuidv4()
   
   // await serviceCreateSet(userId, title, data)
 
-  const pyResponse = await fetch("", {
-    method: "post",
-    headers: {
-      "Accept": "application/json",
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-      reqId,
+  const { data } = await axios.post(
+    "http://127.0.0.1:8000/create_cards",
+    {
+      id,
       resource,
       partOfSpeech
-    })
-  })
-  
-  const cards = await pyResponse.json()
-  console.log(cards)
+    },
+    {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  )
+  console.log(data)
 }

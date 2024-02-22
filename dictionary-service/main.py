@@ -6,7 +6,7 @@ import time
 from urllib.request import urlopen
 from bs4 import BeautifulSoup
 
-csv_file = fr'OPTED-Dictionary.csv'
+csv_file = fr'C:\myprojects\lexify\dictionary-service\OPTED-Dictionary.csv'
 
 
 def generate_word_definition_mapping(csv_file: str, word_list: list) -> dict:
