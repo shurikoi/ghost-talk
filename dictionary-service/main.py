@@ -2,7 +2,7 @@ import csv
 import http.server
 import json
 import re
-from urllib.request import urlopen
+from urllib.request import urlopen, Request
 from bs4 import BeautifulSoup
 from time import perf_counter
 
@@ -56,7 +56,8 @@ def is_word(s):
 # def create_response()
 def parse_web_page(url):
     try:
-        with urlopen(url) as response:
+        req = Request(url, headers={'User-Agent': 'Mozilla/5.0'})
+        with urlopen(req) as response:
             html = response.read()
 
         soup = BeautifulSoup(html, 'html.parser')
