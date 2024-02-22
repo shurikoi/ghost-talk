@@ -37,29 +37,30 @@ export const serviceDeleteSet = async (userId, setId, setUser) => {
   if (userId !== setUser) throw ApiError.UnauthorizedError()
 
   const set = await Set.deleteOne({
-    $and: [
-      {_id: setId},
-      {user: userId}
-    ]
+    $and: [{ _id: setId }, { user: userId }],
   })
 
   return set
 }
 
-// Maybe I will rewrite it all
-export const serviceCreateSetByLink = async (id, title = "", resource, partOfSpeech) => {
-  // To send ID request to Python endpoint 
+export const serviceCreateSetByLink = async (
+  id,
+  title = "",
+  resource,
+  partOfSpeech,
+  amountOfCards
+) => {
+  // To send ID request to Python endpoint
   // TODO: In order not to generate twice, it makes sense to transfer this string to serviceCreateSet ?
   // const reqId = uuidv4()
-  
-  // await serviceCreateSet(userId, title, data)
 
   const { data } = await axios.post(
     "http://127.0.0.1:8000/create_cards",
     {
       id,
       resource,
-      partOfSpeech
+      partOfSpeech,
+      amountOfCards,
     },
     {
       headers: {
@@ -67,5 +68,7 @@ export const serviceCreateSetByLink = async (id, title = "", resource, partOfSpe
       },
     }
   )
-  console.log(data)
+  if (!data) throw ApiError.FailedDependency("External service error")
+
+  return await serviceCreateSet(id, title, data)
 }
