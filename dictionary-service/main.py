@@ -134,7 +134,7 @@ class JSONRequestHandler(http.server.BaseHTTPRequestHandler):
         pospeech_ = partofspeech_convert(json_data['partOfSpeech'])
         typeContent = json_data['typeContent']
         words = json_data['resource']
-        id = json_data['id']
+        reqId = json_data['reqId']
 
         if typeContent == 'link':
             time_parse_s = perf_counter()
@@ -179,7 +179,7 @@ class JSONRequestHandler(http.server.BaseHTTPRequestHandler):
 
         for item in response_data:
             item['explanation'] = item['explanation'].strip('"')
-
+        response_data = {"resId": reqId, 'cards': response_data}
         json_output = json.dumps(response_data, ensure_ascii=False, indent=4)
         self.wfile.write(json_output.encode('utf-8'))
 
