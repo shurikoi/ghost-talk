@@ -1,4 +1,10 @@
-import { serviceCreateSet, serviceGetSet, serviceGetAllSets, serviceDeleteSet, serviceCreateSetByLink } from "../services/setService.js"
+import {
+  serviceCreateSet,
+  serviceGetSet,
+  serviceGetAllSets,
+  serviceDeleteSet,
+  serviceCreateSetByLink,
+} from "../services/setService.js"
 
 export const createSet = async (req, res, next) => {
   try {
@@ -49,8 +55,20 @@ export const createSetByLink = async (req, res, next) => {
     // const { id } = req.user
 
     // Imitating a real body request
-    const [ id, title, resource, partOfSpeech, amountOfCards ] = ["65bf85c90c70f8aea692495c", "Smth", "https://www.naturalnavigator.com/find-your-way-using/city/", "verb", 10]
-    const response = await serviceCreateSetByLink(id, title, resource, partOfSpeech)
+    const [title, typeContent, resource, partOfSpeech, amountOfCards] = [
+      "Smth",
+      "link",
+      "https://www.naturalnavigator.com/find-your-way-using/city/",
+      "verbs",
+      10,
+    ]
+    const response = await serviceCreateSetByLink(
+      title,
+      typeContent,
+      resource,
+      partOfSpeech,
+      amountOfCards
+    )
     return res.json(response)
   } catch (e) {
     next(e)

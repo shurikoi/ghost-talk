@@ -3,8 +3,9 @@ import Set from "../models/Set.js"
 import { v4 as uuidv4 } from "uuid"
 import axios from "axios"
 
-export const serviceCreateSet = async (userId, title, cards) => {
-  const link = uuidv4()
+export const serviceCreateSet = async (userId, title, cards, link) => {
+  if (!link) link = uuidv4()
+
   const set = await Set.insertMany([
     {
       user: userId,
@@ -44,20 +45,27 @@ export const serviceDeleteSet = async (userId, setId, setUser) => {
 }
 
 export const serviceCreateSetByLink = async (
-  id,
-  title = "",
+  title,
+  typeContent,
   resource,
   partOfSpeech,
   amountOfCards
 ) => {
-  // To send ID request to Python endpoint
-  // TODO: In order not to generate twice, it makes sense to transfer this string to serviceCreateSet ?
-  // const reqId = uuidv4()
+  // To send Id of request to Python endpoint
+  // TODO: In order not to generate twice, it makes sense to transfer this Id string to serviceCreateSet ?
+  const reqId = uuidv4()
+  console.log(title,
+    typeContent,
+    resource,
+    partOfSpeech,
+    amountOfCards,
+    reqId)
 
   const { data } = await axios.post(
     "http://127.0.0.1:8000/create_cards",
     {
-      id,
+      id: reqId,
+      typeContent,
       resource,
       partOfSpeech,
       amountOfCards,
@@ -70,5 +78,5 @@ export const serviceCreateSetByLink = async (
   )
   if (!data) throw ApiError.FailedDependency("External service error")
 
-  return await serviceCreateSet(id, title, data)
+  return await serviceCreateSet(id, title, data, reqId)
 }
