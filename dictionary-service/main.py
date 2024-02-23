@@ -73,15 +73,19 @@ def parse_web_page(url):
 def response_check(data_to_check: str) -> bool:
     list_to_check_keys = ['reqId', 'typeContent', 'resource', 'partOfSpeech', 'amountOfCards']
     list_to_check_part_of_speach = ["nouns", "adjectives", "verbs", "adverbs"]
+
     try:
         data_to_check = json.loads(data_to_check)
-    except:
+    except Exception as e:
+        print(f"An error occurred: {e}")
         return False
+
     for key in list_to_check_keys:
         if key not in data_to_check:
             return False
         if data_to_check[key] == "":
             return False
+
     if data_to_check['partOfSpeech'] not in list_to_check_part_of_speach:
         return False
 
@@ -132,11 +136,10 @@ class JSONRequestHandler(http.server.BaseHTTPRequestHandler):
 
         amount_of_cards = json_data['amountOfCards']
         pospeech_ = partofspeech_convert(json_data['partOfSpeech'])
-        typeContent = json_data['typeContent']
-        words = json_data['resource']
-        reqId = json_data['reqId']
+        typecontent = json_data['typeContent']
+        reqid = json_data['reqId']
 
-        if typeContent == 'link':
+        if typecontent == 'link':
             time_parse_s = perf_counter()
             page_text = parse_web_page(json_data['resource'])
             if isinstance(page_text, tuple):
@@ -149,7 +152,7 @@ class JSONRequestHandler(http.server.BaseHTTPRequestHandler):
             time_parse_e = perf_counter()
             print(f"parse time: {time_parse_e - time_parse_s} s")
 
-        elif typeContent == 'text':
+        elif typecontent == 'text':
             words = json_data['resource']
             if not isinstance(words, list):
                 self.send_response(401)
@@ -157,6 +160,12 @@ class JSONRequestHandler(http.server.BaseHTTPRequestHandler):
                 self.wfile.write("Error 401: Bad Request".encode('utf-8'))
                 print("Error: 401")
                 return 'error 401'
+        else:
+            self.send_response(401)
+            self.end_headers()
+            self.wfile.write("Error 401: Bad Request".encode('utf-8'))
+            print("Error: 401")
+            return 'error 401'
 
         unique_words = set(words)
         filtered_list = [word.capitalize() for word in unique_words if is_word(word)]
@@ -179,7 +188,7 @@ class JSONRequestHandler(http.server.BaseHTTPRequestHandler):
 
         for item in response_data:
             item['explanation'] = item['explanation'].strip('"')
-        response_data = {"resId": reqId, 'cards': response_data}
+        response_data = {"resId": reqid, 'cards': response_data}
         json_output = json.dumps(response_data, ensure_ascii=False, indent=4)
         self.wfile.write(json_output.encode('utf-8'))
 
