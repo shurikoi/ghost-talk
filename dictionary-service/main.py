@@ -71,7 +71,7 @@ def parse_web_page(url):
 
 
 def response_check(data_to_check: str) -> bool:
-    list_to_check_keys = ['id', 'resource', 'partOfSpeech', 'amountOfCards']
+    list_to_check_keys = ['reqId', 'typeContent', 'resource', 'partOfSpeech', 'amountOfCards']
     list_to_check_part_of_speach = ["nouns", "adjectives", "verbs", "adverbs"]
     try:
         data_to_check = json.loads(data_to_check)
@@ -124,7 +124,7 @@ class JSONRequestHandler(http.server.BaseHTTPRequestHandler):
             self.end_headers()
             self.wfile.write("Error 401: Bad Request".encode('utf-8'))
             print("Error: 401")
-            return
+            return 'error 401'
 
         self._set_headers()
 
@@ -132,20 +132,34 @@ class JSONRequestHandler(http.server.BaseHTTPRequestHandler):
 
         amount_of_cards = json_data['amountOfCards']
         pospeech_ = partofspeech_convert(json_data['partOfSpeech'])
+        typeContent = json_data['typeContent']
+        words = json_data['resource']
+        id = json_data['id']
 
-        time_parse_s = perf_counter()
-        page_text = parse_web_page(json_data['resource'])
-        if isinstance(page_text, tuple):
-            self.send_response(500)
-            self.end_headers()
-            self.wfile.write(f"{page_text[1]}".encode('utf-8'))
-            print("Error: 500")
-            return
-        words = page_text.split()
+        if typeContent == 'link':
+            time_parse_s = perf_counter()
+            page_text = parse_web_page(json_data['resource'])
+            if isinstance(page_text, tuple):
+                self.send_response(500)
+                self.end_headers()
+                self.wfile.write(f"{page_text[1]}".encode('utf-8'))
+                print("Error: 500")
+                return
+            words = page_text.split()
+            time_parse_e = perf_counter()
+            print(f"parse time: {time_parse_e - time_parse_s} s")
+
+        elif typeContent == 'text':
+            words = json_data['resource']
+            if not isinstance(words, list):
+                self.send_response(401)
+                self.end_headers()
+                self.wfile.write("Error 401: Bad Request".encode('utf-8'))
+                print("Error: 401")
+                return 'error 401'
+
         unique_words = set(words)
         filtered_list = [word.capitalize() for word in unique_words if is_word(word)]
-        time_parse_e = perf_counter()
-        print(f"parse time: {time_parse_e - time_parse_s} s")
 
         time_sapostication_s = perf_counter()
         word_definition_mapping = generate_word_definition_mapping(self.csv_data_, filtered_list, amount_of_cards,
