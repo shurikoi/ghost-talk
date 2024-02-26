@@ -46,8 +46,9 @@ export default function ManageSet({ setTitle, setId, setUser }) {
             setValue={setConfirm}
             isFilled={isFilled}
             handleSubmit={handleSubmit}
+            colorScheme={"red"}
           />
-          <BasicSubmitButton onClick={handleSubmit} isFilled={isFilled} />
+          <BasicSubmitButton onClick={handleSubmit} isFilled={isFilled} colorScheme={"red"} />
         </div>
       </ModalMenu>
     </>

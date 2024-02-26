@@ -1,7 +1,6 @@
 .submitBtn {
     height: 52px;
     width: 100%;
-    background-color: #1455ff;
     color: rgb(252, 252, 252);
     border: none;
     border-radius: 18px;
@@ -11,6 +10,18 @@
     font-size: medium;
 }
 
-.filled {
+.default {
     background-color: #5383ff;
+}
+
+.filled-default {
+    background-color: #1455ff;
+}
+
+.red {
+    background-color: #ff8b8b;
+}
+
+.filled-red {
+    background-color: #ff4b4b;
 }

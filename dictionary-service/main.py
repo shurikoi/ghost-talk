@@ -134,7 +134,7 @@ class JSONRequestHandler(http.server.BaseHTTPRequestHandler):
         pospeech_ = partofspeech_convert(json_data['partOfSpeech'])
         typeContent = json_data['typeContent']
         words = json_data['resource']
-        id = json_data['id']
+        reqId = json_data['reqId']
 
         if typeContent == 'link':
             time_parse_s = perf_counter()

@@ -55,14 +55,16 @@ export const createSetByLink = async (req, res, next) => {
     // const { id } = req.user
 
     // Imitating a real body request
-    const [title, typeContent, resource, partOfSpeech, amountOfCards] = [
+    const [userId, title, typeContent, resource, partOfSpeech, amountOfCards] = [
+      "65bf85c90c70f8aea692495c",
       "Smth",
-      "link",
-      "https://www.naturalnavigator.com/find-your-way-using/city/",
-      "verbs",
+      "text",
+      ["card", "map", "notebook"],
+      "nouns",
       10,
     ]
     const response = await serviceCreateSetByLink(
+      userId,
       title,
       typeContent,
       resource,
