@@ -6,11 +6,28 @@
     font-weight: 500;
     padding: 1rem 1rem;
     box-sizing: border-box;
-    border: 2px solid rgb(200, 200, 200);
+    border: 2px solid ;
     border-radius: 18px;
 }
 
 .emailInput:focus {
-    border: 2px solid rgb(31, 31, 31);
+    border: 2px solid ;
     transition: border 0.5s;
+}
+
+
+.default {
+    border-color: rgb(200, 200, 200);
+}
+
+.default:focus {
+    border-color: rgb(31, 31, 31);
+}
+
+.red {
+    border-color: rgb(255, 172, 172);
+}
+
+.red:focus {
+    border-color: rgb(255, 0, 0);
 }

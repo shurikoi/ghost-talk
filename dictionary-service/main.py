@@ -6,7 +6,7 @@ from urllib.request import urlopen, Request
 from bs4 import BeautifulSoup
 from time import perf_counter
 
-csv_file = fr'OPTED-Dictionary.csv'
+csv_file = fr'C:\myprojects\lexify\dictionary-service\OPTED-Dictionary.csv'
 
 
 def csv_initialisation():
@@ -138,6 +138,9 @@ class JSONRequestHandler(http.server.BaseHTTPRequestHandler):
         pospeech_ = partofspeech_convert(json_data['partOfSpeech'])
         typecontent = json_data['typeContent']
         reqid = json_data['reqId']
+        typeContent = json_data['typeContent']
+        words = json_data['resource']
+        reqId = json_data['reqId']
 
         if typecontent == 'link':
             time_parse_s = perf_counter()
