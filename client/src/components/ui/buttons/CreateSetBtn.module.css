@@ -3,7 +3,7 @@
     width: auto;
     justify-content: space-between;
     align-items: center;
-    padding: 2rem 3rem;
+    padding: 3rem 3rem;
     background-color: #a0beff;
     border: 3px white solid;
     border-radius: 10px;
@@ -19,7 +19,7 @@
   .leftContainer {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 1rem;
   }
   
   .createTitle {
@@ -29,8 +29,9 @@
   }
   
   .createDescription {
-    font-family: e-UkraineHead;
+    font-family: e-Ukraine;
     font-weight: 300;
+    font-style: italic;
     /* font-size: medium; */
   }
   

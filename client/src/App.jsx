@@ -10,6 +10,7 @@ import ViewSet from "./components/authorized/ViewSet"
 import Loader from "./components/ui/Loader"
 import { Toaster } from "react-hot-toast"
 import NotFound from "./components/authorized/NotFound"
+import CreateSetBySource from "./components/authorized/CreateSetBySource"
 
 function App() {
   const { authStore } = useContext(Context)
@@ -38,6 +39,7 @@ function App() {
            <>
             <Route path="/" element={<Main />}></Route>
             <Route path="/create-set" element={<Main><CreateSet /></Main>}></Route>
+            <Route path="/create-set-by-source" element={<Main><CreateSetBySource /></Main>}></Route>
             <Route path="/set/:link" element={<Main><ViewSet /></Main>}></Route>
             <Route path="*" element={<Main><NotFound /></Main>}></Route>
            </>
