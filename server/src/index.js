@@ -1,4 +1,5 @@
 import express from "express"
+import 'express-async-errors'
 import connection from "./utils/connection.js"
 import cookieParser from "cookie-parser"
 import router from "./router/index.js"
@@ -22,5 +23,6 @@ app.use("/api", router)
 app.use(errorMiddleware)
 
 connection().then(() => {
+  console.log(`Server is running on ${PORT}`)
   app.listen(PORT)
 })

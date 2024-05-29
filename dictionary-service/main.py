@@ -6,7 +6,7 @@ from urllib.request import urlopen, Request
 from bs4 import BeautifulSoup
 from time import perf_counter
 
-csv_file = fr'C:\myprojects\lexify\dictionary-service\OPTED-Dictionary.csv'
+csv_file = fr'/OPTED-Dictionary.csv'
 
 
 def csv_initialisation():
@@ -71,7 +71,7 @@ def parse_web_page(url):
 
 
 def response_check(data_to_check: str) -> bool:
-    list_to_check_keys = ['reqId', 'typeContent', 'resource', 'partOfSpeech', 'amountOfCards']
+    list_to_check_keys = ['reqId', 'typeContent', 'source', 'partOfSpeech', 'amountOfCards']
     list_to_check_part_of_speach = ["nouns", "adjectives", "verbs", "adverbs"]
 
     try:
@@ -139,12 +139,12 @@ class JSONRequestHandler(http.server.BaseHTTPRequestHandler):
         typecontent = json_data['typeContent']
         reqid = json_data['reqId']
         typeContent = json_data['typeContent']
-        words = json_data['resource']
+        words = json_data['source']
         reqId = json_data['reqId']
 
         if typecontent == 'link':
             time_parse_s = perf_counter()
-            page_text = parse_web_page(json_data['resource'])
+            page_text = parse_web_page(json_data['source'])
             if isinstance(page_text, tuple):
                 self.send_response(500)
                 self.end_headers()
@@ -156,7 +156,7 @@ class JSONRequestHandler(http.server.BaseHTTPRequestHandler):
             print(f"parse time: {time_parse_e - time_parse_s} s")
 
         elif typecontent == 'text':
-            words = json_data['resource']
+            words = json_data['source']
             if not isinstance(words, list):
                 self.send_response(401)
                 self.end_headers()

@@ -44,7 +44,7 @@ export const serviceDeleteSet = async (userId, setId, setUser) => {
   return set
 }
 
-export const serviceCreateSetByLink = async (
+export const serviceCreateSetBySource = async (
   userId,
   title,
   typeContent,
@@ -73,5 +73,5 @@ export const serviceCreateSetByLink = async (
   )
   if (!data) throw ApiError.FailedDependency("External service error")
 
-  return await serviceCreateSet(userId, title, data, reqId)
+  return await serviceCreateSet(userId, title, data.cards, reqId)
 }
