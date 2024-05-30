@@ -1,15 +1,25 @@
 import { Link, useNavigate } from 'react-router-dom'
 import BackBtn from '../ui/buttons/BackBtn'
-import styles from './CreateSet.module.css'
-import { useContext, useState } from 'react'
+import CreateSetTitle from '../ui/createSetTitle'
+import styles from './CreateSetBySource.module.css'
+import { useContext, useRef, useState } from 'react'
 import { AuthorizedContext } from '../../contexts/AuthorizedContext'
 import CreateBtn from '../ui/buttons/CreateBtn'
 import toast from 'react-hot-toast'
+import TypeContent from './TypeContent'
 
 export default function CreateSetBySource() {
   const { setStore } = useContext(AuthorizedContext)
-  const [title, setTitle] = useState('')
+  //   const [title, setTitle] = useState('')
+  const title = useRef('')
   const navigate = useNavigate()
+
+  //   const options = [
+  //     { value: 'nouns', label: 'nouns' },
+  //     { value: 'adjectives', label: 'adjectives' },
+  //     { value: 'verbs', label: 'verbs' },
+  //     { value: 'adverbs', label: 'adverbs' },
+  //   ]
 
   const handleSubmit = async () => {
     setStore.setTitle(title)
@@ -26,18 +36,15 @@ export default function CreateSetBySource() {
     <div className={styles.main}>
       <div className={styles.topWrapper}>
         <BackBtn />
-        <div className={styles.titleWrapper}>
-          <div className={styles.title}>Create a new learning set by source</div>
-          <div className={styles.free}>public</div>
-        </div>
+        <CreateSetTitle title="Create a new learning set by source" />
       </div>
       <input
         type="text"
         className={`${styles.setTitle} ${styles.text}`}
         placeholder={`Enter the title, for example "German - City"`}
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
+        ref={title}
       />
+      <TypeContent />
       <div className={styles.submitWrapper}>
         <CreateBtn onClick={handleSubmit} />
       </div>

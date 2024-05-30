@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom'
 import styles from './StartPage.module.css'
 import CreateSetBtn from '../ui/buttons/CreateSetBtn'
-import AllSets from './AllSets'
 import SetsSections from './SetsSections'
 
 export default function StartPage() {
@@ -18,7 +17,7 @@ export default function StartPage() {
         <Link to="/create-set-by-source" className={`link ${styles.link}`}>
           <CreateSetBtn
             title="Create set by source"
-            description="Just by providing us text or link"
+            description="Just provide us text or link"
             imageName="chip"
           />
         </Link>

@@ -1,94 +1,51 @@
 :root {
     --input-color: #2e3856;
-  }
-  
-  .main {
+}
+
+.main {
     display: flex;
     flex-direction: column;
     color: white;
     gap: 2rem;
-  }
-  
-  .topWrapper {
+}
+
+.topWrapper {
     display: flex;
     flex-direction: column;
     gap: 1.2rem;
-  }
-  
-  .titleWrapper {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .title {
-    font-family: e-Ukraine;
-    font-weight: 500;
-    font-size: x-large;
-  }
-  
-  .free {
-    font-family: e-Ukraine;
-    font-weight: 300;
-    font-size: small;
-    color: #ffcd1f;
-  }
-  
-  .setTitle {
+}
+
+.setTitle {
     background-color: var(--input-color);
     padding: 1rem;
     border-radius: 10px;
     width: auto;
     border: none;
     outline: none;
-  }
-  
-  .setTitle::placeholder {
+}
+
+.setTitle::placeholder {
     color: #bcbcbc;
-  }
-  
-  .setTitle:hover {
+}
+
+.setTitle:hover {
     --input-color: #323d5b;
-  }
-  
-  .cards {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
-  
-  .text {
+}
+
+.text {
     font-family: e-Ukraine;
     font-weight: 500;
     font-size: medium;
     color: white;
-  }
-  
-  .newCard {
-    background-color: #2e3856;
-    color: rgb(179, 179, 210);
-    border: none;
-    border-radius: 7px;
-    font-family: e-Ukraine;
-    cursor: pointer;
-    padding: 1rem 0rem;
-    transition: 0.3s;
-  }
-  
-  .newCard:hover {
-      color: #daaf17;
-  }
-  
-  @media only screen and (max-width: 700px) {
-      .titleWrapper {
-          flex-direction: column;
-      }
-      .topWrapper {
-          align-items: center;
-      }
-  }
-  
-  .submitWrapper {
+}
+
+@media only screen and (max-width: 700px) {
+    .topWrapper {
+        align-items: center;
+    }
+}
+
+.submitWrapper {
     display: flex;
     justify-content: flex-end;
-  }
+}

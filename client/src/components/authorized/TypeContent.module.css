@@ -1,0 +1,37 @@
+.buttonWrapper {
+    display: flex;
+    gap: 2px;
+}
+
+.selectTypeBtn {
+    flex: 1;
+    background-color: var(--input-color);
+    color: white;
+    border: none;
+    padding: 0.5rem;
+    cursor: pointer;
+    text-align: center;
+}
+
+.left {
+    border-radius: 10px 0px 0px 10px;
+}
+
+.right {
+    border-radius: 0px 10px 10px 0px;
+
+}
+
+.selectTypeBtn:hover {
+    background-color: #323d5b;
+}
+
+.text {
+    font-family: e-Ukraine;
+    font-weight: 500;
+    font-size: medium;
+    color: white;
+}
+/* .radioBtn {
+    appearance: none;
+} */
