@@ -5,19 +5,20 @@ export default function TypeContent() {
         <div className={`${styles.buttonWrapper}`}>
         <label
           htmlFor="link"
-          className={`${styles.text} ${styles.selectTypeBtn} ${styles.left}`}
+          className={`${styles.text} ${styles.inputWrapper} ${styles.left}`}
         >
           <input
             type="radio"
             name="typeContent"
             id="link"
             className={`${styles.radioBtn} `}
+            checked
           />
           link
         </label>
         <label
           htmlFor="text"
-          className={`${styles.text} ${styles.selectTypeBtn} ${styles.right}`}
+          className={`${styles.text} ${styles.inputWrapper} ${styles.right}`}
         >
           <input
             type="radio"
