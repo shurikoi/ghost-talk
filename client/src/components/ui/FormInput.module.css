@@ -1,0 +1,26 @@
+:root {
+    --input-color: #2e3856;
+}
+
+.setTitle {
+    background-color: var(--input-color);
+    padding: 1rem;
+    border-radius: 10px;
+    outline: none;
+    border: none;
+}
+
+.setTitle::placeholder {
+    color: #bcbcbc;
+}
+
+.setTitle:hover {
+    --input-color: #323d5b;
+}
+
+.text {
+    font-family: e-Ukraine;
+    font-weight: 500;
+    font-size: medium;
+    color: white;
+}

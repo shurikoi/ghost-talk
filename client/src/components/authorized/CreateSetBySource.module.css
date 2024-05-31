@@ -1,7 +1,3 @@
-:root {
-    --input-color: #2e3856;
-}
-
 .main {
     display: flex;
     flex-direction: column;
@@ -15,30 +11,6 @@
     gap: 1.2rem;
 }
 
-.setTitle {
-    background-color: var(--input-color);
-    padding: 1rem;
-    border-radius: 10px;
-    width: auto;
-    border: none;
-    outline: none;
-}
-
-.setTitle::placeholder {
-    color: #bcbcbc;
-}
-
-.setTitle:hover {
-    --input-color: #323d5b;
-}
-
-.text {
-    font-family: e-Ukraine;
-    font-weight: 500;
-    font-size: medium;
-    color: white;
-}
-
 @media only screen and (max-width: 700px) {
     .topWrapper {
         align-items: center;
@@ -48,4 +20,46 @@
 .submitWrapper {
     display: flex;
     justify-content: flex-end;
+}
+
+/* .inputWrapper {
+    flex: 1;
+    background-color: #2e3856;
+    color: white;
+    border: none;
+    padding: 0.5rem;
+    cursor: pointer;
+    text-align: center;
+    border-radius: 10px;
+} */
+
+.typeContentWrapper {
+    padding: 10px;
+    /* background-color: #1d2d4c; */
+    background-color: #2e3856;
+    border-radius: 20px;
+}
+
+.detailsContainer {
+    display: flex;
+    gap: 0.8rem;
+}
+
+.detail {
+    flex: 1;
+    background-color: #2e3856;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 10px;
+    padding: 2rem;
+}
+
+.detail:hover {
+    background-color: #323d5b;
+}
+
+.description {
+    font-family: e-UkraineHead;
+    font-size: small;
+    text-transform: uppercase;
 }

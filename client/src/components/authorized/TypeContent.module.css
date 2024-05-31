@@ -1,29 +1,27 @@
 .buttonWrapper {
     display: flex;
-    gap: 2px;
+    gap: 0.8rem;
 }
 
 .inputWrapper {
     flex: 1;
-    background-color: var(--input-color);
-    color: white;
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    align-items: center;
+    background-color: #48557c;
     border: none;
     padding: 0.5rem;
     cursor: pointer;
-    text-align: center;
+    border-radius: 10px;
+}
+
+.inputWrapper > img {
+    width: 25px;
 }
 
 .inputWrapper:hover {
-    background-color: #323d5b;
-}
-
-.left {
-    border-radius: 10px 0px 0px 10px;
-}
-
-.right {
-    border-radius: 0px 10px 10px 0px;
-
+    background-color: #5c688d;
 }
 
 .text {
@@ -39,5 +37,22 @@
 
 .inputWrapper:has(.radioBtn:checked) {
     background-color: #616f96;
-    box-shadow: 0px 0px 5px #8da2dc;
+    /* box-shadow: 0px 0px 5px #8da2dc; */
+}
+
+.sourceContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.formInputWrapper {
+    display: flex;
+    border: 1.5px solid #616f96;
+    border-radius: 12px;
+    padding: 2px;
+}
+
+.formInput {
+    flex: 1;
 }
