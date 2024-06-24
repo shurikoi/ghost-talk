@@ -6,7 +6,7 @@ from urllib.request import urlopen, Request
 from bs4 import BeautifulSoup
 from time import perf_counter
 
-csv_file = fr'/OPTED-Dictionary.csv'
+csv_file = fr'/Users/olek/Documents/myprojects/lexify/dictionary-service/OPTED-Dictionary.csv'
 
 
 def csv_initialisation():

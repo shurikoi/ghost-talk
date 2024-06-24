@@ -1,6 +1,6 @@
 import { useContext, useState } from "react"
 import { AuthorizedContext } from "../../contexts/AuthorizedContext"
-import ModalMenu from "../ui/ModalMenu"
+import Modal from "../ui/Modal"
 import BasicSubmitButton from "../ui/buttons/BasicSubmitButton"
 import DeleteBtn from "../ui/buttons/DeleteBtn"
 import { useNavigate } from "react-router-dom"
@@ -29,7 +29,7 @@ export default function ManageSet({ setTitle, setId, setUser }) {
   return (
     <>
       <DeleteBtn />
-      <ModalMenu>
+      <Modal>
         <div className={styles.wrapper}>
           <BackArrowIcon
             onClick={() => {
@@ -50,7 +50,7 @@ export default function ManageSet({ setTitle, setId, setUser }) {
           />
           <BasicSubmitButton onClick={handleSubmit} isFilled={isFilled} colorScheme={"red"} />
         </div>
-      </ModalMenu>
+      </Modal>
     </>
   )
 }

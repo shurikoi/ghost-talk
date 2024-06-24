@@ -5,7 +5,7 @@ import SignIn from "./SignIn"
 import SignUp from "./SignUp"
 import { observer } from "mobx-react-lite"
 import { CSSTransition, SwitchTransition } from "react-transition-group"
-import ModalMenu from "../ui/ModalMenu"
+import Modal from "../ui/Modal"
 
 function AuthForm() {
   const [currentState, setCurrentState] = useState("default")
@@ -17,7 +17,7 @@ function AuthForm() {
   }
 
   return (
-    <ModalMenu>
+    <Modal>
       <SwitchTransition mode={"out-in"}>
           <CSSTransition
             key={currentState}
@@ -34,7 +34,7 @@ function AuthForm() {
             </div>
           </CSSTransition>
         </SwitchTransition>
-    </ModalMenu>
+    </Modal>
   )
 }
 

@@ -13,6 +13,6 @@ export default function FormInput({
   }
 
   return (
-    type === 'textarea' ? <textarea {...tagProperties} /> : <input type="text" {...tagProperties} />
+    type === 'textarea' ? <textarea rows="8" {...tagProperties} /> : <input type="text" {...tagProperties} />
   )
 }

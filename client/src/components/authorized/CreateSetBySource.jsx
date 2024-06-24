@@ -8,29 +8,24 @@ import CreateBtn from '../ui/buttons/CreateBtn'
 import toast from 'react-hot-toast'
 import TypeContent from './TypeContent'
 import FormInput from '../ui/FormInput'
+import Modal from './Modal'
+import { observer } from 'mobx-react-lite'
 
-export default function CreateSetBySource() {
+function CreateSetBySource() {
   const { setStore } = useContext(AuthorizedContext)
   //   const [title, setTitle] = useState('')
   const title = useRef('')
-  const navigate = useNavigate()
-
-  //   const options = [
-  //     { value: 'nouns', label: 'nouns' },
-  //     { value: 'adjectives', label: 'adjectives' },
-  //     { value: 'verbs', label: 'verbs' },
-  //     { value: 'adverbs', label: 'adverbs' },
-  //   ]
+  const options = ['nouns', 'adjectives', 'verbs', 'adverbs']
 
   const handleSubmit = async () => {
-    setStore.setTitle(title)
-    const response = await setStore.createSet()
-    if (!response) {
-      toast.error('Something went wrong :(')
-      return
-    }
-    navigate(`/set/${response.link}`)
-    toast.success('Hooray!')
+    // setStore.setTitle(title)
+    // const response = await setStore.createSet()
+    // if (!response) {
+    //   toast.error('Something went wrong :(')
+    //   return
+    // }
+    // navigate(`/set/${response.link}`)
+    // toast.success('Hooray!')
   }
 
   return (
@@ -47,10 +42,13 @@ export default function CreateSetBySource() {
         <TypeContent />
       </div>
       <div className={styles.detailsContainer}>
-        <div className={`${styles.speechPartWrapper} ${styles.detail}`}>
+        <div className={`${styles.detail}`}>
           <div className={styles.description}>Part of Speech</div>
+          <Modal open={true} onClose={() => console.log("MODAL CLICK")}>
+            Add modal form here 
+          </Modal>
         </div>
-        <div className={`${styles.cardAmountWrapper} ${styles.detail}`}>
+        <div className={`${styles.detail}`}>
           <div className={styles.description}>Amount of Cards</div>
         </div>
       </div>
@@ -60,3 +58,5 @@ export default function CreateSetBySource() {
     </div>
   )
 }
+
+export default observer(CreateSetBySource)
