@@ -8,7 +8,6 @@ import CreateBtn from '../ui/buttons/CreateBtn'
 import toast from 'react-hot-toast'
 import TypeContent from './TypeContent'
 import FormInput from '../ui/FormInput'
-import Modal from './Modal'
 import { observer } from 'mobx-react-lite'
 
 function CreateSetBySource() {
@@ -44,9 +43,6 @@ function CreateSetBySource() {
       <div className={styles.detailsContainer}>
         <div className={`${styles.detail}`}>
           <div className={styles.description}>Part of Speech</div>
-          <Modal open={true} onClose={() => console.log("MODAL CLICK")}>
-            Add modal form here 
-          </Modal>
         </div>
         <div className={`${styles.detail}`}>
           <div className={styles.description}>Amount of Cards</div>
