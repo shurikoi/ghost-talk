@@ -6,6 +6,11 @@ export default {
   ],
   theme: {
     extend: {},
+    fontFamily: {
+      'eUkraine': 'e-Ukraine',
+      'eUkraineHead': 'e-UkraineHead',
+      'cosen': 'Cosen',
+    }
   },
   plugins: [],
 }

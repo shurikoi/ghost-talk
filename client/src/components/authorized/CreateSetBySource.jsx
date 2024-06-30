@@ -16,7 +16,6 @@ import CreateSetModal from './CreateSetModal'
 function CreateSetBySource() {
   const { setStore } = useContext(AuthorizedContext)
     const [title, setTitle] = useState('')
-  const options = ['nouns', 'adjectives', 'verbs', 'adverbs']
   const { modalMenuStore } = useContext(FormModalContext)
 
   const handleSubmit = async () => {
