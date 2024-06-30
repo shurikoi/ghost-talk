@@ -1,7 +1,8 @@
 import styles from './FormInput.module.css'
 
 export default function FormInput({
-  ref,
+  value,
+  setValue,
   placeholder,
   className,
   type = 'input',
@@ -9,7 +10,8 @@ export default function FormInput({
   const tagProperties = {
     className: `${styles.setTitle} ${styles.text} ${className}`,
     placeholder,
-    ref,
+    value,
+    onChange: (e) => setValue(e.target.value),
   }
 
   return (

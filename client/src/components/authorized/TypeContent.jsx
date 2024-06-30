@@ -6,7 +6,7 @@ import text from '/images/text.png'
 
 export default function TypeContent() {
   const [typeOfContent, setTypeOfContent] = useState('link')
-  const source = useRef('')
+  const [ source, setSource ] = useState('')
 
   const handleOptionChange = (element) => {
     console.log(element.target.value)
@@ -49,7 +49,8 @@ export default function TypeContent() {
       </div>
       <div className={styles.formInputWrapper}>
       <FormInput
-          ref={source}
+          value={source}
+          setValue={setSource}
           placeholder={'Place your link here'}
           className={styles.formInput}
           type={typeOfContent === "text" && "textarea"}

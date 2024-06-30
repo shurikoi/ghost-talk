@@ -9,12 +9,15 @@ import toast from 'react-hot-toast'
 import TypeContent from './TypeContent'
 import FormInput from '../ui/FormInput'
 import { observer } from 'mobx-react-lite'
+import Modal from '../ui/Modal'
+import { FormModalContext } from '../../contexts/FormModalContext'
+import CreateSetModal from './CreateSetModal'
 
 function CreateSetBySource() {
   const { setStore } = useContext(AuthorizedContext)
-  //   const [title, setTitle] = useState('')
-  const title = useRef('')
+    const [title, setTitle] = useState('')
   const options = ['nouns', 'adjectives', 'verbs', 'adverbs']
+  const { modalMenuStore } = useContext(FormModalContext)
 
   const handleSubmit = async () => {
     // setStore.setTitle(title)
@@ -27,6 +30,10 @@ function CreateSetBySource() {
     // toast.success('Hooray!')
   }
 
+  const handleModal = () => {
+    modalMenuStore.addClass()
+  }
+
   return (
     <div className={styles.main}>
       <div className={styles.topWrapper}>
@@ -34,7 +41,8 @@ function CreateSetBySource() {
         <CreateSetTitle title="Create a new learning set by source" />
       </div>
       <FormInput
-        ref={title}
+        value={title}
+        setValue={setTitle}
         placeholder={`Enter the title, for example "German - City"`}
       />
       <div className={styles.typeContentWrapper}>
@@ -42,7 +50,10 @@ function CreateSetBySource() {
       </div>
       <div className={styles.detailsContainer}>
         <div className={`${styles.detail}`}>
-          <div className={styles.description}>Part of Speech</div>
+          <div className={styles.description} onClick={handleModal}>
+            Part of Speech
+          </div>
+          <CreateSetModal/>
         </div>
         <div className={`${styles.detail}`}>
           <div className={styles.description}>Amount of Cards</div>
