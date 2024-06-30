@@ -11,11 +11,12 @@ import BasicInput from "../ui/BasicInput"
 import toast from "react-hot-toast"
 
 export default function ManageSet({ setTitle, setId, setUser }) {
+  const title = setTitle.split(" ")[0] 
   const { setStore } = useContext(AuthorizedContext)
   const { modalMenuStore } = useContext(FormModalContext)
   const [confirm, setConfirm] = useState("")
   const navigate = useNavigate()
-  const isFilled = confirm === setTitle
+  const isFilled = confirm === title
 
   const handleSubmit = async () => {
     if (isFilled) {
@@ -39,7 +40,7 @@ export default function ManageSet({ setTitle, setId, setUser }) {
           <div className={styles.title}>Delete set</div>
           <div
             className={styles.description}
-          >{`To confirm, type "${setTitle}" in the box below`}</div>
+          >{`To confirm, type "${title}" in the box below`}</div>
           <BasicInput
             placeholder={"Type here"}
             value={confirm}
