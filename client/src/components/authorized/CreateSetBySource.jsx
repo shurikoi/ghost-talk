@@ -15,8 +15,9 @@ import CreateSetModal from './CreateSetModal'
 
 function CreateSetBySource() {
   const { setStore } = useContext(AuthorizedContext)
-    const [title, setTitle] = useState('')
+  const [title, setTitle] = useState('')
   const { modalMenuStore } = useContext(FormModalContext)
+  const [currentState, setCurrentState] = useState('')
 
   const handleSubmit = async () => {
     // setStore.setTitle(title)
@@ -29,7 +30,8 @@ function CreateSetBySource() {
     // toast.success('Hooray!')
   }
 
-  const handleModal = () => {
+  const handleModal = (state) => {
+    setCurrentState(state)
     modalMenuStore.addClass()
   }
 
@@ -49,13 +51,21 @@ function CreateSetBySource() {
       </div>
       <div className={styles.detailsContainer}>
         <div className={`${styles.detail}`}>
-          <div className={styles.description} onClick={handleModal}>
+          <div
+            className={styles.description}
+            onClick={() => handleModal('partOfSpeech')}
+          >
             Part of Speech
           </div>
-          <CreateSetModal/>
+          <CreateSetModal state={currentState} />
         </div>
         <div className={`${styles.detail}`}>
-          <div className={styles.description}>Amount of Cards</div>
+          <div
+            className={styles.description}
+            onClick={() => handleModal('amountOfCards')}
+          >
+            Amount of Cards
+          </div>
         </div>
       </div>
       <div className={styles.submitWrapper}>
