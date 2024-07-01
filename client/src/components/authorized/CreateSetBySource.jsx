@@ -57,7 +57,7 @@ function CreateSetBySource() {
           >
             Part of Speech
           </div>
-          <CreateSetModal state={currentState} />
+          <CreateSetModal state={currentState} setState={setCurrentState}/>
         </div>
         <div className={`${styles.detail}`}>
           <div

@@ -4,11 +4,11 @@ import { useState } from 'react'
 import SpeechModal from './SpeechModal'
 import CardsAmount from './CardsAmountModal'
 
-function CreateSetModal({ state }) {
+function CreateSetModal({ state, setState }) {
 //   const [currentState, setCurrentState] = useState('partOfSpeech')
 
   const states = {
-    partOfSpeech: <SpeechModal />,
+    partOfSpeech: <SpeechModal setState={setState} />,
     amountOfCards: <CardsAmount />
   }
   return (

@@ -8,8 +8,8 @@ export default function CardsAmount() {
   const options = [...Array(10).keys()].slice(1)
 
   const handleOptionChange = (element) => {
-    console.log(element.target.value)
     setPartOfSpeech(element.target.value)
+    modalMenuStore.removeClass()
   }
 
   return (
