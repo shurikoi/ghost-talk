@@ -6,7 +6,7 @@ import TransitionModal from '../ui/TransitionModal'
 function CreateSetModal({ state, setState }) {
   const states = {
     partOfSpeech: <SpeechModal setState={setState} />,
-    amountOfCards: <CardsAmount />
+    amountOfCards: <CardsAmount setState={setState} />
   }
 
   return (

@@ -1,15 +1,19 @@
-import { action, makeAutoObservable, observable } from "mobx"
+import { action, makeAutoObservable, observable } from 'mobx'
 import {
   serviceGetAllSets,
   serviceCreateSet,
   serviceGetSet,
   serviceDeleteSet,
-} from "../services/setService"
-import userStore from "./userStore"
+} from '../services/setService'
+import userStore from './userStore'
 
 class SetStore {
-  title = ""
+  title = ''
   cards = []
+  typeContent = 'link'
+  source = ''
+  partOfSpeech = ''
+  amountOfCards = ''
   isLoading = false
 
   constructor() {
@@ -24,23 +28,39 @@ class SetStore {
     this.cards[index] = object
   }
 
+  setTypeContent(typeContent) {
+    this.typeContent = typeContent
+  }
+
+  setSource(source) {
+    this.source = source
+  }
+
+  setPartOfSpeech(partOfSpeech) {
+    this.partOfSpeech = partOfSpeech
+  }
+
+  setAmountOfCards(amountOfCards) {
+    this.amountOfCards = amountOfCards
+  }
+
   setLoading(bool) {
     this.isLoading = bool
   }
 
   reset() {
-    this.cards = []
-    this.title = ""
+    title = ''
+    cards = []
+    typeContent = ''
+    source = ''
+    partOfSpeech = ''
+    amountOfCards = ''
   }
 
   async createSet() {
-    try {
-      const response = await serviceCreateSet(this.title, this.cards)
-      this.reset()
-      return response.data[0]
-    } catch (e) {
-      console.log(e.response?.data?.message)
-    }
+    const response = await serviceCreateSet(this.title, this.cards)
+    this.reset()
+    return response.data[0]
   }
 
   async getSet(setId) {
@@ -61,11 +81,7 @@ class SetStore {
   }
 
   async deleteSet(setId, setUser) {
-    try {
-      await serviceDeleteSet(setId, setUser)
-    } catch (error) {
-      console.log(error)
-    }
+    await serviceDeleteSet(setId, setUser)
   }
 }
 

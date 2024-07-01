@@ -16,11 +16,13 @@ import CreateSetModal from './CreateSetModal'
 function CreateSetBySource() {
   const { setStore } = useContext(AuthorizedContext)
   const [title, setTitle] = useState('')
+  const [source, setSource] = useState('')
   const { modalMenuStore } = useContext(FormModalContext)
   const [currentState, setCurrentState] = useState('')
 
   const handleSubmit = async () => {
-    // setStore.setTitle(title)
+    setStore.setTitle(title)
+    setStore.setSource(source)
     // const response = await setStore.createSet()
     // if (!response) {
     //   toast.error('Something went wrong :(')
@@ -47,7 +49,7 @@ function CreateSetBySource() {
         placeholder={`Enter the title, for example "German - City"`}
       />
       <div className={styles.typeContentWrapper}>
-        <TypeContent />
+        <TypeContent value={source} setValue={setSource} />
       </div>
       <div className={styles.detailsContainer}>
         <div className={`${styles.detail}`}>
@@ -57,7 +59,7 @@ function CreateSetBySource() {
           >
             Part of Speech
           </div>
-          <CreateSetModal state={currentState} setState={setCurrentState}/>
+          <CreateSetModal state={currentState} setState={setCurrentState} />
         </div>
         <div className={`${styles.detail}`}>
           <div

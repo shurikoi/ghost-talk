@@ -1,20 +1,21 @@
-import { useContext, useState } from 'react'
+import { useContext } from 'react'
 import BackArrowIcon from '../ui/icon/BackArrowIcon'
 import { FormModalContext } from '../../contexts/FormModalContext'
+import { AuthorizedContext } from '../../contexts/AuthorizedContext'
 
-export default function CardsAmount() {
+export default function CardsAmount({ setState }) {
   const { modalMenuStore } = useContext(FormModalContext)
-  const [partOfSpeech, setPartOfSpeech] = useState('')
+  const { setStore } = useContext(AuthorizedContext)
   const options = [...Array(10).keys()].slice(1)
 
   const handleOptionChange = (element) => {
-    setPartOfSpeech(element.target.value)
+    setStore.setAmountOfCards(element.target.value)
     modalMenuStore.removeClass()
   }
 
   return (
     <>
-      <BackArrowIcon onClick={() => modalMenuStore.removeClass()} />
+      <BackArrowIcon onClick={() => setState("partOfSpeech")} />
       <div className="font-eUkraineHead text-[20px]">Select amount of cards</div>
       <div className="font-eUkraine font-light text-center">
         You can execute up to 10 words
@@ -24,7 +25,7 @@ export default function CardsAmount() {
           <div key={index} className="w-full">
             <label
               htmlFor={option}
-              className="block p-4 bg-gray-200 rounded-xl text-center font-eUkraine font-thin cursor-pointer hover:bg-gray-300 has-[:checked]:bg-gray-300 "
+              className="block p-4 bg-gray-200 rounded-xl text-center font-eUkraine font-thin cursor-pointer hover:bg-gray-300 has-[:checked]:bg-gray-300"
             >
               <input
                 type="radio"
@@ -33,6 +34,7 @@ export default function CardsAmount() {
                 value={option}
                 className="appearance-none"
                 onChange={handleOptionChange}
+                checked={setStore.amountOfCards == option}
               />
               {option}
             </label>

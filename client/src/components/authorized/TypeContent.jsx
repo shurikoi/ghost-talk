@@ -1,16 +1,17 @@
-import { useRef, useState } from 'react'
+import { useContext, useState } from 'react'
 import styles from './TypeContent.module.css'
 import FormInput from '../ui/FormInput'
 import link from '/images/link.png'
 import text from '/images/text.png'
+import { AuthorizedContext } from '../../contexts/AuthorizedContext'
 
-export default function TypeContent() {
+export default function TypeContent({ value, setValue }) {
+  const { setStore } = useContext(AuthorizedContext)
   const [typeOfContent, setTypeOfContent] = useState('link')
-  const [ source, setSource ] = useState('')
 
   const handleOptionChange = (element) => {
-    console.log(element.target.value)
     setTypeOfContent(element.target.value)
+    setStore.setTypeContent(element.target.value)
   }
 
   return (
@@ -49,8 +50,8 @@ export default function TypeContent() {
       </div>
       <div className={styles.formInputWrapper}>
       <FormInput
-          value={source}
-          setValue={setSource}
+          value={value}
+          setValue={setValue}
           placeholder={'Place your link here'}
           className={styles.formInput}
           type={typeOfContent === "text" && "textarea"}

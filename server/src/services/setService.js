@@ -48,7 +48,7 @@ export const serviceCreateSetBySource = async (
   userId,
   title,
   typeContent,
-  resource,
+  source,
   partOfSpeech,
   amountOfCards
 ) => {
@@ -61,7 +61,7 @@ export const serviceCreateSetBySource = async (
     {
       reqId,
       typeContent,
-      resource,
+      source,
       partOfSpeech,
       amountOfCards,
     },

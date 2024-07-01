@@ -1,14 +1,15 @@
-import { useContext, useState } from 'react'
+import { useContext } from 'react'
 import BackArrowIcon from '../ui/icon/BackArrowIcon'
 import { FormModalContext } from '../../contexts/FormModalContext'
+import { AuthorizedContext } from '../../contexts/AuthorizedContext'
 
 export default function SpeechModal({ setState }) {
   const { modalMenuStore } = useContext(FormModalContext)
-  const [partOfSpeech, setPartOfSpeech] = useState('')
+  const { setStore } = useContext(AuthorizedContext)
   const options = ['nouns', 'adjectives', 'verbs', 'adverbs']
 
   const handleOptionChange = (element) => {
-    setPartOfSpeech(element.target.value)
+    setStore.setPartOfSpeech(element.target.value)
     setState("amountOfCards")
   }
 
@@ -33,6 +34,7 @@ export default function SpeechModal({ setState }) {
                 value={option}
                 className="appearance-none"
                 onChange={handleOptionChange}
+                checked={setStore.partOfSpeech === option}
               />
               {option}
             </label>
