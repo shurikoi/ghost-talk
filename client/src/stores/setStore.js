@@ -65,6 +65,18 @@ class SetStore {
   }
 
   async createSetBySource() {
+    if (this.typeContent === 'text') {
+      const splitted = this.source.split(' ')
+      const regex = /[?!.,"']/
+
+      const sourceArray = splitted.map((value) => {
+        const lastItem = value.slice(-1)
+        return regex.test(lastItem) ? value.slice(0, -1) : value
+      })
+
+      this.setSource(sourceArray)
+    }
+
     const response = await serviceCreateSetBySource(
       this.title,
       this.typeContent,
