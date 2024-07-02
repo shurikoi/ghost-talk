@@ -9,10 +9,11 @@ export default function TransitionModal({ children, stateAsKey }) {
           key={stateAsKey}
           timeout={100}
           classNames={{
-            enter: 'translate-x-full',
-            enterActive: 'translate-x-0 transiotion duration-100',
-            exit: 'translate-x-0',
-            exitActive: 'transiotion duration-100',
+            appear: 'opacity-0',
+            appearActive: 'transition-opacity duration-300 opacity-100',
+            enter: 'opacity-0',
+            enterActive: 'transition-opacity duration-300 opacity-100',
+            exitActive: 'transition-opacity duration-200 opacity-0',
           }}
         >
           {children}
