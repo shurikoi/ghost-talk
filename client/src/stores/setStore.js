@@ -4,6 +4,7 @@ import {
   serviceCreateSet,
   serviceGetSet,
   serviceDeleteSet,
+  serviceCreateSetBySource,
 } from '../services/setService'
 import userStore from './userStore'
 
@@ -49,16 +50,28 @@ class SetStore {
   }
 
   reset() {
-    title = ''
-    cards = []
-    typeContent = ''
-    source = ''
-    partOfSpeech = ''
-    amountOfCards = ''
+    this.title = ''
+    this.cards = []
+    this.typeContent = 'link'
+    this.source = ''
+    this.partOfSpeech = ''
+    this.amountOfCards = ''
   }
 
   async createSet() {
     const response = await serviceCreateSet(this.title, this.cards)
+    this.reset()
+    return response.data[0]
+  }
+
+  async createSetBySource() {
+    const response = await serviceCreateSetBySource(
+      this.title,
+      this.typeContent,
+      this.source,
+      this.partOfSpeech,
+      Number(this.amountOfCards)
+    )
     this.reset()
     return response.data[0]
   }

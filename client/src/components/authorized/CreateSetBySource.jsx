@@ -1,15 +1,14 @@
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import BackBtn from '../ui/buttons/BackBtn'
 import CreateSetTitle from '../ui/CreateSetTitle'
 import styles from './CreateSetBySource.module.css'
-import { useContext, useRef, useState } from 'react'
+import { useContext, useState } from 'react'
 import { AuthorizedContext } from '../../contexts/AuthorizedContext'
 import CreateBtn from '../ui/buttons/CreateBtn'
 import toast from 'react-hot-toast'
 import TypeContent from './TypeContent'
 import FormInput from '../ui/FormInput'
 import { observer } from 'mobx-react-lite'
-import Modal from '../ui/Modal'
 import { FormModalContext } from '../../contexts/FormModalContext'
 import CreateSetModal from './CreateSetModal'
 
@@ -19,17 +18,18 @@ function CreateSetBySource() {
   const [source, setSource] = useState('')
   const { modalMenuStore } = useContext(FormModalContext)
   const [currentState, setCurrentState] = useState('')
+  const navigate = useNavigate()
 
   const handleSubmit = async () => {
     setStore.setTitle(title)
     setStore.setSource(source)
-    // const response = await setStore.createSet()
-    // if (!response) {
-    //   toast.error('Something went wrong :(')
-    //   return
-    // }
-    // navigate(`/set/${response.link}`)
-    // toast.success('Hooray!')
+    const response = await setStore.createSetBySource()
+    if (!response) {
+      toast.error('Something went wrong :(')
+      return
+    }
+    navigate(`/set/${response.link}`)
+    toast.success('Hooray!')
   }
 
   const handleModal = (state) => {

@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import BackBtn from "../ui/buttons/BackBtn"
 import CreateSetTitle from "../ui/CreateSetTitle"
 import styles from "./CreateSet.module.css"
