@@ -1,4 +1,3 @@
-import styles from './CreateSetBtn.module.css'
 import quill from '/images/quill.png'
 import chip from '/images/chip.png'
 
@@ -9,14 +8,12 @@ export default function CreateSetBtn({ title, description, imageName }) {
   }
 
   return (
-    <div className={styles.createWrapper}>
-      <div className={styles.leftContainer}>
-        <div className={styles.createTitle}>{title}</div>
-        <div className={styles.createDescription}>{description}</div>
+    <div className="flex w-auto h-full justify-between items-center p-[3rem] bg-indigo-300 rounded-xl border-white border-[3px] text-indigo-950 cursor-pointer duration-200 hover:bg-indigo-400">
+      <div className="flex flex-col gap-[1rem]">
+        <div className="font-eUkraineHead text-xl">{title}</div>
+        <div className="font-eUkraine font-thin italic">{description}</div>
       </div>
-      <div className={styles.rightContainer}>
-        <img src={images[imageName]} alt={imageName} className={styles.icon} />
-      </div>
+      <img src={images[imageName]} alt={imageName} className="h-[4rem]" />
     </div>
   )
 }

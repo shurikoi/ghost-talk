@@ -1,7 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 import BackBtn from '../ui/buttons/BackBtn'
 import CreateSetTitle from '../ui/CreateSetTitle'
-import styles from './CreateSetBySource.module.css'
 import { useContext, useState } from 'react'
 import { AuthorizedContext } from '../../contexts/AuthorizedContext'
 import CreateBtn from '../ui/buttons/CreateBtn'
@@ -38,8 +37,8 @@ function CreateSetBySource() {
   }
 
   return (
-    <div className={styles.main}>
-      <div className={styles.topWrapper}>
+    <div className="flex flex-col text-white gap-[2rem]">
+      <div className="flex flex-col gap-[1.2rem]">
         <BackBtn />
         <CreateSetTitle title="Create a new learning set by source" />
       </div>
@@ -48,29 +47,29 @@ function CreateSetBySource() {
         setValue={setTitle}
         placeholder={`Enter the title, for example "German - City"`}
       />
-      <div className={styles.typeContentWrapper}>
+      <div className="p-[10px] bg-[#2e3856] rounded-2xl">
         <TypeContent value={source} setValue={setSource} />
       </div>
-      <div className={styles.detailsContainer}>
-        <div className={`${styles.detail}`}>
+      <div className="flex gap-[0.8rem]">
+        <div className="flex-1 bg-[#2e3856] text-center cursor-pointer rounded-xl p-[2rem] justify-center hover:bg-[#323d5b]">
           <div
-            className={styles.description}
+            className="font-eUkraineHead text-sm uppercase"
             onClick={() => handleModal('partOfSpeech')}
           >
             Part of Speech
           </div>
           <CreateSetModal state={currentState} setState={setCurrentState} />
         </div>
-        <div className={`${styles.detail}`}>
+        <div className="flex-1 bg-[#2e3856] text-center cursor-pointer rounded-xl p-[2rem] justify-center hover:bg-[#323d5b]">
           <div
-            className={styles.description}
+            className="font-eUkraineHead text-sm uppercase"
             onClick={() => handleModal('amountOfCards')}
           >
             Amount of Cards
           </div>
         </div>
       </div>
-      <div className={styles.submitWrapper}>
+      <div className="flex justify-end">
         <CreateBtn onClick={handleSubmit} />
       </div>
     </div>

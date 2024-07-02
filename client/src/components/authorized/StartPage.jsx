@@ -1,20 +1,19 @@
 import { Link } from 'react-router-dom'
-import styles from './StartPage.module.css'
 import CreateSetBtn from '../ui/buttons/CreateSetBtn'
 import SetsSections from './SetsSections'
 
 export default function StartPage() {
   return (
-    <div className={styles.main}>
-      <div className={styles.buttonsContainer}>
-        <Link to="/create-set" className={`link ${styles.link}`}>
+    <div className="flex gap-[3rem] flex-col">
+      <div className="flex gap-[1rem] flex-wrap flex-col md:flex-row">
+        <Link to="/create-set" className="flex-1 w-auto link">
           <CreateSetBtn
             title="Create set"
             description="And fill it with your own materials"
             imageName="quill"
           />
         </Link>
-        <Link to="/create-set-by-source" className={`link ${styles.link}`}>
+        <Link to="/create-set-by-source" className="flex-1 w-auto link">
           <CreateSetBtn
             title="Create set by source"
             description="Just provide us text or link"
