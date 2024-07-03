@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom"
-import Set from "./Set"
+import Set from "../ui/Set"
 import styles from "./UserSets.module.css"
 
 export default function UserSets({ data = [], title, titleStyles }) {

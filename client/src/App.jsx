@@ -30,6 +30,12 @@ function App() {
           className: "",
           style: {
             fontFamily: "e-Ukraine",
+            fontWeight: "500",
+            borderRadius: "50px",
+            padding: "20px",
+            backgroundColor: "#1D4DF8",
+            border: "5px solid #87A1FF",
+            color: "#EAECFF"
           },
         }}
       />

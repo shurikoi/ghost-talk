@@ -7,7 +7,7 @@ export default function TransitionModal({ children, stateAsKey }) {
       <SwitchTransition mode={'out-in'}>
         <CSSTransition
           key={stateAsKey}
-          timeout={100}
+          timeout={300}
           classNames={{
             appear: 'opacity-0',
             appearActive: 'transition-opacity duration-300 opacity-100',
