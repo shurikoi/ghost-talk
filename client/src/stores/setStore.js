@@ -76,7 +76,7 @@ class SetStore {
 
       this.setSource(sourceArray)
     }
-
+    
     const response = await serviceCreateSetBySource(
       this.title,
       this.typeContent,

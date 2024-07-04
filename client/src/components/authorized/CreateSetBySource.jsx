@@ -22,6 +22,12 @@ function CreateSetBySource() {
   const handleSubmit = async () => {
     setStore.setTitle(title)
     setStore.setSource(source)
+
+    if (!(title && source && setStore.amountOfCards && setStore.partOfSpeech)) {
+      toast.error("Missing info alert!")
+      return
+    }
+
     const response = await setStore.createSetBySource()
     if (!response) {
       toast.error('Something went wrong :(')

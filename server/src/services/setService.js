@@ -1,7 +1,7 @@
-import ApiError from "../exceptions/ApiError.js"
-import Set from "../models/Set.js"
-import { v4 as uuidv4 } from "uuid"
-import axios from "axios"
+import ApiError from '../exceptions/ApiError.js'
+import Set from '../models/Set.js'
+import { v4 as uuidv4 } from 'uuid'
+import axios from 'axios'
 
 export const serviceCreateSet = async (userId, title, cards, link) => {
   if (!link) link = uuidv4()
@@ -15,7 +15,7 @@ export const serviceCreateSet = async (userId, title, cards, link) => {
     },
   ])
 
-  if (!set) throw ApiError.BadRequest("Something went wrong")
+  if (!set) throw ApiError.BadRequest('Something went wrong')
 
   return set
 }
@@ -25,7 +25,7 @@ export const serviceGetSet = async (link) => {
     link,
   })
 
-  if (!set) throw ApiError.NotFound("Set does not exist")
+  if (!set) throw ApiError.NotFound('Set does not exist')
 
   return set
 }
@@ -57,7 +57,7 @@ export const serviceCreateSetBySource = async (
   const reqId = uuidv4()
 
   const { data } = await axios.post(
-    "http://127.0.0.1:8000/create_cards",
+    'http://127.0.0.1:8000/create_cards',
     {
       reqId,
       typeContent,
@@ -67,11 +67,14 @@ export const serviceCreateSetBySource = async (
     },
     {
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
     }
   )
-  if (!data) throw ApiError.FailedDependency("External service error")
+
+  if (!data) throw ApiError.FailedDependency('External service error')
+  if (data?.cards.length == 0)
+    throw ApiError.BadRequest('Not enough source details given')
 
   return await serviceCreateSet(userId, title, data.cards, reqId)
 }
