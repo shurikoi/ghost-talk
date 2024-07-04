@@ -24,17 +24,20 @@ function CreateSetBySource() {
     setStore.setSource(source)
 
     if (!(title && source && setStore.amountOfCards && setStore.partOfSpeech)) {
-      toast.error("Missing info alert!")
+      toast.error('Missing info alert!')
       return
     }
 
-    const response = await setStore.createSetBySource()
-    if (!response) {
-      toast.error('Something went wrong :(')
-      return
-    }
-    navigate(`/set/${response.link}`)
-    toast.success('Hooray!')
+    const setCreationPromise = setStore.createSetBySource()
+
+    toast.promise(setCreationPromise, {
+      loading: 'Loading...',
+      success: 'Hooray!',
+      error: 'Error when fetching',
+    })
+    
+    const response = await setCreationPromise
+    if (response) navigate(`/set/${response.link}`)
   }
 
   const handleModal = (state) => {

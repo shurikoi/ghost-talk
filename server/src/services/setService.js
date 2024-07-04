@@ -73,7 +73,7 @@ export const serviceCreateSetBySource = async (
   )
 
   if (!data) throw ApiError.FailedDependency('External service error')
-  if (data?.cards.length == 0)
+  if (data?.cards?.length == 0 || data?.cards == undefined)
     throw ApiError.BadRequest('Not enough source details given')
 
   return await serviceCreateSet(userId, title, data.cards, reqId)
