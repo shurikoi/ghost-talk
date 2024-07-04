@@ -4,7 +4,8 @@ import {
   serviceCreateSet,
   serviceGetSet,
   serviceDeleteSet,
-  serviceCreateSetBySource,
+  serviceCreateSetByLink,
+  serviceCreateSetByText,
 } from '../services/setService'
 import userStore from './userStore'
 
@@ -14,7 +15,7 @@ class SetStore {
   typeContent = 'link'
   source = ''
   partOfSpeech = ''
-  amountOfCards = ''
+  amountOfCards = Number
   isLoading = false
 
   constructor() {
@@ -42,7 +43,7 @@ class SetStore {
   }
 
   setAmountOfCards(amountOfCards) {
-    this.amountOfCards = amountOfCards
+    this.amountOfCards = Number(amountOfCards)
   }
 
   setLoading(bool) {
@@ -64,25 +65,33 @@ class SetStore {
     return response.data[0]
   }
 
-  async createSetBySource() {
-    if (this.typeContent === 'text') {
-      const splitted = this.source.split(' ')
-      const regex = /[?!.,"']/
+  async createSetByText() {
+    const splitted = this.source.split(' ')
+    const regex = /[?!.,"']/
 
-      const sourceArray = splitted.map((value) => {
-        const lastItem = value.slice(-1)
-        return regex.test(lastItem) ? value.slice(0, -1) : value
-      })
+    const sourceArray = splitted.map((value) => {
+      const lastItem = value.slice(-1)
+      return regex.test(lastItem) ? value.slice(0, -1) : value
+    })
 
-      this.setSource(sourceArray)
-    }
-    
-    const response = await serviceCreateSetBySource(
+    this.setSource(sourceArray)
+
+    const response = await serviceCreateSetByText(
       this.title,
-      this.typeContent,
       this.source,
       this.partOfSpeech,
-      Number(this.amountOfCards)
+      this.amountOfCards
+    )
+    this.reset()
+    return response.data[0]
+  }
+
+  async createSetByLink() {
+    const response = await serviceCreateSetByLink(
+      this.title,
+      this.source,
+      this.partOfSpeech,
+      this.amountOfCards
     )
     this.reset()
     return response.data[0]

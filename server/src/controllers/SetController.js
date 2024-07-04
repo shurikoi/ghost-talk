@@ -3,7 +3,6 @@ import {
   serviceGetSet,
   serviceGetAllSets,
   serviceDeleteSet,
-  serviceCreateSetBySource,
   serviceCreateSetByText,
   serviceCreateSetByLink,
 } from '../services/setService.js'
@@ -56,21 +55,6 @@ export const createSetByLink = async (req, res) => {
   const response = await serviceCreateSetByLink(
     id,
     title,
-    source,
-    partOfSpeech,
-    amountOfCards
-  )
-  return res.json(response)
-}
-
-export const createSetBySource = async (req, res) => {
-  const { title, typeContent, source, partOfSpeech, amountOfCards } = req.body
-  const { id } = req.user
-
-  const response = await serviceCreateSetBySource(
-    id,
-    title,
-    typeContent,
     source,
     partOfSpeech,
     amountOfCards

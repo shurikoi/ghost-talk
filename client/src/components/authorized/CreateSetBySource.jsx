@@ -28,14 +28,17 @@ function CreateSetBySource() {
       return
     }
 
-    const setCreationPromise = setStore.createSetBySource()
+    const setCreationPromise =
+      setStore.typeContent == 'link'
+        ? setStore.createSetByLink()
+        : setStore.createSetByText()
 
     toast.promise(setCreationPromise, {
       loading: 'Loading...',
       success: 'Hooray!',
       error: 'Error when fetching',
     })
-    
+
     const response = await setCreationPromise
     if (response) navigate(`/set/${response.link}`)
   }

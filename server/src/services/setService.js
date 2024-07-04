@@ -85,38 +85,3 @@ export const serviceCreateSetByLink = async (
   
   return await serviceCreateSet(userId, title, cards, reqId)
 }
-
-export const serviceCreateSetBySource = async (
-  userId,
-  title,
-  typeContent,
-  source,
-  partOfSpeech,
-  amountOfCards
-) => {
-  // To send Id of request to Python endpoint
-  // TODO: In order not to generate twice, it makes sense to transfer this Id string to serviceCreateSet ?
-  const reqId = uuidv4()
-
-  const { data } = await axios.post(
-    'http://127.0.0.1:8000/create_cards',
-    {
-      reqId,
-      typeContent,
-      source,
-      partOfSpeech,
-      amountOfCards,
-    },
-    {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    }
-  )
-
-  if (!data) throw ApiError.FailedDependency('External service error')
-  if (data?.cards?.length == 0 || data?.cards == undefined)
-    throw ApiError.BadRequest('Not enough source details given')
-
-  return await serviceCreateSet(userId, title, data.cards, reqId)
-}

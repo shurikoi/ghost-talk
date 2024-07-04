@@ -16,16 +16,28 @@ export const serviceDeleteSet = async (setId, setUser) => {
   return await $apiBearer.post('delete-set', { setId, setUser })
 }
 
-export const serviceCreateSetBySource = async (
+export const serviceCreateSetByText = async (
   title,
-  typeContent,
   source,
   partOfSpeech,
   amountOfCards
 ) => {
-  return await $apiBearer.post('create-set-by-source', {
+  return await $apiBearer.post('create-set-by-text', {
     title,
-    typeContent,
+    source,
+    partOfSpeech,
+    amountOfCards,
+  })
+}
+
+export const serviceCreateSetByLink = async (
+  title,
+  source,
+  partOfSpeech,
+  amountOfCards
+) => {
+  return await $apiBearer.post('create-set-by-link', {
+    title,
     source,
     partOfSpeech,
     amountOfCards,
