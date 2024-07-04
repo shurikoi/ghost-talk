@@ -1,6 +1,6 @@
 import { useContext, useState } from "react"
 import { AuthorizedContext } from "../../contexts/AuthorizedContext"
-import ModalMenu from "../ui/ModalMenu"
+import Modal from "../ui/Modal"
 import BasicSubmitButton from "../ui/buttons/BasicSubmitButton"
 import DeleteBtn from "../ui/buttons/DeleteBtn"
 import { useNavigate } from "react-router-dom"
@@ -11,11 +11,12 @@ import BasicInput from "../ui/BasicInput"
 import toast from "react-hot-toast"
 
 export default function ManageSet({ setTitle, setId, setUser }) {
+  const title = setTitle.split(" ")[0] 
   const { setStore } = useContext(AuthorizedContext)
   const { modalMenuStore } = useContext(FormModalContext)
   const [confirm, setConfirm] = useState("")
   const navigate = useNavigate()
-  const isFilled = confirm === setTitle
+  const isFilled = confirm === title
 
   const handleSubmit = async () => {
     if (isFilled) {
@@ -29,7 +30,7 @@ export default function ManageSet({ setTitle, setId, setUser }) {
   return (
     <>
       <DeleteBtn />
-      <ModalMenu>
+      <Modal>
         <div className={styles.wrapper}>
           <BackArrowIcon
             onClick={() => {
@@ -39,7 +40,7 @@ export default function ManageSet({ setTitle, setId, setUser }) {
           <div className={styles.title}>Delete set</div>
           <div
             className={styles.description}
-          >{`To confirm, type "${setTitle}" in the box below`}</div>
+          >{`To confirm, type "${title}" in the box below`}</div>
           <BasicInput
             placeholder={"Type here"}
             value={confirm}
@@ -50,7 +51,7 @@ export default function ManageSet({ setTitle, setId, setUser }) {
           />
           <BasicSubmitButton onClick={handleSubmit} isFilled={isFilled} colorScheme={"red"} />
         </div>
-      </ModalMenu>
+      </Modal>
     </>
   )
 }

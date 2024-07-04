@@ -10,7 +10,7 @@ class ModalMenuStore {
         })
     }
 
-    setFormActive(bool) {
+    setFormState(bool) {
         this.isFormActive = bool
     }
 

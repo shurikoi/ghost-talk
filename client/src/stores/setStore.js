@@ -1,15 +1,20 @@
-import { action, makeAutoObservable, observable } from "mobx"
+import { action, makeAutoObservable, observable } from 'mobx'
 import {
   serviceGetAllSets,
   serviceCreateSet,
   serviceGetSet,
   serviceDeleteSet,
-} from "../services/setService"
-import userStore from "./userStore"
+  serviceCreateSetBySource,
+} from '../services/setService'
+import userStore from './userStore'
 
 class SetStore {
-  title = ""
+  title = ''
   cards = []
+  typeContent = 'link'
+  source = ''
+  partOfSpeech = ''
+  amountOfCards = ''
   isLoading = false
 
   constructor() {
@@ -24,23 +29,63 @@ class SetStore {
     this.cards[index] = object
   }
 
+  setTypeContent(typeContent) {
+    this.typeContent = typeContent
+  }
+
+  setSource(source) {
+    this.source = source
+  }
+
+  setPartOfSpeech(partOfSpeech) {
+    this.partOfSpeech = partOfSpeech
+  }
+
+  setAmountOfCards(amountOfCards) {
+    this.amountOfCards = amountOfCards
+  }
+
   setLoading(bool) {
     this.isLoading = bool
   }
 
   reset() {
+    this.title = ''
     this.cards = []
-    this.title = ""
+    this.typeContent = 'link'
+    this.source = ''
+    this.partOfSpeech = ''
+    this.amountOfCards = ''
   }
 
   async createSet() {
-    try {
-      const response = await serviceCreateSet(this.title, this.cards)
-      this.reset()
-      return response.data[0]
-    } catch (e) {
-      console.log(e.response?.data?.message)
+    const response = await serviceCreateSet(this.title, this.cards)
+    this.reset()
+    return response.data[0]
+  }
+
+  async createSetBySource() {
+    if (this.typeContent === 'text') {
+      const splitted = this.source.split(' ')
+      const regex = /[?!.,"']/
+
+      const sourceArray = splitted.map((value) => {
+        const lastItem = value.slice(-1)
+        return regex.test(lastItem) ? value.slice(0, -1) : value
+      })
+
+      this.setSource(sourceArray)
     }
+    
+    const response = await serviceCreateSetBySource(
+      this.title,
+      this.typeContent,
+      this.source,
+      this.partOfSpeech,
+      Number(this.amountOfCards)
+    )
+    this.reset()
+    return response.data[0]
   }
 
   async getSet(setId) {
@@ -61,11 +106,7 @@ class SetStore {
   }
 
   async deleteSet(setId, setUser) {
-    try {
-      await serviceDeleteSet(setId, setUser)
-    } catch (error) {
-      console.log(error)
-    }
+    await serviceDeleteSet(setId, setUser)
   }
 }
 

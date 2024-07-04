@@ -1,21 +1,10 @@
-import HeadImage from "../../../public/images/HeadImage"
-import GetStartedBtn from "../ui/buttons/GetStartedBtn"
-import styles from "./Header.module.css"
+import GetStartedBtn from '../ui/buttons/GetStartedBtn'
 
 export default function Header() {
   return (
-    <div className={styles.header}>
-      <div className={styles.topContainer}>
-        <div className={styles.name}>Lexify</div>
-        <GetStartedBtn className={styles.authTopBtn} />
-      </div>
-      <div className={styles.bottomContainer}>
-        <div className={styles.content}>
-          <GetStartedBtn className={styles.authBottomBtn} />
-          <div className={styles.about}>Learning by flashcards</div>
-          <HeadImage className={styles.headImage} />
-        </div>
-      </div>
+    <div className="flex flex-col gap-[0.3rem] md:flex-row justify-between text-white items-center bg-[#0a092d] border-none rounded-3xl border-[#111E80] py-[1.5rem] px-[4rem]">
+      <div className="font-cosen text-3xl cursor-pointer select-none">Lexify</div>
+      <GetStartedBtn />
     </div>
   )
 }

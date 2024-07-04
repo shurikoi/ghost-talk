@@ -1,14 +1,12 @@
-import styles from "./AuthForm.module.css"
-import { useState } from "react"
-import DefaultForm from "./DefaultForm"
-import SignIn from "./SignIn"
-import SignUp from "./SignUp"
-import { observer } from "mobx-react-lite"
-import { CSSTransition, SwitchTransition } from "react-transition-group"
-import ModalMenu from "../ui/ModalMenu"
+import { useState } from 'react'
+import DefaultForm from './DefaultForm'
+import SignIn from './SignIn'
+import SignUp from './SignUp'
+import { observer } from 'mobx-react-lite'
+import TransitionModal from '../ui/TransitionModal'
 
 function AuthForm() {
-  const [currentState, setCurrentState] = useState("default")
+  const [currentState, setCurrentState] = useState('default')
 
   const states = {
     default: <DefaultForm setCurrentState={setCurrentState}></DefaultForm>,
@@ -17,24 +15,11 @@ function AuthForm() {
   }
 
   return (
-    <ModalMenu>
-      <SwitchTransition mode={"out-in"}>
-          <CSSTransition
-            key={currentState}
-            timeout={100}
-            classNames={{
-              enter: styles.fadeEnter,
-              enterActive: styles.fadeEnterActive,
-              exit: styles.fadeExit,
-              exitActive: styles.fadeExitActive,
-            }}
-          >
-            <div className={styles.wrapper} action="">
-              {states[currentState]}
-            </div>
-          </CSSTransition>
-        </SwitchTransition>
-    </ModalMenu>
+    <TransitionModal stateAsKey={currentState}>
+      <div className="flex box-border py-8 px-12 relative flex-col justify-center items-center gap-[1.3rem]">
+        {states[currentState]}
+      </div>
+    </TransitionModal>
   )
 }
 

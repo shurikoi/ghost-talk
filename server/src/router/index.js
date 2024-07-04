@@ -1,6 +1,6 @@
 import express from "express"
 import { signIn, checkUser, signUp, signOut, refresh, getUserById } from "../controllers/UserController.js"
-import { createSet, createSetByLink, deleteSet, getAllSets, getSet } from "../controllers/SetController.js"
+import { createSet, createSetBySource, deleteSet, getAllSets, getSet } from "../controllers/SetController.js"
 import { authMiddleware } from "../middlewares/authMiddleware.js"
 
 const router = express.Router()
@@ -15,6 +15,6 @@ router.post('/get-set', getSet)
 router.post('/get-user-by-id', authMiddleware, getUserById)
 router.get('/get-all-sets', authMiddleware, getAllSets)
 router.post('/delete-set', authMiddleware, deleteSet)
-router.post('/create-set-by-link', createSetByLink)
+router.post('/create-set-by-source', authMiddleware, createSetBySource)
 
 export default router

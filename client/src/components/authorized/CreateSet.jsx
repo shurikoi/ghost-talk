@@ -1,5 +1,6 @@
-import { Link, useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import BackBtn from "../ui/buttons/BackBtn"
+import CreateSetTitle from "../ui/CreateSetTitle"
 import styles from "./CreateSet.module.css"
 import { useContext, useState } from "react"
 import { AuthorizedContext } from "../../contexts/AuthorizedContext"
@@ -34,10 +35,7 @@ export default function CreateSet() {
     <div className={styles.main}>
       <div className={styles.topWrapper}>
         <BackBtn />
-        <div className={styles.titleWrapper}>
-          <div className={styles.title}>Create a new learning set</div>
-          <div className={styles.free}>public</div>
-        </div>
+        <CreateSetTitle title="Create a new learning set" />
       </div>
       <input
         type="text"
