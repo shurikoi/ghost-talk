@@ -20,14 +20,14 @@ def csv_initialisation():
     return data
 
 
-def partofspeech_convert(partofspeech: str) -> str:
-    if partofspeech == 'nouns':
+def part_of_speech_convert(part_of_speech: str) -> str:
+    if part_of_speech == 'nouns':
         return 'n.'
-    elif partofspeech == 'adjectives':
+    elif part_of_speech == 'adjectives':
         return 'a.'
-    elif partofspeech == 'verbs':
+    elif part_of_speech == 'verbs':
         return 'v.'
-    elif partofspeech == 'adverbs':
+    elif part_of_speech == 'adverbs':
         return 'adv.'
     else:
         return 'error'
@@ -53,7 +53,6 @@ def is_word(s):
     return re.match("^[a-zA-Z]+$", s)
 
 
-# def create_response()
 def parse_web_page(url):
     try:
         req = Request(url, headers={'User-Agent': 'Mozilla/5.0'})
@@ -71,7 +70,7 @@ def parse_web_page(url):
 
 
 def response_check(data_to_check: str) -> bool:
-    list_to_check_keys = ['reqId', 'typeContent', 'resource', 'partOfSpeech', 'amountOfCards']
+    list_to_check_keys = ['reqId', 'source', 'partOfSpeech', 'amountOfCards']
     list_to_check_part_of_speach = ["nouns", "adjectives", "verbs", "adverbs"]
 
     try:
@@ -104,47 +103,37 @@ class JSONRequestHandler(http.server.BaseHTTPRequestHandler):
         s_t = perf_counter()
         print("Post resp start...")
 
-        if self.path == 'status':
+        if self.path == '/status':
             self.send_response(100)
             self.end_headers()
             self.wfile.write("Status: Ok".encode('utf-8'))
             print("Status check")
             return
 
-        elif self.path != '/create_cards':
-            self.send_response(404)
-            self.end_headers()
-            self.wfile.write("Error 404: Not Found".encode('utf-8'))
-            print("Error: 404")
-            return
+        # endpoin 1
+        elif self.path == '/create_cards_by_link':
+            content_length = int(self.headers['Content-Length'])
+            post_data = self.rfile.read(content_length)
 
-        content_length = int(self.headers['Content-Length'])
-        post_data = self.rfile.read(content_length)
+            decoded_data = post_data.decode('utf-8')
 
-        decoded_data = post_data.decode('utf-8')
+            if not response_check(decoded_data):
+                self.send_response(401)
+                self.end_headers()
+                self.wfile.write("Error 401: Bad Request".encode('utf-8'))
+                print("Error: 401")
+                return 'error 401'
 
-        if not response_check(decoded_data):
-            self.send_response(401)
-            self.end_headers()
-            self.wfile.write("Error 401: Bad Request".encode('utf-8'))
-            print("Error: 401")
-            return 'error 401'
+            self._set_headers()
 
-        self._set_headers()
+            json_data = json.loads(decoded_data)
 
-        json_data = json.loads(decoded_data)
+            amount_of_cards = json_data['amountOfCards']
+            pospeech_ = part_of_speech_convert(json_data['partOfSpeech'])
+            reqid = json_data['reqId']
 
-        amount_of_cards = json_data['amountOfCards']
-        pospeech_ = partofspeech_convert(json_data['partOfSpeech'])
-        typecontent = json_data['typeContent']
-        reqid = json_data['reqId']
-        typeContent = json_data['typeContent']
-        words = json_data['resource']
-        reqId = json_data['reqId']
-
-        if typecontent == 'link':
             time_parse_s = perf_counter()
-            page_text = parse_web_page(json_data['resource'])
+            page_text = parse_web_page(json_data['source'])
             if isinstance(page_text, tuple):
                 self.send_response(500)
                 self.end_headers()
@@ -155,49 +144,102 @@ class JSONRequestHandler(http.server.BaseHTTPRequestHandler):
             time_parse_e = perf_counter()
             print(f"parse time: {time_parse_e - time_parse_s} s")
 
-        elif typecontent == 'text':
-            words = json_data['resource']
+            unique_words = set(words)
+            filtered_list = [word.capitalize() for word in unique_words if is_word(word)]
+
+            time_dm_s = perf_counter()
+            word_definition_mapping = generate_word_definition_mapping(self.csv_data_, filtered_list, amount_of_cards,
+                                                                       pospeech_)
+            time_dm_e = perf_counter()
+            print(f"dm time: {time_dm_e - time_dm_s} s")
+
+            response_data = []
+            test_len = 0
+            for word, definition in word_definition_mapping.items():
+                test_len += 1
+                response_data.append({
+                    "word": word,
+                    "explanation": definition
+                })
+            print(f"len: {test_len}")
+
+            for item in response_data:
+                item['explanation'] = item['explanation'].strip('"')
+            response_data = {"resId": reqid, 'cards': response_data}
+            json_output = json.dumps(response_data, ensure_ascii=False, indent=4)
+            self.wfile.write(json_output.encode('utf-8'))
+
+            print("Post resp end")
+            e_t = perf_counter()
+            print(f"time of post: {e_t - s_t} s")
+
+        # endpoint 2
+        # endpoint is shit which write to http like: www.huesos/ty      ty - is endpoint
+        elif self.path == '/create_cards_by_text':
+            content_length = int(self.headers['Content-Length'])
+            post_data = self.rfile.read(content_length)
+
+            decoded_data = post_data.decode('utf-8')
+
+            if not response_check(decoded_data):
+                self.send_response(401)
+                self.end_headers()
+                self.wfile.write("Error 401: Bad Request".encode('utf-8'))
+                print("Error: 401")
+                return 'error 401'
+
+            self._set_headers()
+
+            json_data = json.loads(decoded_data)
+
+            amount_of_cards = json_data['amountOfCards']
+            pospeech_ = part_of_speech_convert(json_data['partOfSpeech'])
+            reqid = json_data['reqId']
+
+            words = json_data['source']
             if not isinstance(words, list):
                 self.send_response(401)
                 self.end_headers()
                 self.wfile.write("Error 401: Bad Request".encode('utf-8'))
                 print("Error: 401")
                 return 'error 401'
+
+            unique_words = set(words)
+            filtered_list = [word.capitalize() for word in unique_words if is_word(word)]
+
+            time_dm_s = perf_counter()
+            word_definition_mapping = generate_word_definition_mapping(self.csv_data_, filtered_list, amount_of_cards,
+                                                                       pospeech_)
+            # definition mapping = dm
+            time_dm_e = perf_counter()
+            print(f"dm time: {time_dm_e - time_dm_s} s")
+
+            response_data = []
+            test_len = 0
+            for word, definition in word_definition_mapping.items():
+                test_len += 1
+                response_data.append({
+                    "word": word,
+                    "explanation": definition
+                })
+            print(f"len: {test_len}")
+
+            for item in response_data:
+                item['explanation'] = item['explanation'].strip('"')
+            response_data = {"resId": reqid, 'cards': response_data}
+            json_output = json.dumps(response_data, ensure_ascii=False, indent=4)
+            self.wfile.write(json_output.encode('utf-8'))
+
+            print("Post resp end")
+            e_t = perf_counter()
+            print(f"time of post: {e_t - s_t} s")
+
         else:
-            self.send_response(401)
+            self.send_response(404)
             self.end_headers()
-            self.wfile.write("Error 401: Bad Request".encode('utf-8'))
-            print("Error: 401")
-            return 'error 401'
-
-        unique_words = set(words)
-        filtered_list = [word.capitalize() for word in unique_words if is_word(word)]
-
-        time_sapostication_s = perf_counter()
-        word_definition_mapping = generate_word_definition_mapping(self.csv_data_, filtered_list, amount_of_cards,
-                                                                   pospeech_)
-        time_sapostication_e = perf_counter()
-        print(f"sapostication time: {time_sapostication_e - time_sapostication_s} s")
-
-        response_data = []
-        test_len = 0
-        for word, definition in word_definition_mapping.items():
-            test_len += 1
-            response_data.append({
-                "word": word,
-                "explanation": definition
-            })
-        print(f"len: {test_len}")
-
-        for item in response_data:
-            item['explanation'] = item['explanation'].strip('"')
-        response_data = {"resId": reqid, 'cards': response_data}
-        json_output = json.dumps(response_data, ensure_ascii=False, indent=4)
-        self.wfile.write(json_output.encode('utf-8'))
-
-        print("Post resp end")
-        e_t = perf_counter()
-        print(f"time of post: {e_t - s_t} s")
+            self.wfile.write("Error 404: Not Found".encode('utf-8'))
+            print("Error: 404")
+            return
 
 
 def run(server_class=http.server.HTTPServer, handler_class=JSONRequestHandler, port=8000):
