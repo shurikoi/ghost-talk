@@ -2,6 +2,8 @@ import ApiError from '../exceptions/ApiError.js'
 import Set from '../models/Set.js'
 import { v4 as uuidv4 } from 'uuid'
 import axios from 'axios'
+import { $dictionaryApi } from '../http/index.js'
+import createCardsBySource from '../utils/createCardsBySource.js'
 
 export const serviceCreateSet = async (userId, title, cards, link) => {
   if (!link) link = uuidv4()
@@ -42,6 +44,46 @@ export const serviceDeleteSet = async (userId, setId, setUser) => {
   })
 
   return set
+}
+
+export const serviceCreateSetByText = async (
+  userId,
+  title,
+  source,
+  partOfSpeech,
+  amountOfCards
+) => {
+  const reqId = uuidv4()
+
+  const cards = await createCardsBySource(
+    '/create_cards_by_text',
+    reqId,
+    source,
+    partOfSpeech,
+    amountOfCards
+  )
+
+  return await serviceCreateSet(userId, title, cards, reqId)
+}
+
+export const serviceCreateSetByLink = async (
+  userId,
+  title,
+  source,
+  partOfSpeech,
+  amountOfCards
+) => {
+  const reqId = uuidv4()
+
+  const cards = await createCardsBySource(
+    '/create_cards_by_link',
+    reqId,
+    source,
+    partOfSpeech,
+    amountOfCards
+  )
+  
+  return await serviceCreateSet(userId, title, cards, reqId)
 }
 
 export const serviceCreateSetBySource = async (
