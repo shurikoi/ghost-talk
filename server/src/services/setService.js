@@ -1,8 +1,6 @@
 import ApiError from '../exceptions/ApiError.js'
 import Set from '../models/Set.js'
 import { v4 as uuidv4 } from 'uuid'
-import axios from 'axios'
-import { $dictionaryApi } from '../http/index.js'
 import createCardsBySource from '../utils/createCardsBySource.js'
 
 export const serviceCreateSet = async (userId, title, cards, link) => {
@@ -30,6 +28,13 @@ export const serviceGetSet = async (link) => {
   if (!set) throw ApiError.NotFound('Set does not exist')
 
   return set
+}
+
+export const serviceGetLimitedSets = async (skip) => {
+  const sets = await Set.find({}, undefined, { skip, limit: 5 }).sort({
+    createdAt: 1,
+  })
+  return sets
 }
 
 export const serviceGetAllSets = async () => {
@@ -82,6 +87,6 @@ export const serviceCreateSetByLink = async (
     partOfSpeech,
     amountOfCards
   )
-  
+
   return await serviceCreateSet(userId, title, cards, reqId)
 }

@@ -5,6 +5,7 @@ import {
   serviceDeleteSet,
   serviceCreateSetByText,
   serviceCreateSetByLink,
+  serviceGetLimitedSets,
 } from '../services/setService.js'
 
 export const createSet = async (req, res) => {
@@ -20,6 +21,15 @@ export const getSet = async (req, res) => {
   const setData = await serviceGetSet(link)
 
   return res.json(setData)
+}
+
+export const getLimitedSets = async (req, res) => {
+  const skip =
+    req.query.skip && /^\d+$/.test(req.query.skip) ? Number(req.query.skip) : 0
+
+  const setsData = await serviceGetLimitedSets(skip)
+
+  return res.json(setsData)
 }
 
 export const getAllSets = async (req, res) => {

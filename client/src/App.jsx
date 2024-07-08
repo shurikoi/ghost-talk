@@ -52,7 +52,7 @@ function App() {
           ) : (
             <>
               <Route path="/" element={<StartPage />}></Route>
-              {/* <Route path="*" element={<Navigate to="/" />} /> */}
+              <Route path="*" element={<Navigate to="/" />} />
             </>
           )}
         </Routes>
