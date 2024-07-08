@@ -7,6 +7,8 @@ import cors from "cors"
 import dotenv from "dotenv"
 dotenv.config({ path: ".env.local" })
 import { errorMiddleware } from "./middlewares/errorMiddleware.js"
+import requestLogger from "./middlewares/requestLogger.js"
+import unknownEndpoint from "./middlewares/unknownEndpoint.js"
 
 const app = express()
 const PORT = 4000
@@ -19,7 +21,9 @@ app.use(
 )
 app.use(express.json())
 app.use(cookieParser())
+app.use(requestLogger)
 app.use("/api", router)
+app.use(unknownEndpoint)
 app.use(errorMiddleware)
 
 connection().then(() => {
