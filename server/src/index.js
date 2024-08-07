@@ -13,6 +13,7 @@ import unknownEndpoint from "./middlewares/unknownEndpoint.js"
 const app = express()
 const PORT = 4000
 
+app.use(express.static('dist'))
 app.use(
   cors({
     origin: "http://localhost:5173",
