@@ -9,11 +9,16 @@ dotenv.config({ path: ".env.local" })
 import { errorMiddleware } from "./middlewares/errorMiddleware.js"
 import requestLogger from "./middlewares/requestLogger.js"
 import unknownEndpoint from "./middlewares/unknownEndpoint.js"
+import path from 'path'
+import { fileURLToPath } from 'url';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express()
 const PORT = process.env.PORT
 
-app.use(express.static('dist'))
+// app.use(express.static('dist'))
+app.use(express.static(path.join(__dirname, '../dist')))
 app.use(
   cors({
     // origin: process.env.CLIENT_URL,
