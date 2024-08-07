@@ -11,12 +11,12 @@ import requestLogger from "./middlewares/requestLogger.js"
 import unknownEndpoint from "./middlewares/unknownEndpoint.js"
 
 const app = express()
-const PORT = 4000
+const PORT = process.env.PORT
 
 app.use(express.static('dist'))
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    // origin: process.env.CLIENT_URL,
     credentials: true,
   })
 )
