@@ -7,7 +7,7 @@ import Main from "./Main"
 export default function StartPage() {
   return (
       <FormModalContext.Provider value={{ modalMenuStore }}>
-        <div className="flex flex-col h-svh">
+        <div className="flex flex-col h-svh text-center">
         <Header />
         <Main />
         <AuthForm />
