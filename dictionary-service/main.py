@@ -5,21 +5,26 @@ import re
 from urllib.request import urlopen, Request
 from bs4 import BeautifulSoup
 from time import perf_counter
+from functools import lru_cache
 
+console_logging = True
 csv_file = fr'/Users/olek/Documents/myprojects/lexify/dictionary-service/OPTED-Dictionary.csv'
+word_regex = re.compile("^[a-zA-Z]+$")
 
 
+# pre-initializing the csv directly into a variable will speed up data reading
 def csv_initialisation():
     print("initialisation csv data...")
 
     with open(csv_file, 'r', encoding='utf-8') as file:
         csv_reader = csv.DictReader(file, quotechar='~')
         data = list(csv_reader)
-
-    print("Successful initialization of csv")
+    if console_logging:
+        print("Successful initialization of csv")
     return data
 
 
+# TODO: Use enum instead of function
 def part_of_speech_convert(part_of_speech: str) -> str:
     if part_of_speech == 'nouns':
         return 'n.'
@@ -33,6 +38,8 @@ def part_of_speech_convert(part_of_speech: str) -> str:
         return 'error'
 
 
+# input csv, words, number of words, and part of speech. output dictionary word:description
+@lru_cache(maxsize=1000)
 def generate_word_definition_mapping(csv_data: list, word_list: list, amount: int, pospeech: str) -> dict:
     word_definition_mapping = {}
     encountered_words = set()
@@ -49,10 +56,13 @@ def generate_word_definition_mapping(csv_data: list, word_list: list, amount: in
     return word_definition_mapping
 
 
+# uses compiled regular expressions to speed up the work of determining whether a string is a word
+@lru_cache(maxsize=1000)
 def is_word(s):
-    return re.match("^[a-zA-Z]+$", s)
+    return word_regex.match(s)
 
 
+@lru_cache(maxsize=1000)
 def parse_web_page(url):
     try:
         req = Request(url, headers={'User-Agent': 'Mozilla/5.0'})
@@ -65,7 +75,8 @@ def parse_web_page(url):
 
         return page_text
     except Exception as e:
-        print(f"An error occurred: {e}")
+        if console_logging:
+            print(f"An error occurred: {e}")
         return False, e
 
 
@@ -76,7 +87,8 @@ def response_check(data_to_check: str) -> bool:
     try:
         data_to_check = json.loads(data_to_check)
     except Exception as e:
-        print(f"An error occurred: {e}")
+        if console_logging:
+            print(f"An error occurred: {e}")
         return False
 
     for key in list_to_check_keys:
@@ -92,6 +104,9 @@ def response_check(data_to_check: str) -> bool:
 
 
 class JSONRequestHandler(http.server.BaseHTTPRequestHandler):
+    """
+    #TODO: Describe the class
+    """
     csv_data_ = csv_initialisation()
 
     def _set_headers(self):
@@ -101,13 +116,15 @@ class JSONRequestHandler(http.server.BaseHTTPRequestHandler):
 
     def do_POST(self):
         s_t = perf_counter()
-        print("Post resp start...")
+        if console_logging:
+            print("Post resp start...")
 
         if self.path == '/status':
             self.send_response(100)
             self.end_headers()
             self.wfile.write("Status: Ok".encode('utf-8'))
-            print("Status check")
+            if console_logging:
+                print("Status check")
             return
 
         # endpoin 1
@@ -121,7 +138,8 @@ class JSONRequestHandler(http.server.BaseHTTPRequestHandler):
                 self.send_response(401)
                 self.end_headers()
                 self.wfile.write("Error 401: Bad Request".encode('utf-8'))
-                print("Error: 401")
+                if console_logging:
+                    print("Error: 401")
                 return 'error 401'
 
             self._set_headers()
@@ -138,11 +156,13 @@ class JSONRequestHandler(http.server.BaseHTTPRequestHandler):
                 self.send_response(500)
                 self.end_headers()
                 self.wfile.write(f"{page_text[1]}".encode('utf-8'))
-                print("Error: 500")
+                if console_logging:
+                    print("Error: 500")
                 return
             words = page_text.split()
             time_parse_e = perf_counter()
-            print(f"parse time: {time_parse_e - time_parse_s} s")
+            if console_logging:
+                print(f"parse time: {time_parse_e - time_parse_s} s")
 
             unique_words = set(words)
             filtered_list = [word.capitalize() for word in unique_words if is_word(word)]
@@ -151,7 +171,8 @@ class JSONRequestHandler(http.server.BaseHTTPRequestHandler):
             word_definition_mapping = generate_word_definition_mapping(self.csv_data_, filtered_list, amount_of_cards,
                                                                        pospeech_)
             time_dm_e = perf_counter()
-            print(f"dm time: {time_dm_e - time_dm_s} s")
+            if console_logging:
+                print(f"dm time: {time_dm_e - time_dm_s} s")
 
             response_data = []
             test_len = 0
@@ -161,20 +182,21 @@ class JSONRequestHandler(http.server.BaseHTTPRequestHandler):
                     "word": word,
                     "explanation": definition
                 })
-            print(f"len: {test_len}")
+            if console_logging:
+                print(f"len: {test_len}")
 
             for item in response_data:
                 item['explanation'] = item['explanation'].strip('"')
             response_data = {"resId": reqid, 'cards': response_data}
             json_output = json.dumps(response_data, ensure_ascii=False, indent=4)
             self.wfile.write(json_output.encode('utf-8'))
-
-            print("Post resp end")
+            if console_logging:
+                print("Post resp end")
             e_t = perf_counter()
-            print(f"time of post: {e_t - s_t} s")
+            if console_logging:
+                print(f"time of post: {e_t - s_t} s")
 
         # endpoint 2
-        # endpoint is shit which write to http like: www.huesos/ty      ty - is endpoint
         elif self.path == '/create_cards_by_text':
             content_length = int(self.headers['Content-Length'])
             post_data = self.rfile.read(content_length)
@@ -185,7 +207,8 @@ class JSONRequestHandler(http.server.BaseHTTPRequestHandler):
                 self.send_response(401)
                 self.end_headers()
                 self.wfile.write("Error 401: Bad Request".encode('utf-8'))
-                print("Error: 401")
+                if console_logging:
+                    print("Error: 401")
                 return 'error 401'
 
             self._set_headers()
@@ -201,7 +224,8 @@ class JSONRequestHandler(http.server.BaseHTTPRequestHandler):
                 self.send_response(401)
                 self.end_headers()
                 self.wfile.write("Error 401: Bad Request".encode('utf-8'))
-                print("Error: 401")
+                if console_logging:
+                    print("Error: 401")
                 return 'error 401'
 
             unique_words = set(words)
@@ -212,7 +236,8 @@ class JSONRequestHandler(http.server.BaseHTTPRequestHandler):
                                                                        pospeech_)
             # definition mapping = dm
             time_dm_e = perf_counter()
-            print(f"dm time: {time_dm_e - time_dm_s} s")
+            if console_logging:
+                print(f"dm time: {time_dm_e - time_dm_s} s")
 
             response_data = []
             test_len = 0
@@ -222,30 +247,34 @@ class JSONRequestHandler(http.server.BaseHTTPRequestHandler):
                     "word": word,
                     "explanation": definition
                 })
-            print(f"len: {test_len}")
+            if console_logging:
+                print(f"len: {test_len}")
 
             for item in response_data:
                 item['explanation'] = item['explanation'].strip('"')
             response_data = {"resId": reqid, 'cards': response_data}
             json_output = json.dumps(response_data, ensure_ascii=False, indent=4)
             self.wfile.write(json_output.encode('utf-8'))
-
-            print("Post resp end")
+            if console_logging:
+                print("Post resp end")
             e_t = perf_counter()
-            print(f"time of post: {e_t - s_t} s")
+            if console_logging:
+                print(f"time of post: {e_t - s_t} s")
 
         else:
             self.send_response(404)
             self.end_headers()
             self.wfile.write("Error 404: Not Found".encode('utf-8'))
-            print("Error: 404")
+            if console_logging:
+                print("Error: 404")
             return
 
 
 def run(server_class=http.server.HTTPServer, handler_class=JSONRequestHandler, port=8000):
     server_address = ('', port)
     httpd = server_class(server_address, handler_class)
-    print(f'Starting server on port {port}...')
+    if console_logging:
+        print(f'Starting server on port {port}...')
     httpd.serve_forever()
 
 
